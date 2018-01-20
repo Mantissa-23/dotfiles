@@ -71,5 +71,6 @@ nmap <leader>ev :sp ~/.config/nvim/init.vim<CR>
 nmap <leader>gs :Gstatus<CR>
 nmap <leader>gc :Gcommit<CR>
 nmap <leader>gl :Glog<CR>
+nmap <leader>gp :Gpush<CR>
 
 " Plugin configuration
