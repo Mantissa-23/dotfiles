@@ -65,9 +65,11 @@ let mapleader=" "
 nmap <leader>nn :NERDTreeToggle<CR>
 nmap <leader>tt :TagbarToggle<CR>
 " Add control for quickly opening init.vim
-nmap <leader>erc :sp ~/.config/nvim/init.vim<CR>
+nmap <leader>ev :sp ~/.config/nvim/init.vim<CR>
 
 " Fugitive controls
 nmap <leader>gs :Gstatus<CR>
 nmap <leader>gc :Gcommit<CR>
+nmap <leader>gl :Glog<CR>
+
 " Plugin configuration
