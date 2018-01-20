@@ -35,6 +35,12 @@ set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
 set number
 set title
 
+" Do not wrap lines in the middle of words
+set linebreak
+
+" Split right and below, instead of left and above
+set splitright splitbelow
+
 " Custom keymappings
 " ------------------
 
@@ -52,5 +58,7 @@ nnoremap k gk
 let mapleader=","
 nmap <leader>nn :NERDTreeToggle<CR>
 nmap <leader>tt :TagbarToggle<CR>
+" Add control for quickly opening init.vim
+nmap <leader>erc :sp ~/.config/nvim/init.vim<CR>
 
 " Plugin configuration
