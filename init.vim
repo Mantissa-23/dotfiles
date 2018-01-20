@@ -41,6 +41,12 @@ set linebreak
 " Split right and below, instead of left and above
 set splitright splitbelow
 
+" Enable code folding
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
+
 " Custom keymappings
 " ------------------
 
@@ -55,10 +61,13 @@ nnoremap j gj
 nnoremap k gk
 
 " Leader controls
-let mapleader=","
+let mapleader=" "
 nmap <leader>nn :NERDTreeToggle<CR>
 nmap <leader>tt :TagbarToggle<CR>
 " Add control for quickly opening init.vim
 nmap <leader>erc :sp ~/.config/nvim/init.vim<CR>
 
+" Fugitive controls
+nmap <leader>gs :Gstatus<CR>
+nmap <leader>gc :Gcommit<CR>
 " Plugin configuration
