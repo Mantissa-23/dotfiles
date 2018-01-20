@@ -20,6 +20,9 @@ call plug#end()
 set background=dark
 colorscheme palenight
 
+" Color column 80, for code formatting
+set colorcolumn=80
+
 " General Configuration 
 " ---------------------
 
