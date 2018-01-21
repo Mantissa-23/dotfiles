@@ -50,6 +50,10 @@ set foldnestmax=10
 set nofoldenable
 set foldlevel=2
 
+" Set scrolloff, so that at least n lines are displayed above and below the
+" cursor.
+set scrolloff=10
+
 " Custom keymappings
 " ------------------
 
