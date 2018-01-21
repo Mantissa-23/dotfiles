@@ -63,6 +63,9 @@ nnoremap <C-l> <C-w>l
 nnoremap j gj
 nnoremap k gk
 
+" Use <Esc> to exit Terminal-mode for neovim's terminal emulator
+tnoremap <Esc> <C-\><C-n>
+
 " Leader controls
 let mapleader=" "
 nmap <leader>nn :NERDTreeToggle<CR>
