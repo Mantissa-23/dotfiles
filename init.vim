@@ -3,7 +3,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Appearance
 Plug 'vim-airline/vim-airline' " Useful bottom info bar
 Plug 'vim-airline/vim-airline-themes'
-Plug 'drewtempelmeyer/palenight.vim' " Solarized colorscheme
+Plug 'drewtempelmeyer/palenight.vim' " Palenight colorscheme; better contrast when dark
+Plug 'altercation/vim-colors-solarized' " Solarized colorscheme
 
 " Functionality
 Plug 'tpope/vim-fugitive' " Git wrapper
@@ -17,8 +18,29 @@ call plug#end()
 
 " Aesthetics
 " ----------
-set background=dark
-colorscheme palenight
+function DarkScheme()
+    set background=dark
+    colorscheme palenight
+endfunction
+
+function LightScheme()
+    set background=light
+    colorscheme solarized
+endfunction
+
+" Toggles colorscheme between dark and light schemes, for quick switching
+" between dark and light environments. Bound to <leader>cs under leader
+" bindings.
+function ToggleScheme()
+    if &background ==# 'dark'
+        call LightScheme()
+    elseif &background ==# 'light'
+        call DarkScheme()
+    endif
+endfunction
+
+" Default to dark scheme
+call DarkScheme()
 
 " Color column 80, for code formatting
 set colorcolumn=80
@@ -83,4 +105,6 @@ nmap <leader>gc :Gcommit<CR>
 nmap <leader>gl :Glog<CR>
 nmap <leader>gp :Gpush<CR>
 
+" Quickswitch colorscheme
+nmap <leader>ts :call ToggleScheme()<CR>
 " Plugin configuration
