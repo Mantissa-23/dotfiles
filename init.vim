@@ -18,14 +18,17 @@ call plug#end()
 
 " Aesthetics
 " ----------
+
+colorscheme solarized
+
 function DarkScheme()
     set background=dark
-    colorscheme palenight
+    " colorscheme solarized
 endfunction
 
 function LightScheme()
     set background=light
-    colorscheme solarized
+    " colorscheme solarized
 endfunction
 
 " Toggles colorscheme between dark and light schemes, for quick switching
@@ -40,7 +43,7 @@ function ToggleScheme()
 endfunction
 
 " Default to dark scheme
-call DarkScheme()
+call LightScheme()
 
 " Color column 80, for code formatting
 set colorcolumn=80
