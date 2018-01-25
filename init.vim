@@ -13,20 +13,45 @@ Plug 'scrooloose/nerdtree' " File browser
 Plug 'majutsushi/tagbar' " Tag browser
 Plug 'sheerun/vim-polyglot' " Language package package
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' } " Keyword completion
+Plug 'neomake/neomake' " Syntax checker
 
 call plug#end()
+
+" Custom keymappings
+" ------------------
+
+" Make tab and window navigation more sensible
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Scroll through visible lines as opposed to numbered lines
+nnoremap j gj
+nnoremap k gk
+
+" Use <Esc> to exit Terminal-mode for neovim's terminal emulator
+tnoremap <Esc> <C-\><C-n>
+
+" Leader controls
+let mapleader=" "
+
+" Add control for quickly opening init.vim
+nmap <leader>ev :sp ~/.config/nvim/init.vim<CR>
+
+
 
 " Aesthetics
 " ----------
 
 colorscheme solarized
 
-function DarkScheme()
+function! DarkScheme()
     set background=dark
     " colorscheme solarized
 endfunction
 
-function LightScheme()
+function! LightScheme()
     set background=light
     " colorscheme solarized
 endfunction
@@ -34,7 +59,7 @@ endfunction
 " Toggles colorscheme between dark and light schemes, for quick switching
 " between dark and light environments. Bound to <leader>cs under leader
 " bindings.
-function ToggleScheme()
+function! ToggleScheme()
     if &background ==# 'dark'
         call LightScheme()
     elseif &background ==# 'light'
@@ -44,6 +69,9 @@ endfunction
 
 " Default to dark scheme
 call LightScheme()
+
+" Quickswitch colorscheme
+nmap <leader>ts :call ToggleScheme()<CR>
 
 " Color column 80, for code formatting
 set colorcolumn=80
@@ -79,28 +107,19 @@ set foldlevel=2
 " cursor.
 set scrolloff=10
 
-" Custom keymappings
-" ------------------
+" Hit enter-enter to exit commenting. Works only for C/Ruby/Python
+function! EnterEnter()
+	if getline(".") =~ '^\s*\(//\|#\|"\)\s*$'
+		return "\<C-u>"
+	else
+		return "\<CR>"
+	endif
+endfunction
 
-" Make tab and window navigation more sensible
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+imap <expr> <CR> EnterEnter()
 
-" Scroll through visible lines as opposed to numbered lines
-nnoremap j gj
-nnoremap k gk
-
-" Use <Esc> to exit Terminal-mode for neovim's terminal emulator
-tnoremap <Esc> <C-\><C-n>
-
-" Leader controls
-let mapleader=" "
-nmap <leader>nn :NERDTreeToggle<CR>
-nmap <leader>tt :TagbarToggle<CR>
-" Add control for quickly opening init.vim
-nmap <leader>ev :sp ~/.config/nvim/init.vim<CR>
+" Plugin configuration
+" --------------------
 
 " Fugitive controls
 nmap <leader>gs :Gstatus<CR>
@@ -108,6 +127,14 @@ nmap <leader>gc :Gcommit<CR>
 nmap <leader>gl :Glog<CR>
 nmap <leader>gp :Gpush<CR>
 
-" Quickswitch colorscheme
-nmap <leader>ts :call ToggleScheme()<CR>
-" Plugin configuration
+" NERDTree controls
+nmap <leader>nn :NERDTreeToggle<CR>
+nmap <leader>nb :Bookmark
+
+" Tagbar controls
+nmap <leader>tt :TagbarToggle<CR>
+
+" Neomake setup
+
+" Automatically run neomake when reading a buffer (after 1s), and when writing
+call neomake#configure#automake('rw')
