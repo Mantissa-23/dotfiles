@@ -129,7 +129,7 @@ nmap <leader>gp :Gpush<CR>
 
 " NERDTree controls
 nmap <leader>nn :NERDTreeToggle<CR>
-nmap <leader>nb :Bookmark
+nmap <leader>nb :Bookmark 
 
 " Tagbar controls
 nmap <leader>tt :TagbarToggle<CR>
