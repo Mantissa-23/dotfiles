@@ -1,4 +1,8 @@
-call plug#begin('~/.local/share/nvim/plugged')
+if has('nvim')
+    call plug#begin('~/.local/share/nvim/plugged')
+else
+    call plug#begin('~/.vim/plugged')
+endif
 
 " Appearance
 Plug 'vim-airline/vim-airline' " Useful bottom info bar
