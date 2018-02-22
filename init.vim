@@ -124,6 +124,9 @@ endfunction
 
 imap <expr> <CR> EnterEnter()
 
+" <leader> w writes file
+nmap <leader>w :w<CR>
+
 " Plugin configuration
 " --------------------
 
