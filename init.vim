@@ -16,7 +16,9 @@ Plug 'tpope/vim-sensible' " Sensible defaults
 Plug 'scrooloose/nerdtree' " File browser
 Plug 'majutsushi/tagbar' " Tag browser
 Plug 'sheerun/vim-polyglot' " Language package package
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' } " Keyword completion
+if has("python")
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.py' } " Keyword completion
+endif
 Plug 'neomake/neomake' " Syntax checker
 
 call plug#end()
