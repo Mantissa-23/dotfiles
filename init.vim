@@ -16,7 +16,7 @@ Plug 'tpope/vim-sensible' " Sensible defaults
 Plug 'scrooloose/nerdtree' " File browser
 Plug 'majutsushi/tagbar' " Tag browser
 Plug 'sheerun/vim-polyglot' " Language package package
-if has("python")
+if has("python") && v:version > 741578
     Plug 'Valloric/YouCompleteMe', { 'do': './install.py' } " Keyword completion
 endif
 Plug 'neomake/neomake' " Syntax checker
@@ -37,7 +37,9 @@ nnoremap j gj
 nnoremap k gk
 
 " Use <Esc> to exit Terminal-mode for neovim's terminal emulator
-tnoremap <Esc> <C-\><C-n>
+if has('nvim')
+    tnoremap <Esc> <C-\><C-n>
+endif
 
 " Leader controls
 let mapleader=" "
