@@ -16,8 +16,10 @@ Plug 'tpope/vim-sensible' " Sensible defaults
 Plug 'scrooloose/nerdtree' " File browser
 Plug 'majutsushi/tagbar' " Tag browser
 Plug 'sheerun/vim-polyglot' " Language package package
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' } " Keyword completion
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' } " Keyword completion
 Plug 'neomake/neomake' " Syntax checker
+"Plug 'vim-syntastic/syntastic'
+Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
 
@@ -41,7 +43,7 @@ tnoremap <Esc> <C-\><C-n>
 let mapleader=" "
 
 " Add control for quickly opening init.vim
-nmap <leader>ev :sp ~/.config/nvim/init.vim<CR>
+nmap <leader>ev :vsp ~/.config/nvim/init.vim<CR>
 
 
 
@@ -128,6 +130,8 @@ nmap <leader>w :w<CR>
 " Plugin configuration
 " --------------------
 
+" FILE SYSTEM & SCM
+
 " Fugitive controls
 nmap <leader>gs :Gstatus<CR>
 nmap <leader>gc :Gcommit<CR>
@@ -141,7 +145,53 @@ nmap <leader>nb :Bookmark
 " Tagbar controls
 nmap <leader>tt :TagbarToggle<CR>
 
-" Neomake setup
+" BUILD, LINT, CHECK
 
-" Automatically run neomake when reading a buffer (after 1s), and when writing
-call neomake#configure#automake('rw')
+" Neomake setup
+let g:neomake_cpp_enabled_markers = ['gcc']
+let g:neomake_c_enabled_markers = ['gcc']
+
+" call neomake#configure#automake('nrwi', 500)
+
+" Map nm to full-project make
+nmap <leader>nm :Neomake!<CR>
+
+" YCM Setup
+let g:ycm_collect_identifiers_from_tags_files = 1
+
+" Auto-Pair Setup
+let g:AutoPairsFlyMode = 0
+
+" AESTHETIC & INFORMATION
+
+" Airline Customization
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensiosn#fugitiveline#enabled = 1
+
+" Extra Configuration
+" -------------------
+
+" Function to automatically set makeprg, valuable for C++ and C
+function! g:BuildInSubDir(buildsubdir)
+    " Sets makeprg base dir
+    let toplevelpath = FindTopLevelProjectDir()
+    let builddir = toplevelpath . a:buildsubdir
+    let makeprgcmd = 'make -C ' . builddir
+    if builddir !=? "//build"
+        let &makeprg=makeprgcmd
+    endif
+endfunction
+
+function! FindTopLevelProjectDir()
+    " Searches for a .git directory upward till root.
+    let isittopdir = finddir('.git')
+    if isittopdir ==? ".git"
+        return getcwd()
+    endif
+    let gitdir = finddir('.git', ';')
+    let gitdirsplit = split(gitdir, '/')
+    let toplevelpath = '/' . join(gitdirsplit[:-2],'/')
+    return toplevelpath
+endfunction
+
+autocmd BufNewFile,BufRead *.cpp,*.c call g:BuildInSubDir("/build")
