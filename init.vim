@@ -26,11 +26,17 @@ call plug#end()
 " Custom keymappings
 " ------------------
 
+" Leader controls
+let mapleader=" "
+
 " Make tab and window navigation more sensible
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+nnoremap <leader>h :tabp<CR>
+nnoremap <leader>l :tabn<CR>
 
 " Scroll through visible lines as opposed to numbered lines
 nnoremap j gj
@@ -39,13 +45,16 @@ nnoremap k gk
 " Use <Esc> to exit Terminal-mode for neovim's terminal emulator
 tnoremap <Esc> <C-\><C-n>
 
-" Leader controls
-let mapleader=" "
 
 " Add control for quickly opening init.vim
 nmap <leader>ev :vsp ~/.config/nvim/init.vim<CR>
 
+" <leader> w writes file
+nmap <leader>w :w<CR>
 
+" tab controls
+nmap <leader>ts :tab split<CR>
+nmap <leader>tc :tabc<CR>
 
 " Aesthetics
 " ----------
@@ -124,8 +133,6 @@ endfunction
 
 imap <expr> <CR> EnterEnter()
 
-" <leader> w writes file
-nmap <leader>w :w<CR>
 
 " Plugin configuration
 " --------------------
