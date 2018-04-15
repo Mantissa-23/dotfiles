@@ -144,6 +144,7 @@ nmap <leader>gs :Gstatus<CR>
 nmap <leader>gc :Gcommit<CR>
 nmap <leader>gl :Glog<CR>
 nmap <leader>gp :Gpush<CR>
+nmap <leader>gd :Gdiff<CR>
 
 " NERDTree controls
 nmap <leader>nn :NERDTreeToggle<CR>
