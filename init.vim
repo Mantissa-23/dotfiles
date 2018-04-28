@@ -206,4 +206,7 @@ function! FindTopLevelProjectDir()
     return toplevelpath
 endfunction
 
-autocmd BufNewFile,BufRead *.cpp,*.c call g:BuildInSubDir("/build")
+" Only use out-of-source build if no in-source build is detected.
+if globpath('.','Makefile') == ''
+    autocmd BufNewFile,BufRead *.cpp,*.c call g:BuildInSubDir("/build")
+endif
