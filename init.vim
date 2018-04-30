@@ -21,7 +21,7 @@ if has("python") && v:version > 741578
 endif
 Plug 'neomake/neomake' " Syntax checker
 "Plug 'vim-syntastic/syntastic'
-Plug 'jiangmiao/auto-pairs'
+Plug 'vim-scripts/auto-pairs-gentle'
 
 call plug#end()
 
