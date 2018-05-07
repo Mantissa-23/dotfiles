@@ -19,7 +19,8 @@ Plug 'sheerun/vim-polyglot' " Language package package
 if has("python") && v:version > 741578
     Plug 'Valloric/YouCompleteMe', { 'do': './install.py' } " Keyword completion
 endif
-Plug 'neomake/neomake' " Syntax checker
+"Plug 'neomake/neomake' " Lint via makeprg - async
+Plug 'w0rp/ale' " Lint via external tools - async
 "Plug 'vim-syntastic/syntastic'
 Plug 'vim-scripts/auto-pairs-gentle'
 
@@ -48,7 +49,6 @@ nnoremap k gk
 if has('nvim')
     tnoremap <Esc> <C-\><C-n>
 endif
-
 
 " Add control for quickly opening init.vim
 nmap <leader>ev :vsp ~/.config/nvim/init.vim<CR>
