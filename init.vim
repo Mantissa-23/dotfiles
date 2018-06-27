@@ -22,7 +22,8 @@ endif
 "Plug 'neomake/neomake' " Lint via makeprg - async
 Plug 'w0rp/ale' " Lint via external tools - async
 "Plug 'vim-syntastic/syntastic'
-Plug 'vim-scripts/auto-pairs-gentle'
+Plug 'vim-scripts/auto-pairs-gentle' " Automatically makes surrounds
+Plug 'tpope/vim-surround' " Adds bindings for changing surrounds
 
 call plug#end()
 
@@ -60,37 +61,44 @@ nmap <leader>w :w<CR>
 nmap <leader>ts :tab split<CR>
 nmap <leader>tc :tabc<CR>
 
+" Toggle spelling
+"!function ToggleSpelling()
+    "if &spelllang ==# 'en_us'
+"endfunction
+
+"nmap <leader> ss :call ToggleSpelling()<CR>
+
 " Aesthetics
 " ----------
 
 colorscheme solarized
 
 function! DarkScheme()
-    set background=dark
     " colorscheme solarized
+    set background=dark
 endfunction
 
 function! LightScheme()
-    set background=light
     " colorscheme solarized
+    set background=light
 endfunction
 
 " Toggles colorscheme between dark and light schemes, for quick switching
 " between dark and light environments. Bound to <leader>cs under leader
 " bindings.
 function! ToggleScheme()
-    if &background ==# 'dark'
-        call LightScheme()
-    elseif &background ==# 'light'
+    if &background ==# 'light'
         call DarkScheme()
+    elseif &background ==# 'dark'
+        call LightScheme()
     endif
 endfunction
 
-" Default to dark scheme
+" Default to light scheme
 call LightScheme()
 
 " Quickswitch colorscheme
-nmap <leader>ts :call ToggleScheme()<CR>
+nmap <leader>cs :call ToggleScheme()<CR>
 
 " Color column 80, for code formatting
 set colorcolumn=80
