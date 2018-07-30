@@ -10,6 +10,8 @@ config checkout
 
 If this fails, rename any default conflicting files if you would like to keep their contents, or remove them if you don't care.
 
+Alternatively, download and run the [install script](https://github.com/Mantissa-23/dotfiles/blob/master/install.sh).
+
 ## nvim
 
 My own personal neovim configuration, with a focus on simplicity and rigorous abuse of a `<space>` `<leader>`. Meant to be cloned right into `~/.config` on new computers, distros and servers, with minimal setup and finicking.
