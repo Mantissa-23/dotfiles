@@ -4,8 +4,9 @@ A collection of UNIX/Windows dotfiles for direct installation to /home. Setup is
 
 ```bash
 git clone --bare https://github.com/Mantissa-23/dotfiles.git $HOME/.cfg
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config checkout
+config config --local status.showUntrackedFiles no
 ```
 
 If this fails, rename any default conflicting files if you would like to keep their contents, or remove them if you don't care.
