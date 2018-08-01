@@ -116,7 +116,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ -t 1 ]; then
+# Only launch zsh if running on WSL and a TTY
+if grep -q Microsoft /proc/version && [ -t 1 ]; then
     exec zsh
 fi
 
