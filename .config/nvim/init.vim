@@ -24,6 +24,7 @@ Plug 'w0rp/ale' " Lint via external tools - async
 "Plug 'vim-syntastic/syntastic'
 Plug 'vim-scripts/auto-pairs-gentle' " Automatically makes surrounds
 Plug 'tpope/vim-surround' " Adds bindings for changing surrounds
+Plug 'christoomey/vim-tmux-navigator' " Seamless navigation for tmux
 
 call plug#end()
 
