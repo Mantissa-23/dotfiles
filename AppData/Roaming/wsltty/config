@@ -1,0 +1,7 @@
+# To use common configuration in %APPDATA%\mintty, simply remove this file
+BoldAsFont=-1
+ThemeFile=solarized
+CursorType=block
+Term=xterm-256color
+Font=Inconsolata
+FontHeight=10
