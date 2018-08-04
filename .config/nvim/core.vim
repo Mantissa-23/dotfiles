@@ -5,10 +5,11 @@
 let mapleader=" "
 
 " Make tab and window navigation more sensible
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" Functionality replaced with plugin
+"nnoremap <C-h> <C-w>h
+"nnoremap <C-j> <C-w>j
+"nnoremap <C-k> <C-w>k
+"nnoremap <C-l> <C-w>l
 
 nnoremap <leader>h :tabp<CR>
 nnoremap <leader>l :tabn<CR>
