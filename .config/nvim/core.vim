@@ -1,6 +1,9 @@
 " Custom keymappings
 " ------------------
 
+" Map 'fd' to the escape key, as in Spacemacs
+:imap fd <Esc>
+
 " Leader controls
 let mapleader=" "
 
