@@ -20,7 +20,7 @@ exports.configuration = {
     "ui.colorscheme": "nord",
     "oni.useDefaultConfig": false,
     //"oni.bookmarks": ["~/Documents"],
-    "oni.loadInitVim": '~/.config/nvim/core.vim',
+    "oni.loadInitVim": true,
     //"environment.additionalPaths": '~/.vim/plugged',
     //"editor.fontSize": "12px",
     //"editor.fontFamily": "Monaco",
