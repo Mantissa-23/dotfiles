@@ -20,7 +20,7 @@ exports.configuration = {
     "oni.useDefaultConfig": false,
     "oni.loadInitVim": true,
     /// Aesthetic
-    "ui.colorscheme": "gruvbox",
+    "ui.colorscheme": "palenight",
     "editor.fontSize": "12px",
     "editor.fontFamily": "Consolas",
     // UI customizations
