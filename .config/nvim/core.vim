@@ -37,7 +37,7 @@ if !exists("g:syntax_on")
 endif
 
 " Generic Tab Settings
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
+set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab autoindent
 
 " Enable line number display, always
 set number
@@ -137,11 +137,9 @@ endfunction
 function! JNewEntry()
     let filename = JFilename()
 
-    "if bufwinnr(filename) == -1
-    execute ":vsp" filename
-    "else
-        "execute ":sbuffer" filename
-    "endif
+    if !(bufwinnr(filename) == bufnr('%'))
+        execute ":vsp" filename
+    endif
     
     " If new file unopened in buffer, add date header
     if empty(glob(filename))
@@ -163,7 +161,7 @@ endfunction
 :inoremap fd <Esc>
 :vnoremap fd <Esc>
 if has('nvim')
-    :tnoremap fd <Esc>
+    :tnoremap fd <C-\><C-n>
 endif
 
 " Make tab and window navigation more sensible
