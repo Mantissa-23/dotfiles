@@ -144,11 +144,11 @@ function! JNewEntry()
     "endif
     
     " If new file unopened in buffer, add date header
-    if empty(glob(filename)) && bufwinnr(filename) == -1 
+    if empty(glob(filename))
         execute "normal! A* " . strftime('%A, %m/%d/%y')
     endif
 
-    execute "normal! Go** " . strftime('%H:%M')
+    execute "normal! Go** " . strftime('%H:%M ')
 endfunction
 
 function! JViewEntry()
@@ -220,7 +220,7 @@ let mapleader=" "
 " New journal entry
 nnoremap <leader>ajj :call JNewEntry()<CR> 
 " View current journal entry
-nnoremap <leader>avj :call JNewEntry()<CR>
+nnoremap <leader>avj :call JViewEntry()<CR>
 " as        - Shells/Terminals
 " -----------------------------------
 " b         - Buffers

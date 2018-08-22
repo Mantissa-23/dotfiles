@@ -14,20 +14,25 @@ Plug 'altercation/vim-colors-solarized' " Solarized colorscheme
 Plug 'morhetz/gruvbox' " Gruvbox, like solarized but warmer and more retro.
 
 " Functionality
-Plug 'tpope/vim-fugitive' " Git wrapper
 Plug 'tpope/vim-sensible' " Sensible defaults
 Plug 'scrooloose/nerdtree' " File browser
 Plug 'majutsushi/tagbar' " Tag browser
 Plug 'sheerun/vim-polyglot' " Language package package
 
+if !exists("g:gui_oni") " Probably won't be using tmux in Oni
+    Plug 'christoomey/vim-tmux-navigator' " Seamless navigation for tmux
+endif
+
+" IDE
+Plug 'tpope/vim-fugitive' " Git wrapper
 if !exists("g:gui_oni") " Oni comes with LSP
     Plug 'w0rp/ale' " Lint and complete via external tools - async
 endif
 Plug 'vim-scripts/auto-pairs-gentle' " Automatically makes surrounds
 Plug 'tpope/vim-surround' " Adds bindings for changing surrounds
-if !exists("g:gui_oni") " Probably won't be using tmux in Oni
-    Plug 'christoomey/vim-tmux-navigator' " Seamless navigation for tmux
-endif
+
+" Applications
+Plug 'jceb/vim-orgmode' " Org-mode support for vim, for journaling + notes
 
 call plug#end()
 
