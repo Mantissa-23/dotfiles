@@ -7,8 +7,11 @@ endif
 " Appearance
 Plug 'vim-airline/vim-airline' " Useful bottom info bar
 Plug 'vim-airline/vim-airline-themes'
+
+" Colorschemes
 Plug 'drewtempelmeyer/palenight.vim' " Palenight colorscheme; better contrast when dark
 Plug 'altercation/vim-colors-solarized' " Solarized colorscheme
+Plug 'morhetz/gruvbox' " Gruvbox, like solarized but warmer and more retro.
 
 " Functionality
 Plug 'tpope/vim-fugitive' " Git wrapper
@@ -16,15 +19,15 @@ Plug 'tpope/vim-sensible' " Sensible defaults
 Plug 'scrooloose/nerdtree' " File browser
 Plug 'majutsushi/tagbar' " Tag browser
 Plug 'sheerun/vim-polyglot' " Language package package
-if has("python") && v:version > 741578
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.py' } " Keyword completion
+
+if !exists("g:gui_oni") " Oni comes with LSP
+    Plug 'w0rp/ale' " Lint and complete via external tools - async
 endif
-"Plug 'neomake/neomake' " Lint via makeprg - async
-Plug 'w0rp/ale' " Lint via external tools - async
-"Plug 'vim-syntastic/syntastic'
 Plug 'vim-scripts/auto-pairs-gentle' " Automatically makes surrounds
 Plug 'tpope/vim-surround' " Adds bindings for changing surrounds
-Plug 'christoomey/vim-tmux-navigator' " Seamless navigation for tmux
+if !exists("g:gui_oni") " Probably won't be using tmux in Oni
+    Plug 'christoomey/vim-tmux-navigator' " Seamless navigation for tmux
+endif
 
 call plug#end()
 

@@ -1,66 +1,19 @@
-" Custom keymappings
-" ------------------
+"                               Aesthetics
+" ----------------------------------------------------------------------------
 
-" Map 'fd' to the escape key, as in Spacemacs
-:imap fd <Esc>
-
-" Leader controls
-let mapleader=" "
-
-" Make tab and window navigation more sensible
-" Functionality replaced with plugin
-"nnoremap <C-h> <C-w>h
-"nnoremap <C-j> <C-w>j
-"nnoremap <C-k> <C-w>k
-"nnoremap <C-l> <C-w>l
-
-nnoremap <leader>h :tabp<CR>
-nnoremap <leader>l :tabn<CR>
-
-" Scroll through visible lines as opposed to numbered lines
-nnoremap j gj
-nnoremap k gk
-
-" Use <Esc> to exit Terminal-mode for neovim's terminal emulator
-if has('nvim')
-    tnoremap <Esc> <C-\><C-n>
-endif
-
-" Add control for quickly opening init.vim
-nmap <leader>ev :vsp ~/.config/nvim/init.vim<CR>
-
-" <leader> w writes file
-nmap <leader>w :w<CR>
-
-" tab controls
-nmap <leader>ts :tab split<CR>
-nmap <leader>tc :tabc<CR>
-
-" Toggle spelling
-"!function ToggleSpelling()
-    "if &spelllang ==# 'en_us'
-"endfunction
-
-"nmap <leader> ss :call ToggleSpelling()<CR>
-
-" Aesthetics
-" ----------
-
-colorscheme solarized
+" Toggle colorscheme between dark and light schemes, for quick switching
+" between dark and light environments.
 
 function! DarkScheme()
-    " colorscheme solarized
+    colorscheme palenight
     set background=dark
 endfunction
 
 function! LightScheme()
-    " colorscheme solarized
+    colorscheme solarized
     set background=light
 endfunction
 
-" Toggles colorscheme between dark and light schemes, for quick switching
-" between dark and light environments. Bound to <leader>cs under leader
-" bindings.
 function! ToggleScheme()
     if &background ==# 'light'
         call DarkScheme()
@@ -69,27 +22,24 @@ function! ToggleScheme()
     endif
 endfunction
 
-" Default to light scheme
-call LightScheme()
-
-" Quickswitch colorscheme
-nmap <leader>cs :call ToggleScheme()<CR>
+" Default to dark scheme
+call DarkScheme()
 
 " Color column 80, for code formatting
 set colorcolumn=80
 
-" General Configuration 
-" ---------------------
+"                         General Editor Configuration
+" ----------------------------------------------------------------------------
 
 " Safeguarded syntax enable
 if !exists("g:syntax_on")
     syntax enable
 endif
 
-" Tab settings
+" Generic Tab Settings
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
 
-" Enable line number display
+" Enable line number display, always
 set number
 set title
 
@@ -99,7 +49,7 @@ set linebreak
 " Split right and below, instead of left and above
 set splitright splitbelow
 
-" Enable code folding
+" Enable generic code folding
 set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
@@ -120,25 +70,10 @@ endfunction
 
 imap <expr> <CR> EnterEnter()
 
-
-" Plugin configuration
-" --------------------
+"                           Plugin Configuration
+" ----------------------------------------------------------------------------
 
 " FILE SYSTEM & SCM
-
-" Fugitive controls
-nmap <leader>gs :Gstatus<CR>
-nmap <leader>gc :Gcommit<CR>
-nmap <leader>gl :Glog<CR>
-nmap <leader>gp :Gpush<CR>
-nmap <leader>gd :Gdiff<CR>
-
-" NERDTree controls
-nmap <leader>nn :NERDTreeToggle<CR>
-nmap <leader>nb :Bookmark 
-
-" Tagbar controls
-nmap <leader>tt :TagbarToggle<CR>
 
 " BUILD, LINT, CHECK
 
@@ -147,9 +82,6 @@ let g:neomake_cpp_enabled_markers = ['gcc']
 let g:neomake_c_enabled_markers = ['gcc']
 
 " call neomake#configure#automake('nrwi', 500)
-
-" Map nm to full-project make
-nmap <leader>nm :Neomake!<CR>
 
 " YCM Setup
 let g:ycm_collect_identifiers_from_tags_files = 1
@@ -163,8 +95,7 @@ let g:AutoPairsFlyMode = 0
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensiosn#fugitiveline#enabled = 1
 
-" Extra Configuration
-" -------------------
+" NEOMAKE
 
 " Function to automatically set makeprg, valuable for C++ and C
 function! g:BuildInSubDir(buildsubdir)
@@ -193,3 +124,194 @@ endfunction
 if globpath('.','Makefile') == ''
     autocmd BufNewFile,BufRead *.cpp,*.c call g:BuildInSubDir("/build")
 endif
+
+"                           Custom Functions
+" ----------------------------------------------------------------------------
+
+function! JFilename()
+    let journaldir = '~/Docs/Org/Journal/'
+    let name = strftime('%Y%m%d.org')
+    return journaldir . name
+endfunction
+
+function! JNewEntry()
+    let filename = JFilename()
+
+    "if bufwinnr(filename) == -1
+    execute ":vsp" filename
+    "else
+        "execute ":sbuffer" filename
+    "endif
+    
+    " If new file unopened in buffer, add date header
+    if empty(glob(filename)) && bufwinnr(filename) == -1 
+        execute "normal! A* " . strftime('%A, %m/%d/%y')
+    endif
+
+    execute "normal! Go** " . strftime('%H:%M')
+endfunction
+
+function! JViewEntry()
+    let filename = JFilename()
+    execute ":vsp" filename
+endfunction
+
+"                           General Keymappings
+" ----------------------------------------------------------------------------
+
+" Map 'fd' to the escape key, as in Spacemacs
+:inoremap fd <Esc>
+:vnoremap fd <Esc>
+if has('nvim')
+    :tnoremap fd <Esc>
+endif
+
+" Make tab and window navigation more sensible
+" Functionality usually covered by vim-tmux-navigator
+" Map only if using oni, which doesn't require vim-tmux-navigator
+if exists("g:gui_oni")
+    nnoremap <C-h> <C-w>h
+    nnoremap <C-j> <C-w>j
+    nnoremap <C-k> <C-w>k
+    nnoremap <C-l> <C-w>l
+endif
+
+" Use alt + directions to move left and right
+nnoremap <M-h> :tabp<CR>
+nnoremap <M-l> :tabn<CR>
+
+" Scroll through visible lines as opposed to numbered lines
+nnoremap j gj
+nnoremap k gk
+
+" Leader Keymappings
+" ----------------------------------------------------------------------------
+
+" ALL HAIL OUR GLORIOUS ETERNAL LEADER, THE SPACEBAR, PRAISE BE TO HIM
+let mapleader=" "
+
+" Prefix Glossary
+" a         - Applications
+" aj        - Journal
+" as        - Shells/Terminals
+" b         - Buffers
+" c         - Comments
+" C         - Compile
+" e         - Errors/Linting/Language Diagnostics
+" f         - Files
+" fe        - Edit configuration
+" g         - Git/VCS
+" h         - Help
+" i         - Insertion/Snippets
+" p         - Project
+" s         - Search
+" sa        - ag
+" sg        - grep
+" sk        - ack
+" st        - pt
+" sw        - web
+" t         - toggles
+" T         - colorscheme toggles
+" w         - windows
+"  wt       - tabs
+
+" a         - Applications
+" -----------------------------------
+" New journal entry
+nnoremap <leader>ajj :call JNewEntry()<CR> 
+" View current journal entry
+nnoremap <leader>avj :call JNewEntry()<CR>
+" as        - Shells/Terminals
+" -----------------------------------
+" b         - Buffers
+" -----------------------------------
+" Close current buffer and the window it's in
+nmap <leader>bd :bdelete<CR> 
+nmap <leader>bd! :bdelete!<CR> 
+
+" c         - Comments
+" -----------------------------------
+" C         - Compile
+" -----------------------------------
+
+" Map nm to full-project make
+nmap <leader>Cnm :Neomake!<CR>
+
+" e         - Errors/Linting/Language Diagnostics
+" -----------------------------------
+" f         - Files
+" -----------------------------------
+
+" NERDTree controls
+nmap <leader>ft :NERDTreeToggle<CR>
+nmap <leader>fnb :Bookmark 
+
+" fe        - Edit configuration
+" -----------------------------------
+
+" Add control for quickly opening init.vim
+nmap <leader>fei :vsp ~/.config/nvim/init.vim<CR>
+" Add control for quickly opening core.vim
+nmap <leader>fec :vsp ~/.config/nvim/core.vim<CR>
+
+" Add control for quickly reloading current vimrc
+nmap <leader>fer :so $MYVIMRC<CR>
+
+" g         - Git/VCS
+" -----------------------------------
+
+" Fugitive controls
+nmap <leader>gs :Gstatus<CR>
+nmap <leader>gc :Gcommit<CR>
+nmap <leader>gl :Glog<CR>
+nmap <leader>gp :Gpush<CR>
+nmap <leader>gd :Gdiff<CR>
+
+" h         - Help
+" -----------------------------------
+" i         - Insertion/Snippets
+" -----------------------------------
+" j         - Jump; File navigation
+" -----------------------------------
+
+" Open tagbar
+nmap <leader>jt :TagbarToggle<CR>
+
+" p         - Project
+" -----------------------------------
+" s         - Search
+" -----------------------------------
+" sa        - ag
+" -----------------------------------
+" sg        - grep
+" -----------------------------------
+" sk        - ack
+" -----------------------------------
+" st        - pt
+" -----------------------------------
+" sw        - web
+" -----------------------------------
+" t         - toggles
+" -----------------------------------
+
+" Toggle spelling
+"!function ToggleSpelling()
+    "if &spelllang ==# 'en_us'
+"endfunction
+
+"nmap <leader> ts :call ToggleSpelling()<CR>
+
+" T         - colorscheme toggles
+" -------------------------------------------------
+
+" Quickswitch between dark and light colorschemes
+nmap <leader>Tc :call ToggleScheme()<CR>
+
+" w         - windows
+" -------------------------------------------------
+"  wt       - tabs
+
+" tab controls
+nmap <leader>wts :tab split<CR>
+nmap <leader>wtc :tabc<CR>
+
