@@ -30,6 +30,8 @@ if !exists("g:gui_oni") " Oni comes with LSP
 endif
 Plug 'vim-scripts/auto-pairs-gentle' " Automatically makes surrounds
 Plug 'tpope/vim-surround' " Adds bindings for changing surrounds
+Plug 'pelodelfuego/vim-swoop' " Adds helm-swoop-like functionality
+Plug 'terryma/vim-multiple-cursors' " Adds sublime-like multicursor
 
 " Applications
 Plug 'jceb/vim-orgmode' " Org-mode support for vim, for journaling + notes
