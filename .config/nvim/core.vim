@@ -70,6 +70,11 @@ endfunction
 
 imap <expr> <CR> EnterEnter()
 
+" Set both ignorecase and smartcase so that all-lowercase searches will
+" ignore case
+set ignorecase
+set smartcase
+
 "                           Plugin Configuration
 " ----------------------------------------------------------------------------
 
@@ -124,6 +129,12 @@ endfunction
 if globpath('.','Makefile') == ''
     autocmd BufNewFile,BufRead *.cpp,*.c call g:BuildInSubDir("/build")
 endif
+
+" vim-swoop configuration
+
+let g:swoopUseDefaultKeyMap = 0
+let g:swoopPatternSpaceInsertsWildcard = 0
+let g:swoopAutoInsertMode = 0
 
 "                           Custom Functions
 " ----------------------------------------------------------------------------
@@ -181,6 +192,9 @@ nnoremap <M-l> :tabn<CR>
 " Scroll through visible lines as opposed to numbered lines
 nnoremap j gj
 nnoremap k gk
+
+" Add // in visual mode to search for highlighted text
+vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 
 " Leader Keymappings
 " ----------------------------------------------------------------------------
@@ -285,6 +299,11 @@ nmap <leader>jt :TagbarToggle<CR>
 " -----------------------------------
 " s         - Search
 " -----------------------------------
+nmap <leader>ss :call Swoop()<CR>
+vmap <leader>ss :call SwoopSelection()<CR>
+
+nmap <leader>sS :call SwoopMulti()<CR>
+vmap <leader>sS :call SwoopMultiSelection()<CR>
 " sa        - ag
 " -----------------------------------
 " sg        - grep
