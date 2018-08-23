@@ -4,6 +4,12 @@
 (tooltip-mode    -1)
 (menu-bar-mode   -1)
 
+;; Fonts
+(set-frame-font "Inconsolata 12" nil t)
+
+;; Toggle on line numbers by default
+(global-display-line-numbers-mode)
+
 ;; package configs
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -19,13 +25,13 @@
 (require 'use-package)
 
 ;; Use quelpa to enable use of some git repos
-					;(use-package quelpa
-					;:ensure t)
-					;(quelpa
-					;'(quelpa-use-package
-					;:fetcher git
-					;:url "https://framagit.org/steckerhalter/quelpa-use-package.git"))
-					;(require 'quelpa-use-package)
+;; (use-package quelpa
+;;   :ensure t)
+;; (quelpa
+;;  '(quelpa-use-package
+;;    :fetcher git
+;;    :url "https://framagit.org/steckerhalter/quelpa-use-package.git"))
+;; (require 'quelpa-use-package)
 
 ;; Cross over to the VIM DARK SIDE
 (use-package evil
@@ -37,6 +43,8 @@
   :ensure t
   :config
   (evil-escape-mode))
+(use-package evil-collection
+  :ensure t)
 
 ;; Theming framework
 (use-package base16-theme
@@ -64,6 +72,25 @@
 (use-package counsel
   :ensure t)
 
+(use-package org-journal
+  :ensure t
+  :init
+  (setq org-journal-file-format "%Y%m%d.org")
+  org-journal-dir "~/Docs/Org/Journal")
+
+(use-package org
+  :ensure t
+  :init
+  (setq 
+  org-directory "~/Docs/Org"
+  org-agenda-files (list org-journal-dir org-directory)
+  org-capture-templates '(
+			  ("t" "Todo" entry (file+headline "~/Docs/Org/gtd.org" "Tasks")
+			   "* TODO %?\n  %i\n  %a")
+			  ("n" "Note" entry (file+olp "~/Docs/Org/notes.org")
+			   "* %?\nCreated on %U\n  %i\n  %a")
+			  )))
+
 ;; Load all .el files under .emacs.d/config
 (load "~/.emacs.d/load-directory.el")
 (load-directory "~/.emacs.d/config")
@@ -82,14 +109,14 @@
 	   ;; Files
 	   "ff"  '(counsel-find-file :which-key "find files")
 	   ;; Config
-	   "fei" (lambda ()
+	   "fei" '((lambda ()
 		    (interactive)
 		    (split-window-right)
-		    (find-file user-init-file)
+		    (find-file user-init-file))
 		    :which-key "edit init.el")
-	   "fer" (lambda ()
+	   "fer" '((lambda ()
 		    (interactive)
-		    (load-file user-init-file)
+		    (load-file user-init-file))
 		    :which-key "reload init.el")
 	   ;; Window creation and movement
 	   "wl"  '(windmove-right :which-key "move right")
@@ -101,12 +128,16 @@
 	   "wd"  '(delete-window :which-key "delete window")
 	   ;;Apps
 	   "att" '(ansi-term :which-key "open terminal")
+	   "ajj" '(org-journal-new-entry :which-key "new journal entry")
+	   "ajv" '(org-journal-display-entry :which-key "view today's journal")
 	   ;; Help
 	   "hdv" 'counsel-describe-variable
 	   "hdf" 'counsel-describe-function
 	   "hdk" 'describe-key
 	   ;; Comments
 	   "cl"  'comment-line
+	   ;; Toggles
+	   "tn"  '(display-line-numbers-mode :which-key "toggle line numbers")
 	   ))
 
 (custom-set-variables
@@ -114,16 +145,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (evil use-package))))
+ '(package-selected-packages
+   (quote
+    (evil-collection org-journal counsel-rg counsel swiper evil use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (counsel-rg counsel swiper evil use-package))))
+
