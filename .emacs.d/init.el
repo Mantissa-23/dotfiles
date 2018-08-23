@@ -68,19 +68,29 @@
   :demand
   :config
   (setq ivy-use-virtual-buffers t
-	ivy-count-format "%d/%d "))
+	ivy-count-format "%d/%d "
+	ivy-re-builders-alist '((t . ivy--regex-fuzzy))))
 
 (use-package swiper
   :ensure t)
 
 (use-package counsel
   :ensure t)
+(use-package counsel-dash
+  :ensure t
+  :config
+  (setq counsel-dash-common-docsets '("Javascript" "HTML" "Python" "Sass")))
+
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-mode +1))
 
 (use-package org-journal
   :ensure t
   :init
-  (setq org-journal-file-format "%Y%m%d.org")
-  org-journal-dir "~/Docs/Org/Journal")
+  (setq org-journal-file-format "%Y%m%d.org"
+  org-journal-dir "~/Docs/Org/Journal"))
 
 (use-package org
   :ensure t
@@ -94,6 +104,35 @@
 			  ("n" "Note" entry (file+olp "~/Docs/Org/notes.org")
 			   "* %?\nCreated on %U\n  %i\n  %a")
 			  )))
+
+;; Enable LSP support
+(use-package lsp-mode
+  :ensure t
+  :config
+  (require 'lsp-imenu)
+  (add-hook 'lsp-after-open-hook 'lsp-enable-imenu))
+;; And UI for things like autocompletions
+(use-package lsp-ui
+  :ensure t
+  :config
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+  
+;; JAVASCRIPT
+
+(use-package js2-mode
+  :ensure t
+  :config
+  ;; Set js2-mode as the JavaScript major-omde
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
+
+;; Add LSP support for JavaScript
+(use-package lsp-javascript-typescript
+  :ensure t
+  :config
+  (add-hook 'js-mode-hook #'lsp-javascript-typescript-enable)
+  (add-hook 'typescript-mode-hook #'lsp-javascript-typescript-enable) ;; for typescript support
+  (add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable) ;; for js3-mode support
+  (add-hook 'rjsx-mode #'lsp-javascript-typescript-enable)) ;; for rjsx-mode support
 
 ;; Load all .el files under .emacs.d/config
 (load "~/.emacs.d/load-directory.el")
@@ -112,6 +151,7 @@
 	   "/"   '(counsel-rg :which-key "ripgrep")
 	   ;; Files
 	   "ff"  '(counsel-find-file :which-key "find files")
+	   "fr"  '(counsel-recentf :which-key "find recent files")
 	   ;; Config
 	   "fei" '((lambda ()
 		    (interactive)
@@ -139,12 +179,23 @@
 	   "hdf" 'counsel-describe-function
 	   "hdk" 'describe-key
 	   ;; Comments
-	   "cl"  'comment-line
+	   "Cl"  'comment-line
+	   ;; Complation/Completion
+	   "cc"  '(completion-at-point :which-key "complete item at point")
+	   ;; Definitions
+	   "dg"  '(xref-find-definitions :which-key "goto definition at point")
+	   "dr"  '(xref-find-references :which-key "find references for symbol at point")
 	   ;; Toggles
 	   "tn"  '(display-line-numbers-mode :which-key "toggle line numbers")
 	   ;; Search (and replace)
 	   "ss"  '(swiper-all :which-key "edit matches one-by-one")
 	   "sS"  '(swiper-multi :which-key "edit matches across files one-by-one")
+	   ;; Project
+	   "pp"  '(projectile-switch-project :which-key "open known project")
+	   "pa"  '(projectile-add-known-project :which-key "add project to list")
+	   "pA"  '(projectile-discover-projects-in-directory :which-key "discover projects in directory")
+	   "ps"  '(projectile-ripgrep :which-key "search in project")
+	   "pf"  '(projectile-find-file :which-key "find files in project")
 	   ))
 
 (custom-set-variables
@@ -154,7 +205,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (evil-collection org-journal counsel-rg counsel swiper evil use-package))))
+    (counsel-dash projectile lsp-javascript-typescript emacs-lsp evil-collection org-journal counsel-rg counsel swiper evil use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
