@@ -36,6 +36,8 @@
 ;; Cross over to the VIM DARK SIDE
 (use-package evil
   :ensure t
+  :init
+  (setq evil-want-integration nil)
   :config
   (evil-mode 1))
 ;; Adds `fd` as an evil escape key
@@ -44,7 +46,9 @@
   :config
   (evil-escape-mode))
 (use-package evil-collection
-  :ensure t)
+  :ensure t
+  :custom (evil-collection-setup-minibuffer t)
+  :init (evil-collection-init))
 
 ;; Theming framework
 (use-package base16-theme
@@ -138,6 +142,9 @@
 	   "cl"  'comment-line
 	   ;; Toggles
 	   "tn"  '(display-line-numbers-mode :which-key "toggle line numbers")
+	   ;; Search (and replace)
+	   "ss"  '(swiper-all :which-key "edit matches one-by-one")
+	   "sS"  '(swiper-multi :which-key "edit matches across files one-by-one")
 	   ))
 
 (custom-set-variables
