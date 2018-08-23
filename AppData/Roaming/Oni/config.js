@@ -21,8 +21,8 @@ exports.configuration = {
     "oni.loadInitVim": true,
     /// Aesthetic
     "ui.colorscheme": "palenight",
-    "editor.fontSize": "12px",
-    "editor.fontFamily": "Consolas",
+    "editor.fontSize": "16",
+    "editor.fontFamily": "Inconsolata",
     // UI customizations
     "ui.animations.enabled": false,
     "ui.fontSmoothing": false
