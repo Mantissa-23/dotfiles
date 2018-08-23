@@ -219,6 +219,12 @@ let mapleader=" "
 nnoremap <leader>ajj :call JNewEntry()<CR> 
 " View current journal entry
 nnoremap <leader>avj :call JViewEntry()<CR>
+" Open terminal un current window
+nmap <leader>att :terminal<CR>
+" Open a new vsplit with a term
+nmap <leader>atv :vsp<CR>:terminal<CR>
+" Open a new hsplit with a term
+nmap <leader>ats :sp<CR>:terminal<CR>
 " as        - Shells/Terminals
 " -----------------------------------
 " b         - Buffers
