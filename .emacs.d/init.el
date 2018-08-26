@@ -3,9 +3,10 @@
 (tool-bar-mode   -1)
 (tooltip-mode    -1)
 (menu-bar-mode   -1)
+(setq inhibit-startup-screen t)
 
 ;; Fonts
-(set-frame-font "Inconsolata 12" nil t)
+(set-frame-font "Inconsolata 11" nil t)
 
 ;; Toggle on line numbers by default
 (global-display-line-numbers-mode)
@@ -30,7 +31,7 @@
 ;; (quelpa
 ;;  '(quelpa-use-package
 ;;    :fetcher git
-;;    :url "https://framagit.org/steckerhalter/quelpa-use-package.git"))
+;;    :url "https://framagit.org/steckerhalter/quelpa-use-package.git")lflflflflf)
 ;; (require 'quelpa-use-package)
 
 ;; Cross over to the VIM DARK SIDE
@@ -67,9 +68,10 @@
   :ensure t
   :demand
   :config
-  (setq ivy-use-virtual-buffers t
+  (setq ivy-use-virtual-buffers t ;; use virtual buffers
 	ivy-count-format "%d/%d "
-	ivy-re-builders-alist '((t . ivy--regex-fuzzy))))
+	ivy-re-builders-alist '((t . ivy--regex-fuzzy)) ;; Use fuzzy finding in searches
+	ivy-initial-inputs-alist nil)) ;; Remove initial '^' in ivy searches
 
 (use-package swiper
   :ensure t)
@@ -85,6 +87,11 @@
   :ensure t
   :config
   (projectile-mode +1))
+
+(use-package magit
+  :ensure t)
+(use-package evil-magit
+  :ensure t)
 
 (use-package org-journal
   :ensure t
@@ -103,7 +110,8 @@
 			   "* TODO %?\n  %i\n  %a")
 			  ("n" "Note" entry (file+olp "~/Docs/Org/notes.org")
 			   "* %?\nCreated on %U\n  %i\n  %a")
-			  )))
+			  ))
+  org-hide-leading-stars t)
 
 ;; Enable LSP support
 (use-package lsp-mode
@@ -134,10 +142,18 @@
   (add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable) ;; for js3-mode support
   (add-hook 'rjsx-mode #'lsp-javascript-typescript-enable)) ;; for rjsx-mode support
 
+(use-package multishell
+  :ensure t)
+
 ;; Load all .el files under .emacs.d/config
 (load "~/.emacs.d/load-directory.el")
 (load-directory "~/.emacs.d/config")
 
+(use-package evil-mc
+  :ensure t
+  :config
+  (global-evil-mc-mode 1)
+  (push 'evil-escape-mode evil-mc-incompatible-minor-modes))
 ;; Custom keybindings
 
 (use-package general
@@ -152,6 +168,7 @@
 	   ;; Files
 	   "ff"  '(counsel-find-file :which-key "find files")
 	   "fr"  '(counsel-recentf :which-key "find recent files")
+	   "fR"  '((lambda () (interactive) (revert-buffer :ignore-auto :noconfirm)) :which-key "reload current buffer from disk")
 	   ;; Config
 	   "fei" '((lambda ()
 		    (interactive)
@@ -163,17 +180,26 @@
 		    (load-file user-init-file))
 		    :which-key "reload init.el")
 	   ;; Window creation and movement
-	   "wl"  '(windmove-right :which-key "move right")
-	   "wh"  '(windmove-left :which-key "move left")
-	   "wk"  '(windmove-up :which-key "move up")
-	   "wj"  '(windmove-down :which-key "move down")
+	   "wl"  '(evil-window-right :which-key "move right")
+	   "wh"  '(evil-window-left :which-key "move left")
+	   "wk"  '(evil-window-up :which-key "move up")
+	   "wj"  '(evil-window-down :which-key "move down")
+	   "wL"  '(evil-window-move-far-right :which-key "move right")
+	   "wH"  '(evil-window-move-far-left :which-key "move left")
+	   "wK"  '(evil-window-move-very-top :which-key "move up")
+	   "wJ"  '(evil-window-move-very-bottom :which-key "move down")
 	   "wv"  '(split-window-right :which-key "split right")
 	   "ws"  '(split-window-below :which-key "split below")
 	   "wd"  '(delete-window :which-key "delete window")
+	   "wfn" '(make-frame :which-key "open new Emacs window")
 	   ;;Apps
-	   "att" '(ansi-term :which-key "open terminal")
-	   "ajj" '(org-journal-new-entry :which-key "new journal entry")
+	   "att" '(multi-term :which-key "open terminal")
+	   "atn" '(multi-term-next :which-key "switch to next term buffer")
+	   "atp" '(multi-term-prev :which-key "switch to previous term buffer")
+	   "ajj" '(org-journal-new-entry :which-key "new journal entry"lflf)
 	   "ajv" '(org-journal-display-entry :which-key "view today's journal")
+	   "ajp" '(org-journal-previous-entry :which-key "view next journal entry")
+	   "ajn" '(org-journal-next-entry :which-key "view previous journal entry")
 	   ;; Help
 	   "hdv" 'counsel-describe-variable
 	   "hdf" 'counsel-describe-function
@@ -196,20 +222,14 @@
 	   "pA"  '(projectile-discover-projects-in-directory :which-key "discover projects in directory")
 	   "ps"  '(projectile-ripgrep :which-key "search in project")
 	   "pf"  '(projectile-find-file :which-key "find files in project")
+	   ;; Magit
+	   "gs"  'magit-status
+	   "gc"  'magit-commit
+	   "gd"  'magit-diff
+	   "gt"  'magit-tag
+	   ;; Colorscheme
+	   "Ts"  'toggle-dark-light-theme
 	   ))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (counsel-dash projectile lsp-javascript-typescript emacs-lsp evil-collection org-journal counsel-rg counsel swiper evil use-package))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
