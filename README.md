@@ -17,6 +17,10 @@ Alternatively, download and run the [install script](https://github.com/Mantissa
 
 My own personal neovim configuration, with a focus on simplicity and rigorous abuse of a `<space>` `<leader>`. Meant to be cloned right into `~/.config` on new computers, distros and servers, with minimal setup and finicking.
 
+## .emacs.d
+
+My own personal Emacs configuration. Emacs and nvim configurations are designed to be fairly similar in terms of what keybindings do what, however do to intrinsic differences in the editors there will be feature differences between the two, and due to my laziness and also flip-flopping between which one is my favorite editor, there will be differences in the keybindings.
+
 ## Dependencies
 
 - vim-plug
