@@ -40,3 +40,18 @@
 (provide 'base16-material-palenight-theme)
 
 ;;; base16-material-palenight-theme.el ends here
+(defcustom default-light-color-theme 'base16-solarized-light
+  "default light theme")
+
+(defcustom default-dark-color-theme 'base16-material-palenight
+  "default dark theme")
+
+(defun toggle-dark-light-theme ()
+  (interactive)
+
+  (let ((is-light (find default-light-color-theme custom-enabled-themes)))
+    (dolist (theme custom-enabled-themes)
+      (disable-theme theme))
+    (load-theme (if is-light default-dark-color-theme default-light-color-theme) t)))
+
+(load-theme default-light-color-theme t)
