@@ -31,7 +31,7 @@
 ;; (quelpa
 ;;  '(quelpa-use-package
 ;;    :fetcher git
-;;    :url "https://framagit.org/steckerhalter/quelpa-use-package.git")lflflflflf)
+;;    :url "https://framagit.org/steckerhalter/quelpa-use-package.git"))
 ;; (require 'quelpa-use-package)
 
 ;; Cross over to the VIM DARK SIDE
@@ -191,7 +191,7 @@
 	   "wv"  '(split-window-right :which-key "split right")
 	   "ws"  '(split-window-below :which-key "split below")
 	   "wd"  '(delete-window :which-key "delete window")
-	   "wfn" '(make-frame :which-key "open new Emacs window")
+	   "wff" '(make-frame :which-key "open new Emacs window")
 	   ;;Apps
 	   "att" '(multi-term :which-key "open terminal")
 	   "atn" '(multi-term-next :which-key "switch to next term buffer")
