@@ -13,9 +13,15 @@ If this fails, rename any default conflicting files if you would like to keep th
 
 Alternatively, download and run the [install script](https://github.com/Mantissa-23/dotfiles/blob/master/install.sh).
 
+## Text Editors
+
+I use both Emacs and Vim depending on what I'm up to. Vim is generally for short edits, configuration, or if I must work remotely over an SSH (I haven't learned to use Emacs's Tramp-Mode yet). Emacs I generally use for my personal machine and development. I occasionally switch between which one is my favorite.
+
+Both are vim-editing-style-biased; the Emacs configuration is evil-mode-centric. Both rely heavily on a rigorous and aggressive abuse of `SPC` as `<leader>`, just as with Spacemacs. Both are intended to be as lean as possible and do only what I need them to do, minimizing bloat otherwise.
+
 ## nvim
 
-My own personal neovim configuration, with a focus on simplicity and rigorous abuse of a `<space>` `<leader>`. Meant to be cloned right into `~/.config` on new computers, distros and servers, with minimal setup and finicking.
+My own personal neovim configuration.
 
 ### Dependencies
 
