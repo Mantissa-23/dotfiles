@@ -83,6 +83,9 @@
   :config
   (setq counsel-dash-common-docsets '("Javascript" "HTML" "Python" "Sass")))
 
+(use-package ripgrep
+  :ensure t)
+
 (use-package projectile
   :ensure t
   :config
@@ -124,6 +127,10 @@
   :ensure t
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+(use-package company-lsp
+  :ensure t
+  :config
+  (push 'company-lsp company-backends))
   
 ;; JAVASCRIPT
 
@@ -142,7 +149,42 @@
   (add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable) ;; for js3-mode support
   (add-hook 'rjsx-mode #'lsp-javascript-typescript-enable)) ;; for rjsx-mode support
 
+(use-package web-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+
 (use-package multishell
+  :ensure t)
+
+;; Company
+
+(use-package company
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'company-mode))
+
+;; Flycheck
+
+(use-package flycheck
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'flycheck-mode))
+
+;; For school
+
+(use-package lean-mode
+  :ensure t)
+
+(use-package company-lean
   :ensure t)
 
 ;; Load all .el files under .emacs.d/config
@@ -169,6 +211,8 @@
 	   "ff"  '(counsel-find-file :which-key "find files")
 	   "fr"  '(counsel-recentf :which-key "find recent files")
 	   "fR"  '((lambda () (interactive) (revert-buffer :ignore-auto :noconfirm)) :which-key "reload current buffer from disk")
+	   "fdd" '(delete-file :which-key "delete file")
+	   "fdD" '(delete-directory :which-key "delete directory")
 	   ;; Config
 	   "fei" '((lambda ()
 		    (interactive)
@@ -192,10 +236,17 @@
 	   "ws"  '(split-window-below :which-key "split below")
 	   "wd"  '(delete-window :which-key "delete window")
 	   "wff" '(make-frame :which-key "open new Emacs window")
+	   "wfd" '(delete-frame :which-key "delete Emacs window")
 	   ;;Apps
+	   ; Terminal
 	   "att" '(multi-term :which-key "open terminal")
 	   "atn" '(multi-term-next :which-key "switch to next term buffer")
 	   "atp" '(multi-term-prev :which-key "switch to previous term buffer")
+	   ; Org
+	   "aot" '(org-todo :which-key "mark as todo item")
+	   "aoT" '(org-todo-list :which-key "open todo list")
+	   "aoi" '(org-display-inline-images :which-key "show images in .org files")
+	   ; Journal
 	   "ajj" '(org-journal-new-entry :which-key "new journal entry"lflf)
 	   "ajv" '(org-journal-display-entry :which-key "view today's journal")
 	   "ajp" '(org-journal-previous-entry :which-key "view next journal entry")
@@ -229,6 +280,10 @@
 	   "gt"  'magit-tag
 	   ;; Colorscheme
 	   "Ts"  'toggle-dark-light-theme
+	   ;; Buffers
+	   "bd"  '(kill-this-buffer :which-key "close buffer")
+	   "bn"  '(next-buffer :which-key "next buffer")
+	   "bp"  '(previous-buffer :which-key "previous buffer")
 	   ))
 
 (setq custom-file "~/.emacs.d/custom.el")
