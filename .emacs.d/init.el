@@ -19,6 +19,14 @@
  whitespace-style '(face lines-tail))
 (add-hook 'prog-mode-hook #'whitespace-mode)
 
+;; Enable save-desktop so layouts are restored on boot
+(desktop-save-mode 1)
+
+;; Save auto backup files to .emacs.d directory so they don't
+;; clutter up motherfucking everything
+(setq backup-directory-alist
+      `(("." . ,(concat user-emacs-directory "backups"))))
+
 ;; ------------------------------ Initialization ---------------------------- ;;
 
 ;; use package.el and add repos
@@ -82,19 +90,22 @@
   :custom (evil-collection-setup-minibuffer t)
   :init (evil-collection-init))
 
-;; Evil keybindings for org
-(use-package evil-org
-  :ensure t)
-
-;; Evil keybindings in org... Apparently there are two packages.
-;; They do different things.
-;; (use-package org-evil
-;;   :ensure t)
-;; Journals in org-mode
-
 ;; Evil keybinds for git integration
 (use-package evil-magit
-  :ensure t)
+  :ensure t
+  :after magit)
+
+;; Evil keybindings in org
+(use-package evil-org
+  :ensure t
+  :after org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+	    (lambda ()
+	      (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
 
 ;; Multiple cursors for Evil
 (use-package evil-mc
@@ -131,20 +142,27 @@
 
 ;;                --------------- Org-Mode -----------------                  ;;
 
-; Set org-journal-dir outside of config so it can be used in org's initalization
-(setq org-journal-dir "~/Docs/org/Journal")
+;; Journals in org-mode
+(use-package org-journal
+  :ensure t
+  :init
+  (setq org-journal-file-format "%Y%m%d.org"
+  org-journal-dir "~/Docs/org/Journal")) ; Custom journal name format
 
 ;; Emacs's framework for organizing your life in plaintext
 (use-package org
   :ensure t
   :init
+  (load-library "find-lisp")
   (setq
-   org-directory "~/Docs/Org"
-   org-agenda-files (list org-journal-dir org-directory)
+   org-directory "~/Docs/Org/"
+   org-agenda-files (find-lisp-find-files org-directory "\.org$")
    org-capture-templates '(
-			   ("t" "Todo" entry (file+headline "~/Docs/Org/gtd.org" "Tasks")
+			   ("t" "Todo" entry
+			    (file+headline "~/Docs/Org/gtd.org" "Tasks")
 			    "* TODO %?\n  %i\n  %a")
-			   ("n" "Note" entry (file+olp "~/Docs/Org/notes.org")
+			   ("n" "Note" entry
+			    (file+olp "~/Docs/Org/notes.org")
 			    "* %?\nCreated on %U\n  %i\n  %a")
 			   )
    org-hide-leading-stars t)
@@ -154,10 +172,6 @@
       ad-do-it                            ;; (2)
       (setq buffer-file-name file-name)))) ;; (3)
 
-(use-package org-journal
-  :ensure t
-  :init
-  (setq org-journal-file-format "%Y%m%d.org")) ; Custom journal name format
 
 ;;                ----------- Project Management -----------                  ;;
 
@@ -219,9 +233,12 @@
   :ensure t
   :config
   (add-hook 'js-mode-hook #'lsp-javascript-typescript-enable)
-  (add-hook 'typescript-mode-hook #'lsp-javascript-typescript-enable) ;; for typescript support
-  (add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable) ;; for js3-mode support
-  (add-hook 'rjsx-mode #'lsp-javascript-typescript-enable)) ;; for rjsx-mode support
+  ;; for typescript support
+  (add-hook 'typescript-mode-hook #'lsp-javascript-typescript-enable)
+  ;; for js3-mode support
+  (add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable)
+  ;; for rjsx-mode support
+  (add-hook 'rjsx-mode #'lsp-javascript-typescript-enable))
 
 ;; Fantastic syntax highlighting for HTML and other templates.
 (use-package web-mode
@@ -276,52 +293,87 @@
 	   :prefix "SPC"
 	   :non-normal-prefix "M-SPC"
 	   ;; Main arsenal
-	   "SPC" '(counsel-M-x :which-key "M-x")
-	   "/"   '(counsel-rg :which-key "ripgrep-regexp")
+	   "SPC" '(counsel-M-x 
+		   :which-key "M-x")
+	   "/"   '(counsel-rg 
+		   :which-key "ripgrep-regexp")
+	   "u"   '(universal-argument 
+		   :which-key "universal argument")
 	   ;; Files
-	   "ff"  '(counsel-find-file :which-key "find files")
-	   "fr"  '(counsel-recentf :which-key "find recent files")
-	   "fR"  '((lambda () (interactive) (revert-buffer :ignore-auto :noconfirm)) :which-key "reload current buffer from disk")
-	   "fdd" '(delete-file :which-key "delete file")
-	   "fdD" '(delete-directory :which-key "delete directory")
+	   "ff"  '(counsel-find-file 
+		   :which-key "find files")
+	   "fr"  '(counsel-recentf 
+		   :which-key "find recent files")
+	   "fR"  '((lambda () (interactive)
+		     (revert-buffer :ignore-auto :noconfirm)) 
+		   :which-key "reload current buffer from disk")
+	   "fdd" '(delete-file 
+		   :which-key "delete file")
+	   "fdD" '(delete-directory 
+		   :which-key "delete directory")
 	   ;; Config
 	   "fei" '((lambda ()
 		     (interactive)
 		     (split-window-right)
 		     (find-file user-init-file))
+		   
 		   :which-key "edit init.el")
 	   "fer" '((lambda ()
 		     (interactive)
 		     (load-file user-init-file))
+		   
 		   :which-key "reload init.el")
 	   ;; Window creation and movement
-	   "wl"  '(evil-window-right :which-key "move right")
-	   "wh"  '(evil-window-left :which-key "move left")
-	   "wk"  '(evil-window-up :which-key "move up")
-	   "wj"  '(evil-window-down :which-key "move down")
-	   "wL"  '(evil-window-move-far-right :which-key "move right")
-	   "wH"  '(evil-window-move-far-left :which-key "move left")
-	   "wK"  '(evil-window-move-very-top :which-key "move up")
-	   "wJ"  '(evil-window-move-very-bottom :which-key "move down")
-	   "wv"  '(split-window-right :which-key "split right")
-	   "ws"  '(split-window-below :which-key "split below")
-	   "wd"  '(delete-window :which-key "delete window")
-	   "wff" '(make-frame :which-key "open new Emacs window")
-	   "wfd" '(delete-frame :which-key "delete Emacs window")
+	   "wl"  '(evil-window-right 
+		   :which-key "move right")
+	   "wh"  '(evil-window-left 
+		   :which-key "move left")
+	   "wk"  '(evil-window-up 
+		   :which-key "move up")
+	   "wj"  '(evil-window-down 
+		   :which-key "move down")
+	   "wL"  '(evil-window-move-far-right 
+		   :which-key "move right")
+	   "wH"  '(evil-window-move-far-left 
+		   :which-key "move left")
+	   "wK"  '(evil-window-move-very-top 
+		   :which-key "move up")
+	   "wJ"  '(evil-window-move-very-bottom 
+		   :which-key "move down")
+	   "wv"  '(split-window-right 
+		   :which-key "split right")
+	   "ws"  '(split-window-below 
+		   :which-key "split below")
+	   "wd"  '(delete-window 
+		   :which-key "delete window")
+	   "wff" '(make-frame 
+		   :which-key "open new Emacs window")
+	   "wfd" '(delete-frame 
+		   :which-key "delete Emacs window")
 	   ;;Apps
 					; Terminal
-	   "att" '(multi-term :which-key "open terminal")
-	   "atn" '(multi-term-next :which-key "switch to next term buffer")
-	   "atp" '(multi-term-prev :which-key "switch to previous term buffer")
+	   "att" '(multi-term 
+		   :which-key "open terminal")
+	   "atn" '(multi-term-next 
+		   :which-key "switch to next term buffer")
+	   "atp" '(multi-term-prev 
+		   :which-key "switch to previous term buffer")
 					; Org
-	   "aot" '(org-todo :which-key "mark as todo item")
-	   "aoT" '(org-todo-list :which-key "open todo list")
-	   "aoi" '(org-display-inline-images :which-key "show images in .org files")
+	   "aot" '(org-todo 
+		   :which-key "mark as todo item")
+	   "aoT" '(org-todo-list 
+		   :which-key "open todo list")
+	   "aoi" '(org-display-inline-images 
+		   :which-key "show images in .org files")
 					; Journal
-	   "ajj" '(org-journal-new-entry :which-key "new journal entry")
-	   "ajv" '(org-journal-display-entry :which-key "view today's journal")
-	   "ajp" '(org-journal-previous-entry :which-key "view next journal entry")
-	   "ajn" '(org-journal-next-entry :which-key "view previous journal entry")
+	   "ajj" '(org-journal-new-entry 
+		   :which-key "new journal entry")
+	   "ajv" '(org-journal-display-entry 
+		   :which-key "view today's journal")
+	   "ajp" '(org-journal-previous-entry 
+		   :which-key "view next journal entry")
+	   "ajn" '(org-journal-next-entry 
+		   :which-key "view previous journal entry")
 	   ;; Help
 	   "hdv" 'counsel-describe-variable
 	   "hdf" 'counsel-describe-function
@@ -329,22 +381,34 @@
 	   ;; Comments
 	   "Cl"  'comment-line
 	   ;; Complation/Completion
-	   "cc"  '(completion-at-point :which-key "complete item at point")
+	   "cc"  '(completion-at-point 
+		   :which-key "complete item at point")
 	   ;; Definitions
-	   "dg"  '(xref-find-definitions :which-key "goto definition at point")
-	   "dr"  '(xref-find-references :which-key "find references for symbol at point")
+	   "dg"  '(xref-find-definitions 
+		   :which-key "goto definition at point")
+	   "dr"  '(xref-find-references 
+		   :which-key "find references for symbol at point")
 	   ;; Toggles
-	   "tn"  '(display-line-numbers-mode :which-key "toggle line numbers")
-	   "tw"  '(visual-line-mode :which-key "toggle line wrapping")
+	   "tn"  '(display-line-numbers-mode 
+		   :which-key "toggle line numbers")
+	   "tw"  '(visual-line-mode 
+		   :which-key "toggle line wrapping")
 	   ;; Search (and replace)
-	   "ss"  '(swiper-all :which-key "edit matches one-by-one")
-	   "sS"  '(swiper-multi :which-key "edit matches across files one-by-one")
+	   "ss"  '(swiper-all 
+		   :which-key "edit matches one-by-one")
+	   "sS"  '(swiper-multi 
+		   :which-key "edit matches across files one-by-one")
 	   ;; Project
-	   "pp"  '(projectile-switch-project :which-key "open known project")
-	   "pa"  '(projectile-add-known-project :which-key "add project to list")
-	   "pA"  '(projectile-discover-projects-in-directory :which-key "discover projects in directory")
-	   "ps"  '(projectile-ripgrep :which-key "search in project")
-	   "pf"  '(projectile-find-file :which-key "find files in project")
+	   "pp"  '(projectile-switch-project 
+		   :which-key "open known project")
+	   "pa"  '(projectile-add-known-project 
+		   :which-key "add project to list")
+	   "pA"  '(projectile-discover-projects-in-directory 
+		   :which-key "discover projects in directory")
+	   "ps"  '(projectile-ripgrep 
+		   :which-key "search in project")
+	   "pf"  '(projectile-find-file 
+		   :which-key "find files in project")
 	   ;; Magit
 	   "gs"  'magit-status
 	   "gc"  'magit-commit
@@ -353,9 +417,12 @@
 	   ;; Colorscheme
 	   "Ts"  'toggle-dark-light-theme
 	   ;; Buffers
-	   "bd"  '(kill-this-buffer :which-key "close buffer")
-	   "bn"  '(next-buffer :which-key "next buffer")
-	   "bp"  '(previous-buffer :which-key "previous buffer")))
+	   "bd"  '(kill-this-buffer 
+		   :which-key "close buffer")
+	   "bn"  '(next-buffer 
+		   :which-key "next buffer")
+	   "bp"  '(previous-buffer 
+		   :which-key "previous buffer")))
   ;; Mode-specific keybindings
   ;; (general-define-key
   ;;  :states '(normal motion visual insert emacs)
