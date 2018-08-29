@@ -20,7 +20,7 @@
 (add-hook 'prog-mode-hook #'whitespace-mode)
 
 ;; Enable save-desktop so layouts are restored on boot
-(desktop-save-mode 1)
+;(desktop-save-mode 1)
 
 ;; Save auto backup files to .emacs.d directory so they don't
 ;; clutter up motherfucking everything
@@ -42,10 +42,10 @@
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
+(setq use-package-always-ensure t)
 
 ;; Use quelpa to enable use of some git repos
-;; (use-package quelpa
-;;   :ensure t)
+;; (use-package quelpa)
 ;; (quelpa
 ;;  '(quelpa-use-package
 ;;    :fetcher git
@@ -58,13 +58,11 @@
 ;;                  -------------- Aesthetics --------------                  ;;
 
 ;; Theming framework
-(use-package base16-theme
-  :ensure t)
+(use-package base16-theme)
 
 ;; Use variable-pitch font for non-code and fixed-pitch for code
 ;; (mainly for org-mode)
 (use-package mixed-pitch
-  :ensure t
   :hook
   (text-mode . mixed-pitch-mode)) ; use mixed-pitch everywhere with text
 
@@ -72,7 +70,6 @@
 
 ;; Cross over to the VIM DARK SIDE
 (use-package evil
-  :ensure t
   :init
   (setq evil-want-integration nil)
   :config
@@ -80,36 +77,18 @@
 
 ;; Adds `fd` as an evil escape key
 (use-package evil-escape
-  :ensure t
   :config
   (evil-escape-mode))
 
 ;; A bunch of evil configs that make Emacs more evil.
 (use-package evil-collection
-  :ensure t
+  :after evil
   :custom (evil-collection-setup-minibuffer t)
   :init (evil-collection-init))
 
-;; Evil keybinds for git integration
-(use-package evil-magit
-  :ensure t
-  :after magit)
-
-;; Evil keybindings in org
-(use-package evil-org
-  :ensure t
-  :after org
-  :config
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook
-	    (lambda ()
-	      (evil-org-set-key-theme)))
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
-
 ;; Multiple cursors for Evil
 (use-package evil-mc
-  :ensure t
+  :after evil
   :config
   (global-evil-mc-mode 1)
   (push 'evil-escape-mode evil-mc-incompatible-minor-modes))
@@ -118,7 +97,6 @@
 ;;                ---------- Completion Framework ----------                  ;;
 
 (use-package ivy
-  :ensure t
   :demand
   :config
   (setq ivy-use-virtual-buffers t ;; use virtual buffers
@@ -127,31 +105,20 @@
 	ivy-initial-inputs-alist nil)) ;; Remove initial '^' in ivy searches
 
 ;; Minibuffer completion with Ivy
-(use-package counsel
-  :ensure t)
+(use-package counsel)
 
 ;; Browse docsets with Counsel. Still dunno how to use this one.
 (use-package counsel-dash
-  :ensure t
   :config
   (setq counsel-dash-common-docsets '("Javascript" "HTML" "Python" "Sass")))
 
 ;; Rapid cross-file search jumping with Counsel/Ivy
-(use-package swiper
-  :ensure t)
+(use-package swiper)
 
 ;;                --------------- Org-Mode -----------------                  ;;
 
-;; Journals in org-mode
-(use-package org-journal
-  :ensure t
-  :init
-  (setq org-journal-file-format "%Y%m%d.org"
-  org-journal-dir "~/Docs/org/Journal")) ; Custom journal name format
-
 ;; Emacs's framework for organizing your life in plaintext
 (use-package org
-  :ensure t
   :init
   (load-library "find-lisp")
   (setq
@@ -172,49 +139,72 @@
       ad-do-it                            ;; (2)
       (setq buffer-file-name file-name)))) ;; (3)
 
+;; Journals in org-mode
+(use-package org-journal
+  :after org
+  :init
+  (setq org-journal-file-format "%Y%m%d.org"
+  org-journal-dir "~/Docs/org/Journal")) ; Custom journal name format
+
+;; Evil keybindings in org
+(use-package evil-org
+  :after (evil org)
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+	    (lambda ()
+	      (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
 
 ;;                ----------- Project Management -----------                  ;;
 
 ;; Lightweight project-management framework
 (use-package projectile
-  :ensure t
   :config
   (projectile-mode +1))
 
 ;; Git integration
-(use-package magit
-  :ensure t)
+(use-package magit)
+
+;; Evil keybinds for git integration
+(use-package evil-magit
+  :after (evil magit))
 
 ;;                ---------- General Development -----------                  ;;
 
 ;; Company completion framework
 (use-package company
-  :ensure t
   :config
   (add-hook 'prog-mode-hook 'company-mode)) ;; Use in any prog-mode
 
+;; DOCUMENTATION ON HOVER? IN MY EMACS?
+(use-package pos-tip)
+
+(use-package company-quickhelp
+  :config
+  (add-hook 'prog-mode-hook 'company-quickhelp-mode))
+
 ;; Flycheck syntax checker
 (use-package flycheck
-  :ensure t
   :config
   (add-hook 'prog-mode-hook 'flycheck-mode)) ;; Use in any prog-mode
 
 ;; Enable Language Server Protocol support
 (use-package lsp-mode
-  :ensure t
   :config
   (require 'lsp-imenu)
   (add-hook 'lsp-after-open-hook 'lsp-enable-imenu))
 
 ;; And UI for things like autocompletions
 (use-package lsp-ui
-  :ensure t
+  :after lsp-mode
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
 ;; Company integration for LSP
 (use-package company-lsp
-  :ensure t
+  :after (company lsp-mode)
   :config
   (push 'company-lsp company-backends))
   
@@ -222,7 +212,6 @@
 
 ;; js2 mode > jsmode
 (use-package js2-mode
-  :ensure t
   :config
   ;; Set js2-mode as the JavaScript major-omde
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
@@ -230,7 +219,6 @@
 ;; Add LSP support for JavaScript with the npm Typescript server
 ;; Remember to npm -g i javascript-typescript-langserver
 (use-package lsp-javascript-typescript
-  :ensure t
   :config
   (add-hook 'js-mode-hook #'lsp-javascript-typescript-enable)
   ;; for typescript support
@@ -242,7 +230,6 @@
 
 ;; Fantastic syntax highlighting for HTML and other templates.
 (use-package web-mode
-  :ensure t
   :config
   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -257,26 +244,22 @@
 ;;                ----------- CS2102: Theorems -------------                  ;;
 
 ;; Enable lean theorem prover integration
-(use-package lean-mode
-  :ensure t)
+(use-package lean-mode)
 
 ;; Enable company integration with lean theorem prover
 (use-package company-lean
-  :ensure t)
+  :after company)
 
 ;;                -------------- Miscellaneous -------------                  ;;
 
 ;; Grep on steroids, integrates with Projectile and Counsel
-(use-package ripgrep
-  :ensure t)
+(use-package ripgrep)
 
 ;; Easy management of multiple shell buffers.
-(use-package multishell
-  :ensure t)
+(use-package multishell)
 
 ;; Shows available keypresses ala spacemacs
 (use-package which-key
-  :ensure t
   :init
   (setq which-key-separator " ")
   (setq which-key-prefix-prefix "+")
@@ -286,7 +269,6 @@
 ;; --------------------------- Custom Keybindings --------------------------- ;;
 
 (use-package general
-  :ensure t
   :config (general-define-key
 	   :states '(normal motion visual insert emacs)
 	   :keymaps 'override
