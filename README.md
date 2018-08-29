@@ -13,6 +13,8 @@ If this fails, rename any default conflicting files if you would like to keep th
 
 Alternatively, download and run the [install script](https://github.com/Mantissa-23/dotfiles/blob/master/install.sh).
 
+Please ensure all dependencies are installed before using a particular dotfile.
+
 ## Text Editors
 
 I use both Emacs and NeoVim depending on what I'm up to. Vim is generally for short edits, configuration, or if I must work remotely over an SSH (I haven't learned to use Emacs's Tramp-Mode yet). I also use Vim when I need to work with pipes (via moreutil's vipe) or if I'm going to get things faster with a BASH terminal than with an IDE. Emacs I generally use for my personal machine and development. I occasionally switch between which one is my favorite; as a result, one configuration may be more mature than the other at any given time (as of writing, Emacs is more mature).
@@ -58,5 +60,3 @@ An absolutely terrible tmux configuration file. Please do not use this.
 ## AppData/Romaing/Code/{User,Oni}
 
 Personal configuration for VSCode and Oni, respectively. Both of these configs are fairly immature and terrible, the former because I just don't like VSCode that much (even though its completion and documentation-on-hover is fantastic) and the latter because Oni itself is immature.
-
-Ensure all of these are installed before using.
