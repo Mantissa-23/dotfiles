@@ -1,5 +1,7 @@
 ;; ------------------------------- General setup ---------------------------- ;;
 
+(setq frame-resize-pixelwise t)
+
 ;; Minimal UI
 (scroll-bar-mode -1)
 (tool-bar-mode   -1)
@@ -8,7 +10,7 @@
 (setq inhibit-startup-screen t)
 
 ;; Fonts
-(set-frame-font "Inconsolata 11" nil t)
+(set-frame-font "Inconsolata 12" nil t)
 
 ;; Toggle on line numbers by default
 (global-display-line-numbers-mode)
@@ -190,6 +192,11 @@
   :config
   (add-hook 'prog-mode-hook 'flycheck-mode)) ;; Use in any prog-mode
 
+;; Flyspell spelling checker
+(use-package flyspell
+  :config
+  (add-hook 'text-mode-hook 'flyspell-mode))
+
 ;; Enable Language Server Protocol support
 (use-package lsp-mode
   :config
@@ -269,142 +276,147 @@
 ;; --------------------------- Custom Keybindings --------------------------- ;;
 
 (use-package general
-  :config (general-define-key
-	   :states '(normal motion visual insert emacs)
-	   :keymaps 'override
-	   :prefix "SPC"
-	   :non-normal-prefix "M-SPC"
-	   ;; Main arsenal
-	   "SPC" '(counsel-M-x 
-		   :which-key "M-x")
-	   "/"   '(counsel-rg 
-		   :which-key "ripgrep-regexp")
-	   "u"   '(universal-argument 
-		   :which-key "universal argument")
-	   ;; Files
-	   "ff"  '(counsel-find-file 
-		   :which-key "find files")
-	   "fr"  '(counsel-recentf 
-		   :which-key "find recent files")
-	   "fR"  '((lambda () (interactive)
-		     (revert-buffer :ignore-auto :noconfirm)) 
-		   :which-key "reload current buffer from disk")
-	   "fdd" '(delete-file 
-		   :which-key "delete file")
-	   "fdD" '(delete-directory 
-		   :which-key "delete directory")
-	   ;; Config
-	   "fei" '((lambda ()
-		     (interactive)
-		     (split-window-right)
-		     (find-file user-init-file))
-		   
-		   :which-key "edit init.el")
-	   "fer" '((lambda ()
-		     (interactive)
-		     (load-file user-init-file))
-		   
-		   :which-key "reload init.el")
-	   ;; Window creation and movement
-	   "wl"  '(evil-window-right 
-		   :which-key "move right")
-	   "wh"  '(evil-window-left 
-		   :which-key "move left")
-	   "wk"  '(evil-window-up 
-		   :which-key "move up")
-	   "wj"  '(evil-window-down 
-		   :which-key "move down")
-	   "wL"  '(evil-window-move-far-right 
-		   :which-key "move right")
-	   "wH"  '(evil-window-move-far-left 
-		   :which-key "move left")
-	   "wK"  '(evil-window-move-very-top 
-		   :which-key "move up")
-	   "wJ"  '(evil-window-move-very-bottom 
-		   :which-key "move down")
-	   "wv"  '(split-window-right 
-		   :which-key "split right")
-	   "ws"  '(split-window-below 
-		   :which-key "split below")
-	   "wd"  '(delete-window 
-		   :which-key "delete window")
-	   "wff" '(make-frame 
-		   :which-key "open new Emacs window")
-	   "wfd" '(delete-frame 
-		   :which-key "delete Emacs window")
-	   ;;Apps
+  :config
+  (general-define-key
+   :states '(normal motion visual emacs)
+   :keymaps 'override
+   "j" 'evil-next-visual-line
+   "k" 'evil-previous-visual-line)
+  (general-define-key
+   :states '(normal motion visual insert emacs)
+   :keymaps 'override
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC"
+   ;; Main arsenal
+   "SPC" '(counsel-M-x
+	   :which-key "M-x")
+   "/"   '(counsel-rg
+	   :which-key "ripgrep-regexp")
+   "u"   '(universal-argument
+	   :which-key "universal argument")
+   ;; Files
+   "ff"  '(counsel-find-file
+	   :which-key "find files")
+   "fr"  '(counsel-recentf
+	   :which-key "find recent files")
+   "fR"  '((lambda () (interactive)
+	     (revert-buffer :ignore-auto :noconfirm))
+	   :which-key "reload current buffer from disk")
+   "fdd" '(delete-file
+	   :which-key "delete file")
+   "fdD" '(delete-directory
+	   :which-key "delete directory")
+   ;; Config
+   "fei" '((lambda ()
+	     (interactive)
+	     (split-window-right)
+	     (find-file user-init-file))
+	   :which-key "edit init.el")
+   "fer" '((lambda ()
+	     (interactive)
+	     (load-file user-init-file))
+	   
+	   :which-key "reload init.el")
+   ;; Window creation and movement
+   "wl"  '(evil-window-right
+	   :which-key "move right")
+   "wh"  '(evil-window-left
+	   :which-key "move left")
+   "wk"  '(evil-window-up
+	   :which-key "move up")
+   "wj"  '(evil-window-down
+	   :which-key "move down")
+   "wL"  '(evil-window-move-far-right
+	   :which-key "move right")
+   "wH"  '(evil-window-move-far-left
+	   :which-key "move left")
+   "wK"  '(evil-window-move-very-top
+	   :which-key "move up")
+   "wJ"  '(evil-window-move-very-bottom
+	   :which-key "move down")
+   "wv"  '(split-window-right
+	   :which-key "split right")
+   "ws"  '(split-window-below
+	   :which-key "split below")
+   "wd"  '(delete-window
+	   :which-key "delete window")
+   "wff" '(make-frame
+	   :which-key "open new Emacs window")
+   "wfd" '(delete-frame
+	   :which-key "delete Emacs window")
+   ;;Apps
 					; Terminal
-	   "att" '(multi-term 
-		   :which-key "open terminal")
-	   "atn" '(multi-term-next 
-		   :which-key "switch to next term buffer")
-	   "atp" '(multi-term-prev 
-		   :which-key "switch to previous term buffer")
+   "att" '(multi-term
+	   :which-key "open terminal")
+   "atn" '(multi-term-next
+	   :which-key "switch to next term buffer")
+   "atp" '(multi-term-prev
+	   :which-key "switch to previous term buffer")
 					; Org
-	   "aot" '(org-todo 
-		   :which-key "mark as todo item")
-	   "aoT" '(org-todo-list 
-		   :which-key "open todo list")
-	   "aoi" '(org-display-inline-images 
-		   :which-key "show images in .org files")
+   "aot" '(org-todo
+	   :which-key "mark as todo item")
+   "aoT" '(org-todo-list
+	   :which-key "open todo list")
+   "aoi" '(org-display-inline-images
+	   :which-key "show images in .org files")
 					; Journal
-	   "ajj" '(org-journal-new-entry 
-		   :which-key "new journal entry")
-	   "ajv" '(org-journal-display-entry 
-		   :which-key "view today's journal")
-	   "ajp" '(org-journal-previous-entry 
-		   :which-key "view next journal entry")
-	   "ajn" '(org-journal-next-entry 
-		   :which-key "view previous journal entry")
-	   ;; Help
-	   "hdv" 'counsel-describe-variable
-	   "hdf" 'counsel-describe-function
-	   "hdk" 'describe-key
-	   ;; Comments
-	   "Cl"  'comment-line
-	   ;; Complation/Completion
-	   "cc"  '(completion-at-point 
-		   :which-key "complete item at point")
-	   ;; Definitions
-	   "dg"  '(xref-find-definitions 
-		   :which-key "goto definition at point")
-	   "dr"  '(xref-find-references 
-		   :which-key "find references for symbol at point")
-	   ;; Toggles
-	   "tn"  '(display-line-numbers-mode 
-		   :which-key "toggle line numbers")
-	   "tw"  '(visual-line-mode 
-		   :which-key "toggle line wrapping")
-	   ;; Search (and replace)
-	   "ss"  '(swiper-all 
-		   :which-key "edit matches one-by-one")
-	   "sS"  '(swiper-multi 
-		   :which-key "edit matches across files one-by-one")
-	   ;; Project
-	   "pp"  '(projectile-switch-project 
-		   :which-key "open known project")
-	   "pa"  '(projectile-add-known-project 
-		   :which-key "add project to list")
-	   "pA"  '(projectile-discover-projects-in-directory 
-		   :which-key "discover projects in directory")
-	   "ps"  '(projectile-ripgrep 
-		   :which-key "search in project")
-	   "pf"  '(projectile-find-file 
-		   :which-key "find files in project")
-	   ;; Magit
-	   "gs"  'magit-status
-	   "gc"  'magit-commit
-	   "gd"  'magit-diff
-	   "gt"  'magit-tag
-	   ;; Colorscheme
-	   "Ts"  'toggle-dark-light-theme
-	   ;; Buffers
-	   "bd"  '(kill-this-buffer 
-		   :which-key "close buffer")
-	   "bn"  '(next-buffer 
-		   :which-key "next buffer")
-	   "bp"  '(previous-buffer 
-		   :which-key "previous buffer")))
+   "ajj" '(org-journal-new-entry
+	   :which-key "new journal entry")
+   "ajv" '(org-journal-display-entry 
+	   :which-key "view today's journal")
+   "ajp" '(org-journal-previous-entry
+	   :which-key "view next journal entry")
+   "ajn" '(org-journal-next-entry
+	   :which-key "view previous journal entry")
+   ;; Help
+   "hdv" 'counsel-describe-variable
+   "hdf" 'counsel-describe-function
+   "hdk" 'describe-key
+   ;; Comments
+   "Cl"  'comment-line
+   ;; Complation/Completion
+   "cc"  '(completion-at-point
+	   :which-key "complete item at point")
+   ;; Definitions
+   "dg"  '(xref-find-definitions
+	   :which-key "goto definition at point")
+   "dr"  '(xref-find-references
+	   :which-key "find references for symbol at point")
+   ;; Toggles
+   "tn"  '(display-line-numbers-mode
+	   :which-key "toggle line numbers")
+   "tw"  '(visual-line-mode
+	   :which-key "toggle line wrapping")
+   ;; Search (and replace)
+   "ss"  '(swiper-all 
+	   :which-key "edit matches one-by-one")
+   "sS"  '(swiper-multi
+	   :which-key "edit matches across files one-by-one")
+   ;; Project
+   "pp"  '(projectile-switch-project
+	   :which-key "open known project")
+   "pa"  '(projectile-add-known-project
+	   :which-key "add project to list")
+   "pA"  '(projectile-discover-projects-in-directory
+	   :which-key "discover projects in directory")
+   "ps"  '(projectile-ripgrep
+	   :which-key "search in project")
+   "pf"  '(projectile-find-file
+	   :which-key "find files in project")
+   ;; Magit
+   "gs"  'magit-status
+   "gc"  'magit-commit
+   "gd"  'magit-diff
+   "gt"  'magit-tag
+   ;; Colorscheme
+   "Ts"  'toggle-dark-light-theme
+   ;; Buffers
+   "bd"  '(kill-this-buffer
+	   :which-key "close buffer")
+   "bn"  '(next-buffer
+	   :which-key "next buffer")
+   "bp"  '(previous-buffer
+	   :which-key "previous buffer")))
   ;; Mode-specific keybindings
   ;; (general-define-key
   ;;  :states '(normal motion visual insert emacs)
