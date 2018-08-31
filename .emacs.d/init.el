@@ -29,6 +29,9 @@
 (setq backup-directory-alist
       `(("." . ,(concat user-emacs-directory "backups"))))
 
+;; Turn on visual line mode for text-mode buffers
+(add-hook 'text-mode '(visual-line-mode 1))
+
 ;; ------------------------------ Initialization ---------------------------- ;;
 
 ;; use package.el and add repos
