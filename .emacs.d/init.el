@@ -7,7 +7,7 @@
 (tool-bar-mode   -1)
 (tooltip-mode    -1)
 (menu-bar-mode   -1)
-(setq inhibit-startup-screen t)
+(setq-default inhibit-startup-screen t)
 
 ;; Fonts
 (set-frame-font "Inconsolata 12" nil t)
@@ -26,18 +26,21 @@
 
 ;; Save auto backup files to .emacs.d directory so they don't
 ;; clutter up motherfucking everything
-(setq backup-directory-alist
+(setq-default backup-directory-alist
       `(("." . ,(concat user-emacs-directory "backups"))))
 
 ;; Turn on visual line mode for text-mode buffers
 (add-hook 'text-mode '(visual-line-mode 1))
+;; At the expense of memory usage, don't slow to a fucking
+;; crawl when encountering unicode characters.
+(setq-default inhibit-compacting-font-caches t)
 
 ;; ------------------------------ Initialization ---------------------------- ;;
 
 ;; use package.el and add repos
 (require 'package)
-(setq package-enable-at-startup nil)
-(setq package-archives '(("org"   . "http://orgmode.org/elpa/")
+(setq-default package-enable-at-startup nil)
+(setq-default package-archives '(("org"   . "http://orgmode.org/elpa/")
 			 ("gnu"   . "http://elpa.gnu.org/packages/")
 			 ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
@@ -47,7 +50,7 @@
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
-(setq use-package-always-ensure t)
+(setq-default use-package-always-ensure t)
 
 ;; Use quelpa to enable use of some git repos
 ;; (use-package quelpa)
@@ -76,7 +79,7 @@
 ;; Cross over to the VIM DARK SIDE
 (use-package evil
   :init
-  (setq evil-want-integration nil)
+  (setq-default evil-want-integration nil)
   :config
   (evil-mode 1))
 
@@ -104,7 +107,7 @@
 (use-package ivy
   :demand
   :config
-  (setq ivy-use-virtual-buffers t ;; use virtual buffers
+  (setq-default ivy-use-virtual-buffers t ;; use virtual buffers
 	ivy-count-format "%d/%d " ;; No fuckin' clue
 	ivy-re-builders-alist '((t . ivy--regex-fuzzy)) ;; Use fuzzy finding
 	ivy-initial-inputs-alist nil)) ;; Remove initial '^' in ivy searches
@@ -115,7 +118,7 @@
 ;; Browse docsets with Counsel. Still dunno how to use this one.
 (use-package counsel-dash
   :config
-  (setq counsel-dash-common-docsets '("Javascript" "HTML" "Python" "Sass")))
+  (setq-default counsel-dash-common-docsets '("Javascript" "HTML" "Python" "Sass")))
 
 ;; Rapid cross-file search jumping with Counsel/Ivy
 (use-package swiper)
@@ -126,7 +129,7 @@
 (use-package org
   :init
   (load-library "find-lisp")
-  (setq
+  (setq-default
    org-directory "~/Docs/Org/"
    org-agenda-files (find-lisp-find-files org-directory "\.org$")
    org-capture-templates '(
@@ -142,13 +145,13 @@
   (defadvice org-edit-src-code (around set-buffer-file-name activate compile)
     (let ((file-name (buffer-file-name))) ;; (1)
       ad-do-it                            ;; (2)
-      (setq buffer-file-name file-name)))) ;; (3)
+      (setq-default buffer-file-name file-name)))) ;; (3)
 
 ;; Journals in org-mode
 (use-package org-journal
   :after org
   :init
-  (setq org-journal-file-format "%Y%m%d.org"
+  (setq-default org-journal-file-format "%Y%m%d.org"
   org-journal-dir "~/Docs/org/Journal")) ; Custom journal name format
 
 ;; Evil keybindings in org
@@ -217,6 +220,11 @@
   :after (company lsp-mode)
   :config
   (push 'company-lsp company-backends))
+
+;; Smartparens
+(use-package smartparens
+             :config
+             (add-hook 'prog-mode-hook #'smartparens-mode))
   
 ;;                ------------ Web Development -------------                  ;;
 
@@ -249,7 +257,8 @@
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  )
 
 ;;                ----------- CS2102: Theorems -------------                  ;;
 
@@ -271,11 +280,23 @@
 ;; Shows available keypresses ala spacemacs
 (use-package which-key
   :init
-  (setq which-key-separator " ")
-  (setq which-key-prefix-prefix "+")
+  (setq-default which-key-separator " ")
+  (setq-default which-key-prefix-prefix "+")
   :config
   (which-key-mode))
 
+;; GOD I HATE TABS
+
+(setq-default
+ ;; web-mode
+ web-mode-markup-indent-offset 2
+ web-mode-css-indent-offset 2
+ web-mode-code-indent-offset 2
+ indent-tabs-mode nil
+ ;; css-mode
+ css-indent-offset 2
+ ;; c-style languages
+ c-basic-offset 4)
 ;; --------------------------- Custom Keybindings --------------------------- ;;
 
 (use-package general
@@ -356,12 +377,16 @@
    "atp" '(multi-term-prev
 	   :which-key "switch to previous term buffer")
 					; Org
-   "aot" '(org-todo
-	   :which-key "mark as todo item")
-   "aoT" '(org-todo-list
-	   :which-key "open todo list")
-   "aoi" '(org-display-inline-images
-	   :which-key "show images in .org files")
+	   "aot" '(org-todo 
+		   :which-key "mark as todo item")
+	   "aoT" '(org-todo-list 
+		   :which-key "open todo list")
+	   "aoi" '(org-display-inline-images 
+		   :which-key "show images in .org files")
+     "aoc" '(org-clock-in
+             :which-key "clock in to track time")
+     "Aoc" '(org-clock-out
+             :Which-key "clock out to track time")
 					; Journal
    "ajj" '(org-journal-new-entry
 	   :which-key "new journal entry")
@@ -437,5 +462,5 @@
 (load-directory "~/.emacs.d/config")
 
 ;; Load settings generated by Customize.el
-(setq custom-file "~/.emacs.d/custom.el")
+(setq-default custom-file "~/.emacs.d/custom.el")
 (load custom-file)
