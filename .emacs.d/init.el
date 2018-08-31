@@ -259,6 +259,13 @@
   ;; for rjsx-mode support
   (add-hook 'rjsx-mode #'lsp-javascript-typescript-enable))
 
+(use-package lsp-css
+  :config
+  (add-hook 'css-mode-hook 'lsp-css-enable)
+  (add-hook 'less-mode-hook 'lsp-css-enable)
+  (add-hook 'scss-mode-hook 'lsp-css-enable)
+  (add-hook 'sass-mode-hook 'lsp-css-enable))
+
 ;; Fantastic syntax highlighting for HTML and other templates.
 (use-package web-mode
   :config
@@ -273,6 +280,8 @@
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
   )
 
+(use-package web-beautify
+  :after web-mode)
 ;;                ----------- CS2102: Theorems -------------                  ;;
 
 ;; Enable lean theorem prover integration
@@ -399,31 +408,31 @@
    "wfd" '(delete-frame
 	   :which-key "delete Emacs window")
    ;;Apps
-					; Terminal
+   ;; Terminal
    "att" '(multi-term
 	   :which-key "open terminal")
    "atn" '(multi-term-next
 	   :which-key "switch to next term buffer")
    "atp" '(multi-term-prev
-	   :which-key "switch to previous term buffer")
-					; Org
-	   "aot" '(org-todo 
-		   :which-key "mark as todo item")
-	   "aoT" '(org-todo-list 
-		   :which-key "open todo list")
-	   "aoi" '(org-display-inline-images 
-		   :which-key "show images in .org files")
-     "aoc" '(org-clock-in
-             :which-key "clock in to track time")
-     "Aoc" '(org-clock-out
-             :Which-key "clock out to track time")
-					; Journal
+           :which-key "switch to previous term buffer")
+   ;; Org
+   "aot" '(org-todo
+           :which-key "mark as todo item")
+   "aoT" '(org-todo-list 
+           :which-key "open todo list")
+   "aoi" '(org-display-inline-images 
+           :which-key "show images in .org files")
+   "aoc" '(org-clock-in
+           :which-key "clock in to track time")
+   "aoC" '(org-clock-out
+           :Which-key "clock out to track time")
+   ;; Journal
    "ajj" '(org-journal-new-entry
-	   :which-key "new journal entry")
+           :which-key "new journal entry")
    "ajv" '(org-journal-display-entry 
-	   :which-key "view today's journal")
+           :which-key "view today's journal")
    "ajp" '(org-journal-previous-entry
-	   :which-key "view next journal entry")
+           :which-key "view next journal entry")
    "ajn" '(org-journal-next-entry
 	   :which-key "view previous journal entry")
    ;; Help
