@@ -118,7 +118,15 @@
 ;; Browse docsets with Counsel. Still dunno how to use this one.
 (use-package counsel-dash
   :config
-  (setq-default counsel-dash-common-docsets '("Javascript" "HTML" "Python" "Sass")))
+  (setq-default
+   counsel-dash-docsets-path "~/.docset"
+   counsel-dash-docsets-url "https://raw.github.com/Kapeli/feeds/master"
+   counsel-dash-common-docsets '("Javascript" "HTML" "Python" "Sass" "C++"))
+   (add-hook 'emacs-lisp-mode-hook
+             (lambda () (setq-local counsel-dash-docsets '("Emacs Lisp"))))
+   (add-hook 'c++-mode-hook
+             (lambda () (setq-local counsel-dash-docsets '("C++")))))
+
 
 ;; Rapid cross-file search jumping with Counsel/Ivy
 (use-package swiper)
@@ -209,6 +217,11 @@
   (require 'lsp-imenu)
   (add-hook 'lsp-after-open-hook 'lsp-enable-imenu))
 
+(use-package yasnippet
+  :config
+  (yas-global-mode 1))
+(use-package yasnippet-snippets)
+
 ;; And UI for things like autocompletions
 (use-package lsp-ui
   :after lsp-mode
@@ -284,6 +297,23 @@
   (setq-default which-key-prefix-prefix "+")
   :config
   (which-key-mode))
+
+;; Make editing with a shedload of splits easier
+(use-package golden-ratio
+  :config
+  (golden-ratio-mode 1)
+  ;; Add evil commands to golden-ratio
+  (setq golden-ratio-extra-commands
+      (append golden-ratio-extra-commands
+              '(evil-window-left
+                evil-window-right
+                evil-window-up
+                evil-window-down
+                select-window-1
+                select-window-2
+                select-window-3
+                select-window-4
+                select-window-5))))
 
 ;; GOD I HATE TABS
 
@@ -415,6 +445,8 @@
 	   :which-key "toggle line numbers")
    "tw"  '(visual-line-mode
 	   :which-key "toggle line wrapping")
+   "tg"  '(golden-ratio-mode
+           :which-key "toggle golden ratio splits")
    ;; Search (and replace)
    "ss"  '(swiper-all 
 	   :which-key "edit matches one-by-one")
@@ -444,7 +476,10 @@
    "bn"  '(next-buffer
 	   :which-key "next buffer")
    "bp"  '(previous-buffer
-	   :which-key "previous buffer")))
+	   :which-key "previous buffer")
+  ;; Insertions
+  "is"   '(yas-insert-snippet
+           :which-key "insert snippet")))
   ;; Mode-specific keybindings
   ;; (general-define-key
   ;;  :states '(normal motion visual insert emacs)
