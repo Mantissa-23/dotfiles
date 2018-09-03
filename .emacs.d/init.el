@@ -30,10 +30,15 @@
       `(("." . ,(concat user-emacs-directory "backups"))))
 
 ;; Turn on visual line mode for text-mode buffers
+;; (this sometimes does not work for some reason)
 (add-hook 'text-mode '(visual-line-mode 1))
+
 ;; At the expense of memory usage, don't slow to a fucking
 ;; crawl when encountering unicode characters.
 (setq-default inhibit-compacting-font-caches t)
+
+;; Set UTF-8 as the default, assumed coding
+(set-language-environment "UTF-8")
 
 ;; ------------------------------ Initialization ---------------------------- ;;
 
@@ -192,24 +197,28 @@
 ;; Company completion framework
 (use-package company
   :config
-  (add-hook 'prog-mode-hook 'company-mode)) ;; Use in any prog-mode
+  :hook (prog-mode . company-mode))
+  ;(add-hook 'prog-mode-hook 'company-mode)) ;; Use in any prog-mode
 
 ;; DOCUMENTATION ON HOVER? IN MY EMACS?
 (use-package pos-tip)
 
 (use-package company-quickhelp
   :config
-  (add-hook 'prog-mode-hook 'company-quickhelp-mode))
+  :hook (prog-mode . company-quickhelp-mode))
+  ;(add-hook 'prog-mode-hook 'company-quickhelp-mode))
 
 ;; Flycheck syntax checker
 (use-package flycheck
   :config
-  (add-hook 'prog-mode-hook 'flycheck-mode)) ;; Use in any prog-mode
+  :hook (prog-mode . flycheck-mode))
+  ;(add-hook 'prog-mode-hook 'flycheck-mode)) ;; Use in any prog-mode
 
 ;; Flyspell spelling checker
 (use-package flyspell
   :config
-  (add-hook 'text-mode-hook 'flyspell-mode))
+  :hook (text-mode . flyspell-mode))
+  ;(add-hook 'text-mode-hook 'flyspell-mode))
 
 ;; Enable Language Server Protocol support
 (use-package lsp-mode
@@ -226,7 +235,8 @@
 (use-package lsp-ui
   :after lsp-mode
   :config
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+  :hook (lsp-mode-hook  . lsp-ui-mode))
+  ;(add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
 ;; Company integration for LSP
 (use-package company-lsp
@@ -237,7 +247,8 @@
 ;; Smartparens
 (use-package smartparens
              :config
-             (add-hook 'prog-mode-hook #'smartparens-mode))
+             :hook (prog-mode . smartparens-mode))
+             ;(add-hook 'prog-mode-hook #'smartparens-mode))
   
 ;;                ------------ Web Development -------------                  ;;
 
@@ -486,6 +497,8 @@
 	   :which-key "next buffer")
    "bp"  '(previous-buffer
 	   :which-key "previous buffer")
+   "bf"  '(counsel-ibuffer
+           :which-key "find buffer and switch")
   ;; Insertions
   "is"   '(yas-insert-snippet
            :which-key "insert snippet")))
