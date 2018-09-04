@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+#cotributor: Dylan Culfogienis <dylanculfogienis@gmail.com>
+#name: File Docstring
+# --
+/**
+ *  @author Dylan Culfogienis
+ *  @email dtc9bb@virginia.edu
+ *  @date `(format-time-string "%Y-%m-%d")`
+ *  @file `(file-name-nondirectory(buffer-file-name))`
+ *  @brief 
+*/
