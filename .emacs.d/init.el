@@ -91,7 +91,9 @@
 ;; Adds `fd` as an evil escape key
 (use-package evil-escape
   :config
-  (evil-escape-mode))
+  (evil-escape-mode)
+  (setq
+   evil-escape-delay 1))
 
 ;; A bunch of evil configs that make Emacs more evil.
 (use-package evil-collection
