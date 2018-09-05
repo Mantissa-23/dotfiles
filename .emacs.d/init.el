@@ -1,15 +1,17 @@
 ;; ------------------------------- General setup ---------------------------- ;;
 
-(setq frame-resize-pixelwise t)
-
-;; Minimal UI
+;; Fuck GUIs
 (scroll-bar-mode -1)
 (tool-bar-mode   -1)
 (tooltip-mode    -1)
 (menu-bar-mode   -1)
 (setq-default inhibit-startup-screen t)
 
-;; Fonts
+;; Unfuck GUIs. Makes window resizing not vomit-worthy when
+;; using Windows X servers.
+(setq frame-resize-pixelwise t)
+
+;; Set fonts
 (set-frame-font "Inconsolata 12" nil t)
 
 ;; Toggle on line numbers by default
@@ -56,6 +58,10 @@
       (if (file-exists-p "/bin/zsh")
           "/usr/bin/zsh"
         "/bin/bash")))
+
+;; Keep track of an unreasonably large number of recent files
+;; Because SPC f r *never forgets*
+(setq recentf-max-saved-items 1000)
 
 ;; ------------------------------ Initialization ---------------------------- ;;
 

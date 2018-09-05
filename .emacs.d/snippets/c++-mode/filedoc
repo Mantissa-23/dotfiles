@@ -3,7 +3,7 @@
 #name: File Docstring
 # --
 /**
- *  @author Dylan Culfogienis
+ *  @student Dylan Culfogienis
  *  @email dtc9bb@virginia.edu
  *  @date `(format-time-string "%Y-%m-%d")`
  *  @file `(file-name-nondirectory(buffer-file-name))`
