@@ -44,6 +44,23 @@
 ;; Set UTF-8 as the default, assumed coding
 (set-language-environment "UTF-8")
 
+;; Set UTF-8 as the default terminal encoding
+(set-terminal-coding-system 'utf-8)
+
+;; Set default terminal program:
+;; Use windows bash (WSL) if running from Windows
+;; Fallback to Powershell if WSL bash isn't found
+;; Use /bin/zsh if running in non-Windows
+;; Use /bin/bash as a fallback if zsh isn't found
+(setq term-ansi-default-program
+      (if (string-equal system-type "windows-nt")
+          (if (file-exists-p "C:/Windows/System32/bash.exe")
+              "C:/Windows/System32/bash.exe"
+            "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
+      (if (file-exists-p "/bin/zsh")
+          "/usr/bin/zsh"
+        "/bin/bash")))
+
 ;; ------------------------------ Initialization ---------------------------- ;;
 
 ;; use package.el and add repos
@@ -95,7 +112,9 @@
 ;; Adds `fd` as an evil escape key
 (use-package evil-escape
   :config
-  (evil-escape-mode))
+  (evil-escape-mode)
+  (setq
+   evil-escape-delay 1))
 
 ;; A bunch of evil configs that make Emacs more evil.
 (use-package evil-collection
