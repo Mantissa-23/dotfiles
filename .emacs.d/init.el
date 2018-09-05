@@ -11,11 +11,15 @@
 ;; using Windows X servers.
 (setq frame-resize-pixelwise t)
 
-;; Set fonts
-(set-frame-font "Inconsolata 12" nil t)
+;; Fonts
+;;(set-frame-font "Inconsolata 12" nil t)
+(set-fontset-font "fontset-default" nil
+                  (font-spec :size 12 :name "Inconsolata"))
 
 ;; Toggle on line numbers by default
-(global-display-line-numbers-mode)
+(if (<= emacs-major-version 26)
+(setq global-linum-mode t)
+(global-display-line-numbers-mode))
 
 ;; Color lines exceeding 80 columns in prog-modes
 (setq-default
@@ -114,7 +118,9 @@
 ;; Adds `fd` as an evil escape key
 (use-package evil-escape
   :config
-  (evil-escape-mode))
+  (evil-escape-mode)
+  (setq
+   evil-escape-delay 1))
 
 ;; A bunch of evil configs that make Emacs more evil.
 (use-package evil-collection
