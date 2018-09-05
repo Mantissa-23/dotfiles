@@ -10,10 +10,14 @@
 (setq-default inhibit-startup-screen t)
 
 ;; Fonts
-(set-frame-font "Inconsolata 12" nil t)
+;;(set-frame-font "Inconsolata 12" nil t)
+(set-fontset-font "fontset-default" nil
+                  (font-spec :size 12 :name "Inconsolata"))
 
 ;; Toggle on line numbers by default
-(global-display-line-numbers-mode)
+(if (<= emacs-major-version 26)
+(setq global-linum-mode t)
+(global-display-line-numbers-mode))
 
 ;; Color lines exceeding 80 columns in prog-modes
 (setq-default
