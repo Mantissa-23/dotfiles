@@ -17,7 +17,7 @@
                   (font-spec :size 12 :name "Inconsolata"))
 
 ;; Toggle on line numbers by default
-(if (<= emacs-major-version 26)
+(if (< emacs-major-version 26)
 (setq global-linum-mode t)
 (global-display-line-numbers-mode))
 
@@ -105,6 +105,12 @@
 (use-package mixed-pitch
   :hook
   (text-mode . mixed-pitch-mode)) ; use mixed-pitch everywhere with text
+
+;; Dim unfocused windows
+(use-package dimmer
+  :config
+  (setq dimmer-fraction 0.50)
+  (dimmer-mode 1))
 
 ;;                  ----------------- Evil -----------------                  ;;
 
@@ -496,6 +502,8 @@
 	   :which-key "toggle line wrapping")
    "tg"  '(golden-ratio-mode
            :which-key "toggle golden ratio splits")
+   "td"   '(dimmer-mode
+            :which-key "toggle dimmer mode")
    ;; Search (and replace)
    "ss"  '(swiper-all 
 	   :which-key "edit matches one-by-one")
