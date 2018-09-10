@@ -12,7 +12,7 @@
  '(evil-collection-setup-minibuffer t)
  '(package-selected-packages
    (quote
-    (dimmer lsp-css web-beautify golden-ratio yasnippet-snippets yasnippet smartparens neotree postip company-quickhelp evil-org evil-org-mode mixed-pitch org-evil company-lsp company-lean lean-mode company ripgrep web-mode evil-mc evi-mc multishell multi-term evil-magit counsel-dash projectile lsp-javascript-typescript emacs-lsp evil-collection org-journal counsel-rg counsel swiper evil use-package))))
+    (esup auto-compile dimmer lsp-css web-beautify golden-ratio yasnippet-snippets yasnippet smartparens neotree postip company-quickhelp evil-org evil-org-mode mixed-pitch org-evil company-lsp company-lean lean-mode company ripgrep web-mode evil-mc evi-mc multishell multi-term evil-magit counsel-dash projectile lsp-javascript-typescript emacs-lsp evil-collection org-journal counsel-rg counsel swiper evil use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

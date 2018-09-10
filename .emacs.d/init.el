@@ -1,5 +1,7 @@
 ;; ------------------------------- General setup ---------------------------- ;;
 
+;; comments
+
 ;; Fuck GUIs
 (scroll-bar-mode -1)
 (tool-bar-mode   -1)
@@ -42,6 +44,9 @@
 ;; At the expense of memory usage, don't slow to a fucking
 ;; crawl when encountering unicode characters.
 (setq-default inhibit-compacting-font-caches t)
+
+;; Sacrifice memory for better performance rendering long lines
+(setq-default bidi-display-reordering nil)
 
 ;; Set UTF-8 as the default, assumed coding
 (set-language-environment "UTF-8")
@@ -94,6 +99,17 @@
 
 ;; -------------------------------- Packages -------------------------------- ;;
 ;; And per-package configuration
+
+;;                  ----------------- Emacs ----------------                  ;;
+
+;; (use-package auto-compile
+;;   :init
+;;   (setq-default load-prefer-newer t)
+;;   :config
+;;   (auto-compile-on-load-mode)
+;;   (auto-compile-on-save-mode))
+  
+(use-package esup)
 
 ;;                  -------------- Aesthetics --------------                  ;;
 
