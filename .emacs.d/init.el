@@ -300,7 +300,11 @@
              :config
              :hook (prog-mode . smartparens-mode))
              ;(add-hook 'prog-mode-hook #'smartparens-mode))
-  
+
+(use-package highlight-symbol
+  :init
+  (add-hook 'prog-mode-hook 'highlight-symbol-mode))
+
 ;;                ------------ Web Development -------------                  ;;
 
 ;; js2 mode > jsmode
@@ -543,6 +547,10 @@
    "gt"  'magit-tag
    ;; Colorscheme
    "Ts"  'toggle-dark-light-theme
+   "Tr"  '(whitespace-mode
+           :which-key "toggle 80-line ruler")
+   "Tm"  '(mixed-pitch-mode
+           :which-key "toggle mixed pitch")
    ;; Buffers
    "bd"  '(kill-this-buffer
 	   :which-key "close buffer")
