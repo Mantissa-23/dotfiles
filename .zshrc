@@ -108,3 +108,5 @@ alias ls='ls'
 export EDITOR=vim
 
 export DISPLAY=:0
+
+export PATH=$PATH:~/opt/bin

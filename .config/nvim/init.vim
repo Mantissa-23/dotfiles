@@ -18,6 +18,7 @@ Plug 'tpope/vim-sensible' " Sensible defaults
 Plug 'scrooloose/nerdtree' " File browser
 Plug 'majutsushi/tagbar' " Tag browser
 Plug 'sheerun/vim-polyglot' " Language package package
+Plug 'Shougo/denite.nvim' " General completion framework similar to Helm
 
 if !exists("g:gui_oni") " Probably won't be using tmux in Oni
     Plug 'christoomey/vim-tmux-navigator' " Seamless navigation for tmux

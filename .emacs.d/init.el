@@ -102,14 +102,14 @@
 
 ;;                  ----------------- Emacs ----------------                  ;;
 
-;; (use-package auto-compile
-;;   :init
-;;   (setq-default load-prefer-newer t)
-;;   :config
-;;   (auto-compile-on-load-mode)
-;;   (auto-compile-on-save-mode))
+(use-package auto-compile
+  :init
+  (setq-default load-prefer-newer t)
+  :config
+  (auto-compile-on-load-mode)
+  (auto-compile-on-save-mode))
   
-(use-package esup)
+;; (use-package esup)
 
 ;;                  -------------- Aesthetics --------------                  ;;
 
@@ -262,7 +262,9 @@
 ;; Flycheck syntax checker
 (use-package flycheck
   :config
-  :hook (prog-mode . flycheck-mode))
+  :hook (prog-mode . flycheck-mode)
+  :hook (c++-mode . (lambda() (setq-default flycheck-gcc-language-standard "c++11"))))
+
   ;(add-hook 'prog-mode-hook 'flycheck-mode)) ;; Use in any prog-mode
 
 ;; Flyspell spelling checker
@@ -298,6 +300,7 @@
 ;; Smartparens
 (use-package smartparens
              :config
+             (setq-default sp-escape-quotes-after-insert nil) ;; Fix for escaped sinlgequotes in C++
              :hook (prog-mode . smartparens-mode))
              ;(add-hook 'prog-mode-hook #'smartparens-mode))
   
