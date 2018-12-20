@@ -65,4 +65,5 @@
         "**/.DS_Store": true,
         "**/*.olean": true
     },
+    "vimStyle.imapEsc": "fd"
 }

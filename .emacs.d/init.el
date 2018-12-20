@@ -14,13 +14,14 @@
 (setq frame-resize-pixelwise t)
 
 ;; Fonts
-;;(set-frame-font "Inconsolata 12" nil t)
-(set-fontset-font "fontset-default" nil
-                  (font-spec :size 12 :name "Inconsolata"))
+(set-frame-font "Inconsolata 12" nil t)
+ (set-fontset-font "fontset-default" nil
+                   (font-spec :size 12 :name "Inconsolata"))
 
 ;; Toggle on line numbers by default
 (if (< emacs-major-version 26)
 (setq global-linum-mode t)
+(setq-default display-line-numbers-type 'relative)
 (global-display-line-numbers-mode))
 
 ;; Color lines exceeding 80 columns in prog-modes
@@ -156,8 +157,12 @@
   :config
   (global-evil-mc-mode 1)
   (push 'evil-escape-mode evil-mc-incompatible-minor-modes))
-;; Custom keybindings
 
+;; Match HTML tags and other modern language constructs
+;; (use-package evil-matchit
+;;   :after evil
+;;   :config
+;;   (global-evil-matchit-mode 1))
 ;;                ---------- Completion Framework ----------                  ;;
 
 (use-package ivy
@@ -303,7 +308,11 @@
              (setq-default sp-escape-quotes-after-insert nil) ;; Fix for escaped sinlgequotes in C++
              :hook (prog-mode . smartparens-mode))
              ;(add-hook 'prog-mode-hook #'smartparens-mode))
-  
+
+(use-package highlight-symbol
+  :init
+  (add-hook 'prog-mode-hook 'highlight-symbol-mode))
+
 ;;                ------------ Web Development -------------                  ;;
 
 ;; js2 mode > jsmode
@@ -356,6 +365,13 @@
 (use-package company-lean
   :after company)
 
+;;                -------------------- C# ------------------                  ;;
+
+(use-package omnisharp
+  :after company
+  :config
+  (add-hook 'csharp-mode-hook 'omnisharp-mode)
+  (add-to-list 'company-backends 'company-omnisharp))
 ;;                -------------- Miscellaneous -------------                  ;;
 
 ;; Grep on steroids, integrates with Projectile and Counsel
@@ -422,6 +438,8 @@
 	   :which-key "ripgrep-regexp")
    "u"   '(universal-argument
 	   :which-key "universal argument")
+   "."   '(repeat-complex-command
+           :which-key "Repeat las M-x command")
    ;; Files
    "ff"  '(counsel-find-file
 	   :which-key "find files")
@@ -546,6 +564,10 @@
    "gt"  'magit-tag
    ;; Colorscheme
    "Ts"  'toggle-dark-light-theme
+   "Tr"  '(whitespace-mode
+           :which-key "toggle 80-line ruler")
+   "Tm"  '(mixed-pitch-mode
+           :which-key "toggle mixed pitch")
    ;; Buffers
    "bd"  '(kill-this-buffer
 	   :which-key "close buffer")
