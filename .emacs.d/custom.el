@@ -3,8 +3,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#292d3e" "#f07178" "#c3e88d" "#ffcb6b" "#82aaff" "#c792ea" "#82aaff" "#959dcb"])
  '(company-quickhelp-mode t)
  '(custom-safe-themes
    (quote
@@ -13,10 +11,10 @@
  '(golden-ratio-mode t)
  '(package-selected-packages
    (quote
-    (highlight-symbol esup auto-compile dimmer lsp-css web-beautify golden-ratio yasnippet-snippets yasnippet smartparens neotree postip company-quickhelp evil-org evil-org-mode mixed-pitch org-evil company-lsp company-lean lean-mode company ripgrep web-mode evil-mc evi-mc multishell multi-term evil-magit counsel-dash projectile lsp-javascript-typescript emacs-lsp evil-collection org-journal counsel-rg counsel swiper evil use-package))))
+    (omnisharp csharp-mode evil-matchit white-sand-theme highlight-symbol esup auto-compile dimmer lsp-css web-beautify golden-ratio yasnippet-snippets yasnippet smartparens neotree postip company-quickhelp evil-org evil-org-mode mixed-pitch org-evil company-lsp company-lean lean-mode company ripgrep web-mode evil-mc evi-mc multishell multi-term evil-magit counsel-dash projectile lsp-javascript-typescript emacs-lsp evil-collection org-journal counsel-rg counsel swiper evil use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((((class color) (min-colors 89)) (:background "#f5ebe1" :foreground "#585858")))))

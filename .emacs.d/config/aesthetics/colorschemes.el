@@ -39,6 +39,8 @@
 
 (provide 'base16-material-palenight-theme)
 
+(use-package white-sand-theme)
+
 ;;; base16-material-palenight-theme.el ends here
 (defcustom default-light-color-theme 'base16-solarized-light
   "default light theme")
