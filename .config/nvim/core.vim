@@ -207,6 +207,7 @@ let mapleader=" "
 " aj        - Journal
 " as        - Shells/Terminals
 " b         - Buffers
+nmap <leader>bf :Denite buffer<CR>
 " c         - Comments
 " C         - Compile
 " e         - Errors/Linting/Language Diagnostics
@@ -263,6 +264,11 @@ nmap <leader>Cnm :Neomake!<CR>
 " NERDTree controls
 nmap <leader>ft :NERDTreeToggle<CR>
 nmap <leader>fnb :Bookmark 
+
+" Denite
+nmap <leader>fr :Denite file/rec<CR>
+nmap <leader>ff :Denite file<CR>
+
 
 " fe        - Edit configuration
 " -----------------------------------
@@ -332,8 +338,17 @@ nmap <leader>Tc :call ToggleScheme()<CR>
 
 " w         - windows
 " -------------------------------------------------
-"  wt       - tabs
+nmap <leader>wh <C-w>h
+nmap <leader>wj <C-w>j
+nmap <leader>wk <C-w>k
+nmap <leader>wl <C-w>l
 
+nmap <leader>wH <C-w>H
+nmap <leader>wJ <C-w>J
+nmap <leader>wK <C-w>K
+nmap <leader>wL <C-w>L
+"  wt       - tabs
+" -------------------------------------------------
 " tab controls
 nmap <leader>wts :tab split<CR>
 nmap <leader>wtc :tabc<CR>
