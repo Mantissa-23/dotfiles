@@ -65,5 +65,10 @@
         "**/.DS_Store": true,
         "**/*.olean": true
     },
-    "vimStyle.imapEsc": "fd"
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["f", "d"],
+            "after": ["<Esc>"]
+        }
+    ]
 }
