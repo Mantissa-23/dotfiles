@@ -34,3 +34,14 @@ export AUTHOR="Dylan Culfogienis <dylanculfogienis@gmail.com>"
 
 export JOURNAL="~/Docs/Writing/Journal"
 
+machine="$(uname -s)"
+
+case "${machine}" in
+  Linux*)   MACHINE=Linux;;
+  Darwin*)  MACHINE=Mac;;
+  CYGWIN*)  MACHINE=Cygwin;;
+  MINGW*)   MACHINE=MinGw;;
+  *)        MACHINE="UNKNOWN:${machine}"
+esac
+
+export MACHINE

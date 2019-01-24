@@ -1,4 +1,7 @@
-alias vim="nvim"
-alias vi="nvim"
-alias oldvim="vim"
+if [ -x "$(command -v nvim)" ]; then
+  alias vim="nvim"
+  alias vi="nvim"
+  alias oldvim="vim"
+fi
+
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
