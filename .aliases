@@ -1,0 +1,4 @@
+alias vim="nvim"
+alias vi="nvim"
+alias oldvim="vim"
+alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'

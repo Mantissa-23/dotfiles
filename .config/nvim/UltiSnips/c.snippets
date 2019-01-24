@@ -1,0 +1,34 @@
+snippet filedoc "C file documentation header" b
+/**
+	@file `!v expand('%:t')`
+	@brief ${1:Short Description}
+	@author `echo $AUTHOR`
+	@date `!v strftime('%c')`
+
+	${2:Long Description}
+*/
+endsnippet
+
+snippet euler "Project Euler default C template" b
+/**
+	@file `!v expand('%:t')`
+	@brief ${1:Short Description}
+	@author `echo $AUTHOR`
+	@date `!v strftime('%c')`
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+
+int main(int argc, char **argv) 
+{
+
+	return 0;
+}
+endsnippet
+
+snippet SIZE "Get size of C array" b
+#define SIZE(x)  (sizeof(x) / sizeof((x)[0]))
+endsnippet

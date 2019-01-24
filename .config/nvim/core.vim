@@ -1,6 +1,9 @@
 "                               Aesthetics
 " ----------------------------------------------------------------------------
 
+"set term=screen-256color
+set t_ut=
+
 " Toggle colorscheme between dark and light schemes, for quick switching
 " between dark and light environments.
 
@@ -30,6 +33,9 @@ set colorcolumn=80
 
 "                         General Editor Configuration
 " ----------------------------------------------------------------------------
+
+" Automatically read changes to a file
+set autoread
 
 " Safeguarded syntax enable
 if !exists("g:syntax_on")
@@ -135,6 +141,22 @@ endif
 let g:swoopUseDefaultKeyMap = 0
 let g:swoopPatternSpaceInsertsWildcard = 0
 let g:swoopAutoInsertMode = 0
+
+" ale configuration
+
+" Restrict ale to only using omnisharp for linting
+let g:ale_linters = {
+\ 'cs': ['OmniSharp']
+\}
+
+" UltiSnips configuration
+
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger=""
+
+let g:UltiSnipsEditSplit="vertical"
+
+let g:UltiSnipsSnippetsDir="~/.config/nvim"
 
 "                           Custom Functions
 " ----------------------------------------------------------------------------
@@ -334,7 +356,7 @@ vmap <leader>sS :call SwoopMultiSelection()<CR>
 " -------------------------------------------------
 
 " Quickswitch between dark and light colorschemes
-nmap <leader>Tc :call ToggleScheme()<CR>
+nmap <leader>Ts :call ToggleScheme()<CR>
 
 " w         - windows
 " -------------------------------------------------
