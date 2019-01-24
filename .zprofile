@@ -1,5 +1,5 @@
 #!/bin/zsh
 
-source ~/.profile
-source ~/.aliases
-source ~/.zshrc
+test -f ~/.profile && source ~/.profile
+test -f ~/.aliases && source ~/.aliases
+test -f ~/.zshrc && source ~/.zshrc
