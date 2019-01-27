@@ -116,3 +116,4 @@ if grep -q Microsoft /proc/version && [ -t 1 ]; then
     exec zsh
 fi
 
+test -f ~/.aliases && source ~/.aliases
