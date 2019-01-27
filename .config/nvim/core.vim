@@ -47,6 +47,7 @@ set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab autoindent
 
 " Enable line number display, always
 set number
+set relativenumber
 set title
 
 " Do not wrap lines in the middle of words
@@ -374,4 +375,6 @@ nmap <leader>wL <C-w>L
 " tab controls
 nmap <leader>wts :tab split<CR>
 nmap <leader>wtc :tabc<CR>
+nmap <leader>wtt gt
+nmap <leader>wtT gT
 
