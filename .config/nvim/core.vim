@@ -225,9 +225,6 @@ vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 " ALL HAIL OUR GLORIOUS ETERNAL LEADER, THE SPACEBAR, PRAISE BE TO HIM
 let mapleader=" "
 
-Shortcut fallback to shortcut menu on partial entry
-      \ noremap <silent> <Leader> :Shortcuts<Return>
-
 " Prefix Glossary
 " a         - Applications
 " aj        - Journal
@@ -255,77 +252,55 @@ Shortcut fallback to shortcut menu on partial entry
 
 " a         - Applications
 " -----------------------------------
-Shortcut new journal entry
-      \ nmap <leader>ajj :call JNewEntry()<CR>
-Shortcut open current journal entry
-      \ nmap <leader>avj :call JViewEntry()<CR>
-Shortcut open terminal in current window
-      \ nmap <leader>att :terminal<CR>
-Shortcut open terminal in vsplit
-      \ nmap <leader>atv :vsp<CR>:terminal<CR>
-Shortcut open terminal in split
-      \ nmap <leader>ats :sp<CR>:terminal<CR>
+nmap <leader>ajj :call JNewEntry()<CR>
+nmap <leader>avj :call JViewEntry()<CR>
+nmap <leader>att :terminal<CR>
+nmap <leader>atv :vsp<CR>:terminal<CR>
+nmap <leader>ats :sp<CR>:terminal<CR>
 " as        - Shells/Terminals
 " -----------------------------------
 " b         - Buffers
 " -----------------------------------
 " Close current buffer and the window it's in
-Shortcut delete buffer
-      \ nmap <leader>bd :bdelete<CR> 
-Shortcut delete buffer without saving
-      \ nmap <leader>bd! :bdelete!<CR> 
+nmap <leader>bd :bdelete<CR> 
+nmap <leader>bd! :bdelete!<CR> 
 
 " c         - Comments
 " -----------------------------------
 " C         - Compile
 " -----------------------------------
 
-Shortcut make project with neomake
-      \ nmap <leader>Cnm :Neomake!<CR>
+nmap <leader>Cnm :Neomake!<CR>
 
 " e         - Errors/Linting/Language Diagnostics
 " -----------------------------------
 " f         - Files
 " -----------------------------------
 
-Shortcut open NERDTree
-      \ nmap <leader>ft :NERDTreeToggle<CR>
-Shortcut boomark NERDTree
-      \ nmap <leader>fnb :Bookmark 
+nmap <leader>ft :NERDTreeToggle<CR>
+nmap <leader>fnb :Bookmark 
 
-Shortcut find file in recents
-      \ nmap <leader>fr :History<CR>
-Shortcut find file
-      \ nmap <leader>ff :Files<CR>
-Shortcut find in git files
-      \ nmap <leader>fgf :GFiles<CR>
-Shortcut find in buffers
-      \ nmap <leader>fb :Buffers<CR>
+nmap <leader>fr :History<CR>
+nmap <leader>ff :Files<CR>
+nmap <leader>fgf :GFiles<CR>
+nmap <leader>fb :Buffers<CR>
 
 " fe        - Edit configuration
 " -----------------------------------
 
-Shortcut open init.vim
-      \ nmap <leader>fei :vsp ~/.config/nvim/init.vim<CR>
-Shortcut open core.vim
-      \ nmap <leader>fec :vsp ~/.config/nvim/core.vim<CR>
+nmap <leader>fei :vsp ~/.config/nvim/init.vim<CR>
+nmap <leader>fec :vsp ~/.config/nvim/core.vim<CR>
 
-Shortcut reload init.vim
-      \ nmap <leader>fer :so $MYVIMRC<CR>
+nmap <leader>fer :so $MYVIMRC<CR>
 
 " g         - Git/VCS
 " -----------------------------------
 
-Shortcut git status
-      \ nmap <leader>gs :Gstatus<CR>
-Shortcut git commit
-      \ nmap <leader>gc :Gcommit<CR>
-Shortcut git log
-      \ nmap <leader>gl :Glog<CR>
-Shortcut git push
-      \ nmap <leader>gp :Gpush<CR>
-Shortcut git diff
-      \ nmap <leader>gd :Gdiff<CR>
+nmap <leader>gs :Gstatus<CR>
+nmap <leader>gc :Gcommit<CR>
+nmap <leader>gl :Glog<CR>
+nmap <leader>gp :Gpush<CR>
+nmap <leader>gd :Gdiff<CR>
 
 " h         - Help
 " -----------------------------------
@@ -334,22 +309,17 @@ Shortcut git diff
 " j         - Jump; File navigation
 " -----------------------------------
 
-Shortcut tagbar toggle
-      \ nmap <leader>jt :TagbarToggle<CR>
+nmap <leader>jt :TagbarToggle<CR>
 
 " p         - Project
 " -----------------------------------
 " s         - Search
 " -----------------------------------
-Shortcut swoop
-      \ nmap <leader>ss :call Swoop()<CR>
-Shortcut swoop selection
-      \ vmap <leader>ss :call SwoopSelection()<CR>
+nmap <leader>ss :call Swoop()<CR>
+vmap <leader>ss :call SwoopSelection()<CR>
 
-Shortcut swoop all open buffers
-      \ nmap <leader>sS :call SwoopMulti()<CR>
-Shortcut swoop selection in all open buffers
-      \ vmap <leader>sS :call SwoopMultiSelection()<CR>
+nmap <leader>sS :call SwoopMulti()<CR>
+vmap <leader>sS :call SwoopMultiSelection()<CR>
 " sa        - ag
 " -----------------------------------
 " sg        - grep
@@ -373,36 +343,69 @@ Shortcut swoop selection in all open buffers
 " T         - colorscheme toggles
 " -------------------------------------------------
 
-Shortcut switch between light and dark colorschemes
-      \ nmap <leader>Ts :call ToggleScheme()<CR>
+nmap <leader>Ts :call ToggleScheme()<CR>
 
 " w         - windows
 " -------------------------------------------------
-Shortcut focus left
-      \ nmap <leader>wh <C-w>h
-Shortcut focus down
-      \ nmap <leader>wj <C-w>j
-Shortcut focus up
-      \ nmap <leader>wk <C-w>k
-Shortcut focus right
-      \ nmap <leader>wl <C-w>l
+nmap <leader>wh <C-w>h
+nmap <leader>wj <C-w>j
+nmap <leader>wk <C-w>k
+nmap <leader>wl <C-w>l
 
-Shortcut move split to left
-      \ nmap <leader>wH <C-w>H
-Shortcut move split to down
-      \ nmap <leader>wJ <C-w>J
-Shortcut move split to up
-      \ nmap <leader>wK <C-w>K
-Shortcut move split to right
-      \ nmap <leader>wL <C-w>L
+nmap <leader>wH <C-w>H
+nmap <leader>wJ <C-w>J
+nmap <leader>wK <C-w>K
+nmap <leader>wL <C-w>L
 "  wt       - tabs
 " -------------------------------------------------
 " tab controls
-Shortcut open current split in new tab
-      \ nmap <leader>wts :tab split<CR>
-Shortcut close current tab
-      \ nmap <leader>wtc :tabc<CR>
-Shortcut go to next tab
-      \ nmap <leader>wtt gt
-Shortcut go to previous tab
-      \ nmap <leader>wtT gT
+nmap <leader>wts :tab split<CR>
+nmap <leader>wtc :tabc<CR>
+nmap <leader>wtt gt
+nmap <leader>wtT gT
+
+if exists("shortcuts")
+  Shortcut fallback to shortcut menu on partial entry
+        \ noremap <silent> <Leader> :Shortcuts<Return>
+
+  Shortcut! <leader>ajj    new journal entry
+  Shortcut! <leader>avj    open current journal entry
+  Shortcut! <leader>att    open terminal in current window
+  Shortcut! <leader>atv    open terminal in vsplit
+  Shortcut! <leader>ats    open terminal in split
+  Shortcut! <leader>bd     delete buffer
+  Shortcut! <leader>bd!    delete buffer without saving
+  Shortcut! <leader>Cnm    make project with neomake
+  Shortcut! <leader>ft     open NERDTree
+  Shortcut! <leader>fnb    boomark NERDTree
+  Shortcut! <leader>fr     find file in recents
+  Shortcut! <leader>ff     find file
+  Shortcut! <leader>fgf    find in git files
+  Shortcut! <leader>fb     find in buffers
+  Shortcut! <leader>fei    open init.vim
+  Shortcut! <leader>fec    open core.vim
+  Shortcut! <leader>fer    reload init.vim
+  Shortcut! <leader>gs     git status
+  Shortcut! <leader>gc     git commit
+  Shortcut! <leader>gl     git log
+  Shortcut! <leader>gp     git push
+  Shortcut! <leader>gd     git diff
+  Shortcut! <leader>jt     tagbar toggle
+  Shortcut! <leader>ss     swoop
+  Shortcut! <leader>ss     swoop selection
+  Shortcut! <leader>sS     swoop all open buffers
+  Shortcut! <leader>sS     swoop selection in all open buffers
+  Shortcut! <leader>Ts     switch between light and dark colorschemes
+  Shortcut! <leader>wh     focus left
+  Shortcut! <leader>wj     focus down
+  Shortcut! <leader>wk     focus up
+  Shortcut! <leader>wl     focus right
+  Shortcut! <leader>wH     move split to left
+  Shortcut! <leader>wJ     move split to down
+  Shortcut! <leader>wK     move split to up
+  Shortcut! <leader>wL     move split to right
+  Shortcut! <leader>wts    open current split in new tab
+  Shortcut! <leader>wtc    close current tab
+  Shortcut! <leader>wtt    go to next tab
+  Shortcut! <leader>wtT    go to previous tab
+endif
