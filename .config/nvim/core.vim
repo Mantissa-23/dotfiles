@@ -289,9 +289,10 @@ nmap <leader>ft :NERDTreeToggle<CR>
 nmap <leader>fnb :Bookmark 
 
 " Denite
-nmap <leader>fr :Denite file/rec<CR>
-nmap <leader>ff :Denite file<CR>
-
+nmap <leader>fr :History<CR>
+nmap <leader>ff :Files<CR>
+nmap <leader>fgf :GFiles<CR>
+nmap <leader>fb :Buffers<CR>
 
 " fe        - Edit configuration
 " -----------------------------------

@@ -14,6 +14,13 @@ Plug 'altercation/vim-colors-solarized' " Solarized colorscheme
 Plug 'jeffkreeftmeijer/vim-dim' " Enhanced default colorscheme
 "Plug 'morhetz/gruvbox' " Gruvbox, like solarized but warmer and more retro.
 
+" Usability
+Plug 'sunaku/vim-shortcut' " Shows all available shortcuts when you've entered an incomplete binding
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
 " Functionality
 Plug 'tpope/vim-sensible' " Sensible defaults
 Plug 'scrooloose/nerdtree' " File browser
@@ -34,7 +41,7 @@ Plug 'vim-scripts/auto-pairs-gentle' " Automatically makes surrounds
 Plug 'tpope/vim-surround' " Adds bindings for changing surrounds
 Plug 'pelodelfuego/vim-swoop' " Adds helm-swoop-like functionality
 Plug 'terryma/vim-multiple-cursors' " Adds sublime-like multicursor
-Plug 'kien/ctrlp.vim' " Fuzzy finder. ctrl+p to use.
+"Plug 'kien/ctrlp.vim' " Fuzzy finder. ctrl+p to use.
 Plug 'airblade/vim-gitgutter' " Shows git diff in the left gutter. 
 Plug 'tpope/vim-commentary' " Comment and uncomment stuff. gc to use.
 Plug 'easymotion/vim-easymotion' " Target specific locations when performing motions instead of repeating over and over
