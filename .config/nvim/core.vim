@@ -225,12 +225,14 @@ vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 " ALL HAIL OUR GLORIOUS ETERNAL LEADER, THE SPACEBAR, PRAISE BE TO HIM
 let mapleader=" "
 
+Shortcut fallback to shortcut menu on partial entry
+      \ noremap <silent> <Leader> :Shortcuts<Return>
+
 " Prefix Glossary
 " a         - Applications
 " aj        - Journal
 " as        - Shells/Terminals
 " b         - Buffers
-nmap <leader>bf :Denite buffer<CR>
 " c         - Comments
 " C         - Compile
 " e         - Errors/Linting/Language Diagnostics
@@ -253,67 +255,77 @@ nmap <leader>bf :Denite buffer<CR>
 
 " a         - Applications
 " -----------------------------------
-" New journal entry
-nnoremap <leader>ajj :call JNewEntry()<CR> 
-" View current journal entry
-nnoremap <leader>avj :call JViewEntry()<CR>
-" Open terminal un current window
-nmap <leader>att :terminal<CR>
-" Open a new vsplit with a term
-nmap <leader>atv :vsp<CR>:terminal<CR>
-" Open a new hsplit with a term
-nmap <leader>ats :sp<CR>:terminal<CR>
+Shortcut new journal entry
+      \ nmap <leader>ajj :call JNewEntry()<CR>
+Shortcut open current journal entry
+      \ nmap <leader>avj :call JViewEntry()<CR>
+Shortcut open terminal in current window
+      \ nmap <leader>att :terminal<CR>
+Shortcut open terminal in vsplit
+      \ nmap <leader>atv :vsp<CR>:terminal<CR>
+Shortcut open terminal in split
+      \ nmap <leader>ats :sp<CR>:terminal<CR>
 " as        - Shells/Terminals
 " -----------------------------------
 " b         - Buffers
 " -----------------------------------
 " Close current buffer and the window it's in
-nmap <leader>bd :bdelete<CR> 
-nmap <leader>bd! :bdelete!<CR> 
+Shortcut delete buffer
+      \ nmap <leader>bd :bdelete<CR> 
+Shortcut delete buffer without saving
+      \ nmap <leader>bd! :bdelete!<CR> 
 
 " c         - Comments
 " -----------------------------------
 " C         - Compile
 " -----------------------------------
 
-" Map nm to full-project make
-nmap <leader>Cnm :Neomake!<CR>
+Shortcut make project with neomake
+      \ nmap <leader>Cnm :Neomake!<CR>
 
 " e         - Errors/Linting/Language Diagnostics
 " -----------------------------------
 " f         - Files
 " -----------------------------------
 
-" NERDTree controls
-nmap <leader>ft :NERDTreeToggle<CR>
-nmap <leader>fnb :Bookmark 
+Shortcut open NERDTree
+      \ nmap <leader>ft :NERDTreeToggle<CR>
+Shortcut boomark NERDTree
+      \ nmap <leader>fnb :Bookmark 
 
-" Denite
-nmap <leader>fr :History<CR>
-nmap <leader>ff :Files<CR>
-nmap <leader>fgf :GFiles<CR>
-nmap <leader>fb :Buffers<CR>
+Shortcut find file in recents
+      \ nmap <leader>fr :History<CR>
+Shortcut find file
+      \ nmap <leader>ff :Files<CR>
+Shortcut find in git files
+      \ nmap <leader>fgf :GFiles<CR>
+Shortcut find in buffers
+      \ nmap <leader>fb :Buffers<CR>
 
 " fe        - Edit configuration
 " -----------------------------------
 
-" Add control for quickly opening init.vim
-nmap <leader>fei :vsp ~/.config/nvim/init.vim<CR>
-" Add control for quickly opening core.vim
-nmap <leader>fec :vsp ~/.config/nvim/core.vim<CR>
+Shortcut open init.vim
+      \ nmap <leader>fei :vsp ~/.config/nvim/init.vim<CR>
+Shortcut open core.vim
+      \ nmap <leader>fec :vsp ~/.config/nvim/core.vim<CR>
 
-" Add control for quickly reloading current vimrc
-nmap <leader>fer :so $MYVIMRC<CR>
+Shortcut reload init.vim
+      \ nmap <leader>fer :so $MYVIMRC<CR>
 
 " g         - Git/VCS
 " -----------------------------------
 
-" Fugitive controls
-nmap <leader>gs :Gstatus<CR>
-nmap <leader>gc :Gcommit<CR>
-nmap <leader>gl :Glog<CR>
-nmap <leader>gp :Gpush<CR>
-nmap <leader>gd :Gdiff<CR>
+Shortcut git status
+      \ nmap <leader>gs :Gstatus<CR>
+Shortcut git commit
+      \ nmap <leader>gc :Gcommit<CR>
+Shortcut git log
+      \ nmap <leader>gl :Glog<CR>
+Shortcut git push
+      \ nmap <leader>gp :Gpush<CR>
+Shortcut git diff
+      \ nmap <leader>gd :Gdiff<CR>
 
 " h         - Help
 " -----------------------------------
@@ -322,18 +334,22 @@ nmap <leader>gd :Gdiff<CR>
 " j         - Jump; File navigation
 " -----------------------------------
 
-" Open tagbar
-nmap <leader>jt :TagbarToggle<CR>
+Shortcut tagbar toggle
+      \ nmap <leader>jt :TagbarToggle<CR>
 
 " p         - Project
 " -----------------------------------
 " s         - Search
 " -----------------------------------
-nmap <leader>ss :call Swoop()<CR>
-vmap <leader>ss :call SwoopSelection()<CR>
+Shortcut swoop
+      \ nmap <leader>ss :call Swoop()<CR>
+Shortcut swoop selection
+      \ vmap <leader>ss :call SwoopSelection()<CR>
 
-nmap <leader>sS :call SwoopMulti()<CR>
-vmap <leader>sS :call SwoopMultiSelection()<CR>
+Shortcut swoop all open buffers
+      \ nmap <leader>sS :call SwoopMulti()<CR>
+Shortcut swoop selection in all open buffers
+      \ vmap <leader>sS :call SwoopMultiSelection()<CR>
 " sa        - ag
 " -----------------------------------
 " sg        - grep
@@ -357,25 +373,36 @@ vmap <leader>sS :call SwoopMultiSelection()<CR>
 " T         - colorscheme toggles
 " -------------------------------------------------
 
-" Quickswitch between dark and light colorschemes
-nmap <leader>Ts :call ToggleScheme()<CR>
+Shortcut switch between light and dark colorschemes
+      \ nmap <leader>Ts :call ToggleScheme()<CR>
 
 " w         - windows
 " -------------------------------------------------
-nmap <leader>wh <C-w>h
-nmap <leader>wj <C-w>j
-nmap <leader>wk <C-w>k
-nmap <leader>wl <C-w>l
+Shortcut focus left
+      \ nmap <leader>wh <C-w>h
+Shortcut focus down
+      \ nmap <leader>wj <C-w>j
+Shortcut focus up
+      \ nmap <leader>wk <C-w>k
+Shortcut focus right
+      \ nmap <leader>wl <C-w>l
 
-nmap <leader>wH <C-w>H
-nmap <leader>wJ <C-w>J
-nmap <leader>wK <C-w>K
-nmap <leader>wL <C-w>L
+Shortcut move split to left
+      \ nmap <leader>wH <C-w>H
+Shortcut move split to down
+      \ nmap <leader>wJ <C-w>J
+Shortcut move split to up
+      \ nmap <leader>wK <C-w>K
+Shortcut move split to right
+      \ nmap <leader>wL <C-w>L
 "  wt       - tabs
 " -------------------------------------------------
 " tab controls
-nmap <leader>wts :tab split<CR>
-nmap <leader>wtc :tabc<CR>
-nmap <leader>wtt gt
-nmap <leader>wtT gT
-
+Shortcut open current split in new tab
+      \ nmap <leader>wts :tab split<CR>
+Shortcut close current tab
+      \ nmap <leader>wtc :tabc<CR>
+Shortcut go to next tab
+      \ nmap <leader>wtt gt
+Shortcut go to previous tab
+      \ nmap <leader>wtT gT
