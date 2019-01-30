@@ -73,7 +73,7 @@ Plug 'honza/vim-snippets' " And accompanying snippets
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="~/.config/nvim"
 
-Plug 'ajh17/VimCompletesMe'  " Simple tab completion framework, works with ale and ultisnips
+Plug 'ajh17/VimCompletesMe'
 
 " Applications
 Plug 'jceb/vim-orgmode' " Org-mode support for vim, for journaling + notes
