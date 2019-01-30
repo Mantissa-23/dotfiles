@@ -4,27 +4,6 @@
 "set term=screen-256color
 set t_ut=
 
-" Toggle colorscheme between dark and light schemes, for quick switching
-" between dark and light environments.
-
-function! DarkScheme()
-    colorscheme palenight
-    set background=dark
-endfunction
-
-function! LightScheme()
-    colorscheme solarized
-    set background=light
-endfunction
-
-function! ToggleScheme()
-    if &background ==# 'light'
-        call DarkScheme()
-    elseif &background ==# 'dark'
-        call LightScheme()
-    endif
-endfunction
-
 " Default to dark scheme
 call DarkScheme()
 
@@ -42,7 +21,7 @@ if !exists("g:syntax_on")
     syntax enable
 endif
 
-" Generic Tab Settings
+" Generic Tab Settings. I like 2-tab, it's compact
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab autoindent
 
 " Enable line number display, always
@@ -53,10 +32,11 @@ set title
 " Do not wrap lines in the middle of words
 set linebreak
 
-" Split right and below, instead of left and above
+" Split right and below, instead of left and above. Left and above is for
+" aliens.
 set splitright splitbelow
 
-" Enable generic code folding
+" Enable generic code folding based on indentations.
 set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
@@ -67,126 +47,12 @@ set foldlevel=2
 set scrolloff=10
 
 " Hit enter-enter to exit commenting. Works only for C/Ruby/Python
-function! EnterEnter()
-	if getline(".") =~ '^\s*\(//\|#\|"\)\s*$'
-		return "\<C-u>"
-	else
-		return "\<CR>"
-	endif
-endfunction
-
 imap <expr> <CR> EnterEnter()
 
 " Set both ignorecase and smartcase so that all-lowercase searches will
 " ignore case
 set ignorecase
 set smartcase
-
-"                           Plugin Configuration
-" ----------------------------------------------------------------------------
-
-" FILE SYSTEM & SCM
-
-" BUILD, LINT, CHECK
-
-" Neomake setup
-let g:neomake_cpp_enabled_markers = ['gcc']
-let g:neomake_c_enabled_markers = ['gcc']
-
-" call neomake#configure#automake('nrwi', 500)
-
-" YCM Setup
-let g:ycm_collect_identifiers_from_tags_files = 1
-
-" Auto-Pair Setup
-let g:AutoPairsFlyMode = 0
-
-" AESTHETIC & INFORMATION
-
-" Airline Customization
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensiosn#fugitiveline#enabled = 1
-
-" NEOMAKE
-
-" Function to automatically set makeprg, valuable for C++ and C
-function! g:BuildInSubDir(buildsubdir)
-    " Sets makeprg base dir
-    let toplevelpath = FindTopLevelProjectDir()
-    let builddir = toplevelpath . a:buildsubdir
-    let makeprgcmd = 'make -C ' . builddir
-    if builddir !=? "//build"
-        let &makeprg=makeprgcmd
-    endif
-endfunction
-
-function! FindTopLevelProjectDir()
-    " Searches for a .git directory upward till root.
-    let isittopdir = finddir('.git')
-    if isittopdir ==? ".git"
-        return getcwd()
-    endif
-    let gitdir = finddir('.git', ';')
-    let gitdirsplit = split(gitdir, '/')
-    let toplevelpath = '/' . join(gitdirsplit[:-2],'/')
-    return toplevelpath
-endfunction
-
-" Only use out-of-source build if no in-source build is detected.
-if globpath('.','Makefile') == ''
-    autocmd BufNewFile,BufRead *.cpp,*.c call g:BuildInSubDir("/build")
-endif
-
-" vim-swoop configuration
-
-let g:swoopUseDefaultKeyMap = 0
-let g:swoopPatternSpaceInsertsWildcard = 0
-let g:swoopAutoInsertMode = 0
-
-" ale configuration
-
-" Restrict ale to only using omnisharp for linting
-let g:ale_linters = {
-\ 'cs': ['OmniSharp']
-\}
-
-" UltiSnips configuration
-
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger=""
-
-let g:UltiSnipsEditSplit="vertical"
-
-let g:UltiSnipsSnippetsDir="~/.config/nvim"
-
-"                           Custom Functions
-" ----------------------------------------------------------------------------
-
-function! JFilename()
-    let journaldir = '~/Docs/Org/Journal/'
-    let name = strftime('%Y%m%d.org')
-    return journaldir . name
-endfunction
-
-function! JNewEntry()
-    let filename = JFilename()
-
-    if !(bufwinnr(filename) == bufnr('%'))
-        execute ":vsp" filename
-    endif
-    
-    " If new file unopened in buffer, add date header
-    if empty(glob(filename))
-        execute "normal! A* " . strftime('%A, %m/%d/%y')
-    endif
-
-    execute "normal! Go** " . strftime('%H:%M ')
-endfunction
-
-function! JViewEntry()
-    let filename = JFilename()
-    execute ":vsp" filename
-endfunction
 
 "                           General Keymappings
 " ----------------------------------------------------------------------------
@@ -212,9 +78,10 @@ endif
 nnoremap <M-h> :tabp<CR>
 nnoremap <M-l> :tabn<CR>
 
-" Scroll through visible lines as opposed to numbered lines
-nnoremap j gj
-nnoremap k gk
+" Scroll through visible lines as opposed to numbered lines; but only in
+" markdown.
+autocmd FileType markdown   nnoremap j gj
+autocmd FileType markdown   nnoremap k gk
 
 " Add // in visual mode to search for highlighted text
 vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
@@ -264,60 +131,48 @@ nmap <leader>ats :sp<CR>:terminal<CR>
 " Close current buffer and the window it's in
 nmap <leader>bd :bdelete<CR> 
 nmap <leader>bd! :bdelete!<CR> 
-
 " c         - Comments
 " -----------------------------------
+nmap <leader>cc gcc
+vmap <leader>c gc
 " C         - Compile
 " -----------------------------------
-
 nmap <leader>Cnm :Neomake!<CR>
-
 " e         - Errors/Linting/Language Diagnostics
 " -----------------------------------
 " f         - Files
 " -----------------------------------
-
 nmap <leader>ft :NERDTreeToggle<CR>
 nmap <leader>fnb :Bookmark 
-
 nmap <leader>fr :History<CR>
 nmap <leader>ff :Files<CR>
 nmap <leader>fgf :GFiles<CR>
 nmap <leader>fb :Buffers<CR>
-
 " fe        - Edit configuration
 " -----------------------------------
-
 nmap <leader>fei :vsp ~/.config/nvim/init.vim<CR>
 nmap <leader>fec :vsp ~/.config/nvim/core.vim<CR>
-
 nmap <leader>fer :so $MYVIMRC<CR>
-
 " g         - Git/VCS
 " -----------------------------------
-
 nmap <leader>gs :Gstatus<CR>
 nmap <leader>gc :Gcommit<CR>
 nmap <leader>gl :Glog<CR>
 nmap <leader>gp :Gpush<CR>
 nmap <leader>gd :Gdiff<CR>
-
 " h         - Help
 " -----------------------------------
 " i         - Insertion/Snippets
 " -----------------------------------
 " j         - Jump; File navigation
 " -----------------------------------
-
 nmap <leader>jt :TagbarToggle<CR>
-
 " p         - Project
 " -----------------------------------
 " s         - Search
 " -----------------------------------
 nmap <leader>ss :call Swoop()<CR>
 vmap <leader>ss :call SwoopSelection()<CR>
-
 nmap <leader>sS :call SwoopMulti()<CR>
 vmap <leader>sS :call SwoopMultiSelection()<CR>
 " sa        - ag
@@ -332,19 +187,11 @@ vmap <leader>sS :call SwoopMultiSelection()<CR>
 " -----------------------------------
 " t         - toggles
 " -----------------------------------
-
 " Toggle spelling
-"!function ToggleSpelling()
-    "if &spelllang ==# 'en_us'
-"endfunction
-
 "nmap <leader> ts :call ToggleSpelling()<CR>
-
 " T         - colorscheme toggles
 " -------------------------------------------------
-
 nmap <leader>Ts :call ToggleScheme()<CR>
-
 " w         - windows
 " -------------------------------------------------
 nmap <leader>wh <C-w>h
