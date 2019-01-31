@@ -46,7 +46,7 @@ endif
 
 Plug 'amcsi/auto-pairs' " Automatically makes surrounds
 let g:AutoPairsFlyMode = 0
-let g:AutoPairs = {'`': '`//s', '"': '"//s', '{': '}//s', '''': '''//s', '(': ')//s', '[': ']//s'} " Disable multiline autpairing
+"let g:AutoPairs = {'`': '`//s', '"': '"//s', '{': '}//s', '''': '''//s', '(': ')//s', '[': ']//s'} " Disable multiline autpairing
 
 Plug 'tpope/vim-surround' " Adds bindings for changing surrounds
 
@@ -68,18 +68,29 @@ Plug 'tpope/vim-speeddating' " Increment and decrement dates with <C-a> and <C-x
 
 Plug 'SirVer/ultisnips' " Snippet engine
 Plug 'honza/vim-snippets' " And accompanying snippets
+let g:UltiSnipsExpandTrigger = "<NUL>"
 " let g:UltiSnipsExpandTrigger="<tab>"
 " let g:UltiSnipsJumpForwardTrigger=""
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="~/.config/nvim"
 
-Plug 'ajh17/VimCompletesMe'
+" Deoplete completion plugin
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 
 " Applications
 Plug 'jceb/vim-orgmode' " Org-mode support for vim, for journaling + notes
 
 " C# Development
 Plug 'OmniSharp/omnisharp-vim'
+"let g:OmniSharp_server_path = '/mnt/c/Omnisharp/omnisharp-http/OmniSharp.exe'
+"let g:OmniSharp_translate_cygwin_wsl = 1
 
 call plug#end()
 
