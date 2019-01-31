@@ -112,8 +112,8 @@ fi
 ###--------------------------###
 
 # Only launch zsh if running on WSL and a TTY
-if grep -q Microsoft /proc/version && [ -t 1 ]; then
-    exec zsh
-fi
+# if grep -q Microsoft /proc/version && [ -t 1 ]; then
+#     exec zsh
+# fi
 
 test -f ~/.aliases && source ~/.aliases
