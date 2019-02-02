@@ -36,9 +36,7 @@ endif
 Plug 'tpope/vim-fugitive' " Git wrapper
 if !exists("g:gui_oni") " Oni comes with LSP
   " Restrict ale to only using omnisharp for C# linting
-  let g:ale_linters = {
-        \ 'cs': ['OmniSharp']
-        \}
+  let g:ale_linters = {'cs': ['OmniSharp']}
   let g:ale_completion_enabled = 1
 
   Plug 'w0rp/ale' " Lint and complete via external tools - async
@@ -89,8 +87,10 @@ Plug 'jceb/vim-orgmode' " Org-mode support for vim, for journaling + notes
 
 " C# Development
 Plug 'OmniSharp/omnisharp-vim'
-"let g:OmniSharp_server_path = '/mnt/c/Omnisharp/omnisharp-http/OmniSharp.exe'
-"let g:OmniSharp_translate_cygwin_wsl = 1
+let g:OmniSharp_server_path = '/mnt/c/tools/Omnisharp/omnisharp/OmniSharp.exe'
+let g:OmniSharp_translate_cygwin_wsl = 1
+" let g:OmniSharp_proc_debug = 1
+" let g:OmniSharp_loglevel = 'debug'
 
 call plug#end()
 
