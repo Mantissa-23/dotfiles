@@ -1,5 +1,9 @@
 "                               Aesthetics
 " ----------------------------------------------------------------------------
+" nocompatible required for non-neovim
+set nocompatible
+syntax on
+filetype plugin on
 
 "set term=screen-256color
 set t_ut=
@@ -23,6 +27,7 @@ endif
 
 " Generic Tab Settings. I like 2-tab, it's compact
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab autoindent
+autocmd Filetype org setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab autoindent
 
 " Enable line number display, always
 set number
@@ -39,8 +44,9 @@ set splitright splitbelow
 " Enable generic code folding based on indentations.
 set foldmethod=indent
 set foldnestmax=10
-set nofoldenable
-set foldlevel=2
+set nofoldenable " Disable folding
+set foldlevel=20
+"autocmd Filetype vimwiki let &l:foldlevel=max(map(range(1, line('$')), 'foldlevel(v:val)'))
 
 " Set scrolloff, so that at least n lines are displayed above and below the
 " cursor.
@@ -121,9 +127,22 @@ let mapleader=" "
 " -----------------------------------
 nmap <leader>ajj :call JNewEntry()<CR>
 nmap <leader>avj :call JViewEntry()<CR>
+
 nmap <leader>att :terminal<CR>
 nmap <leader>atv :vsp<CR>:terminal<CR>
 nmap <leader>ats :sp<CR>:terminal<CR>
+
+nmap <leader>aww <Plug>VimwikiIndex
+nmap <leader>awt <Plug>VimwikiTabIndex
+nmap <leader>aws <Plug>VimwikiUISelect
+nmap <leader>awc :VimwikiTOC<CR>
+nmap <leader>adi <Plug>VimwikiDiaryIndex
+nmap <leader>add <Plug>VimwikiMakeDiaryNote
+nmap <leader>adt <Plug>VimwikiTabMakeDiaryNote
+nmap <leader>ady <Plug>VimwikiMakeYesterdayDiaryNote
+nmap <leader>adm <Plug>VimwikiMakeTomorrowDiaryNote
+
+nmap <leader>ar :Codi!!<CR>
 " as        - Shells/Terminals
 " -----------------------------------
 " b         - Buffers
@@ -131,6 +150,8 @@ nmap <leader>ats :sp<CR>:terminal<CR>
 " Close current buffer and the window it's in
 nmap <leader>bd :bdelete<CR> 
 nmap <leader>bd! :bdelete!<CR> 
+nmap <leader>bn :bn<CR>
+nmap <leader>bp :bp<CR>
 " c         - Comments
 " -----------------------------------
 nmap <leader>cc gcc
@@ -152,6 +173,7 @@ nmap <leader>fb :Buffers<CR>
 " -----------------------------------
 nmap <leader>fei :vsp ~/.config/nvim/init.vim<CR>
 nmap <leader>fec :vsp ~/.config/nvim/core.vim<CR>
+nmap <leader>feh :vsp ~/.config/nvim/helpers.vim<CR>
 nmap <leader>fer :so $MYVIMRC<CR>
 " g         - Git/VCS
 " -----------------------------------
@@ -162,8 +184,11 @@ nmap <leader>gp :Gpush<CR>
 nmap <leader>gd :Gdiff<CR>
 " h         - Help
 " -----------------------------------
+nmap <leader>h<leader> :helpgrep 
 " i         - Insertion/Snippets
 " -----------------------------------
+nmap <leader>ise :UltiSnipsEdit<CR>
+nmap <leader>it :pu=strftime('%c')<CR>
 " j         - Jump; File navigation
 " -----------------------------------
 nmap <leader>jt :TagbarToggle<CR>
@@ -208,8 +233,8 @@ nmap <leader>wL <C-w>L
 " tab controls
 nmap <leader>wts :tab split<CR>
 nmap <leader>wtc :tabc<CR>
-nmap <leader>wtt gt
-nmap <leader>wtT gT
+nmap <leader>wtn gt
+nmap <leader>wtp gT
 
 if exists("shortcuts")
   Shortcut fallback to shortcut menu on partial entry

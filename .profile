@@ -45,3 +45,21 @@ case "${machine}" in
 esac
 
 export MACHINE
+
+export PATH=$PATH:~/.bin
+export PATH=$PATH:~/.build/lammps/build
+
+# Cocos2d paths
+
+export PATH=$PATH:~/.bin/cocos2d/cocos2d-x-3.17.2/tools/cocos2d-console/bin/
+# Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
+export COCOS_CONSOLE_ROOT="~/.bin/cocos2d/cocos2d-x-3.17.2/tools/cocos2d-console/bin"
+export PATH=$COCOS_CONSOLE_ROOT:$PATH
+
+# Add environment variable COCOS_X_ROOT for cocos2d-x
+export COCOS_X_ROOT="~/.bin/cocos2d"
+export PATH=$COCOS_X_ROOT:$PATH
+
+# Add environment variable COCOS_TEMPLATES_ROOT for cocos2d-x
+export COCOS_TEMPLATES_ROOT="~/.bin/cocos2d/cocos2d-x-3.17.2/templates"
+export PATH=$COCOS_TEMPLATES_ROOT:$PATH
