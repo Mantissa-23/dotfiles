@@ -89,7 +89,9 @@ Plug 'jceb/vim-orgmode' " Org-mode support for vim, for journaling + notes
 
 " C# Development
 Plug 'OmniSharp/omnisharp-vim'
-"let g:OmniSharp_server_path = '/mnt/c/Omnisharp/omnisharp-http/OmniSharp.exe'
+if has('win32')
+  let g:OmniSharp_server_path = 'C:\Omnisharp\omnisharp.http-win-x64\OmniSharp.exe'
+endif
 "let g:OmniSharp_translate_cygwin_wsl = 1
 
 call plug#end()

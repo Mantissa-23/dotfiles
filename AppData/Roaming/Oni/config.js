@@ -21,9 +21,10 @@ exports.configuration = {
     "oni.loadInitVim": true,
     /// Aesthetic
     "ui.colorscheme": "palenight",
-    "editor.fontSize": "16",
+    "editor.fontSize": "14",
     "editor.fontFamily": "Inconsolata",
     // UI customizations
     "ui.animations.enabled": false,
-    "ui.fontSmoothing": false
+    "ui.fontSmoothing": true,
+    "neovim.global.python_host_prog": "C:\Python37\python3.exe"
 };
