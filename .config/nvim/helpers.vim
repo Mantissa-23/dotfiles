@@ -33,9 +33,12 @@ endfunction
 
 function! JNewEntry()
     let filename = JFilename()
+    let bufnum = bufwinnr(expand(filename))
 
-    if !(bufwinnr(filename) == bufnr('%'))
-        execute ":vsp" filename
+    if bufnum == -1
+      execute ":vsp" filename
+    else
+      execute bufnum . "wincmd w"
     endif
     
     " If new file unopened in buffer, add date header
@@ -50,6 +53,18 @@ function! JViewEntry()
     let filename = JFilename()
     execute ":vsp" filename
 endfunction
+
+" VIMWIKI
+
+function! VimWikiTitle()
+  let filename = expand('%')
+  let title = expand('%:r')
+
+  if empty(glob(filename))
+  execute "normal! I= " . title . " =\n\n%toc\n"
+endfunction
+
+"autocmd Filetype vimwiki call VimWikiTitle()
 
 " NEOMAKE
 
