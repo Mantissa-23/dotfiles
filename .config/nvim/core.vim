@@ -7,6 +7,7 @@ filetype plugin on
 
 "set term=screen-256color
 set t_ut=
+set termguicolors
 
 " Default to dark scheme
 call DarkScheme()

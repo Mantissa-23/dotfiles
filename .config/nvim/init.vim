@@ -11,8 +11,10 @@ Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensiosn#fugitiveline#enabled = 1
 
 " Colorschemes
-Plug 'drewtempelmeyer/palenight.vim' " Palenight colorscheme; better contrast when dark
-Plug 'altercation/vim-colors-solarized' " Solarized colorscheme
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
+let g:gruvbox_italic=1
 
 " Usability
 Plug 'sunaku/vim-shortcut' " Shows all available shortcuts when you've entered an incomplete binding. Depends on fzf.

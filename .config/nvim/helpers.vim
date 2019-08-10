@@ -6,12 +6,12 @@
 " switching between dark and light environments.
 
 function! DarkScheme()
-    colorscheme palenight
+    colorscheme gruvbox
     set background=dark
 endfunction
 
 function! LightScheme()
-    colorscheme solarized
+    colorscheme gruvbox
     set background=light
 endfunction
 
