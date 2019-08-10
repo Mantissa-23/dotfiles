@@ -1,14 +1,18 @@
+# Path to your oh-my-zsh installation.
+plugins=(zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting)
+export ZSH="/home/dylan/.oh-my-zsh"
+source $ZSH/oh-my-zsh.sh
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
-  export ZSH="/home/dylan/.oh-my-zsh"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME=powerlevel10k/powerlevel10k
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -98,3 +102,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 test -f ~/.aliases && source ~/.aliases
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
