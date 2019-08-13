@@ -28,7 +28,9 @@ endif
 
 " Generic Tab Settings. I like 2-tab, it's compact
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab autoindent
+" Orgmode tabs
 autocmd Filetype org setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab autoindent
+autocmd BufEnter,BufNew *.gd setlocal noexpandtab tabstop=4 shiftwidth=4 autoindent
 
 " Enable line number display, always
 set number
