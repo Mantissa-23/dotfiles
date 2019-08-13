@@ -27,9 +27,18 @@ My own personal neovim configuration.
 
 ### Dependencies
 
-- vim-plug
-- cmake
-- neovim (with all optional dependencies such as python and ruby)
+Indented lists indicate that a particular program's configuration depends on these packages being installed.
+- `i3`
+  - `bumblebee-status`
+  - `light`
+  - `pactl`
+- `neovim` (with all optional dependencies such as python and ruby)
+  - `cmake`
+- `zsh`
+  - `oh-my-zsh`
+  - `zsh-autosuggestions`
+  - `zsh-history-substring-search`
+  - `zsh-syntax-highlighting`
 
 ## .emacs.d
 
