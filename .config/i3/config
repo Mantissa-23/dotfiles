@@ -10,6 +10,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 #exec_always --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
 exec --no-startup-id feh --bg-fill "$HOME/Pictures/Free Ray.png"
+exec --no-startup-id xinput --set-prop 'SynPS/2 Synaptics TouchPad' "libinput Natural Scrolling Enabled" 1
 
 set $mod Mod4
 
@@ -175,6 +176,15 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Screenshots
+bindsym Print exec gnome-screenshot -i
+
+# Backlight controls
+bindsym XF86MonBrightnessUp     exec light -k -A 10
+bindsym XF86KbdBrightnessUp     exec light -k -A 10
+bindsym XF86MonBrightnessDown   exec light -k -U 10
+bindsym XF86KbdBrightnessUp     exec light -k -A 10
+
 # ----- #
 # THEME #
 # ----- #
@@ -220,7 +230,7 @@ client.urgent           $red $red $white $red $red
 
 # i3-gaps config
 # Remove headers
-for_window [class=".*"] border pixel 2
+#for_window [class=".*"] border pixel 2
 
-gaps inner 10
-gaps outer 10
+#gaps inner 10
+#gaps outer 10
