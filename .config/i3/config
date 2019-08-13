@@ -209,7 +209,7 @@ set $darkgray #1d2021
 # Bar stylin
 bar {
     position top
-    status_command bumblebee-status -m load memory disk:home spacer hostname bluetooth brightness amixer battery time -t gruvbox-powerline-light
+    status_command bumblebee-status -m load memory disk:home spacer hostname bluetooth brightness pasink battery time -t gruvbox-powerline-light
     # prime-select redshift vpn weather
     colors {
       background $darkgray
