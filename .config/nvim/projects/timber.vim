@@ -5,11 +5,10 @@ function! s:body()
     let opts = '-std=c++11 -Wall -I ' . projroot . '/godot/ -I ' . projroot . '/godot/platform/x11/'
     let b:ale_cpp_clang_options = opts
     let b:ale_cpp_gcc_options = opts
-    echo 'ALE configured for Godot development'
   endif
 endfunction
 
 aug timber
   au!
-  au BufEnter *.cpp,*.h call s:body()
+  au BufRead,BufNewFile *.cpp,*.h call s:body()
 aug END
