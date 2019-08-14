@@ -192,6 +192,7 @@ nmap <leader>h<leader> :helpgrep
 " i         - Insertion/Snippets
 " -----------------------------------
 nmap <leader>ise :UltiSnipsEdit<CR>
+"nmap <leader>isl call UltiSnips#ListSnippets()<CR>
 nmap <leader>it :pu=strftime('%c')<CR>
 " j         - Jump; File navigation
 " -----------------------------------

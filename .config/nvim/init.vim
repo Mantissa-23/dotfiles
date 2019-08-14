@@ -68,9 +68,12 @@ Plug 'tpope/vim-speeddating' " Increment and decrement dates with <C-a> and <C-x
 
 Plug 'SirVer/ultisnips' " Snippet engine
 Plug 'honza/vim-snippets' " And accompanying snippets
-let g:UltiSnipsExpandTrigger = "<C-j>"
+"let g:UltiSnipsExpandTrigger = "<C-CR>"
+"let g:UltiSnipsListSnippets = "<C-u>"
 " let g:UltiSnipsExpandTrigger="<tab>"
 " let g:UltiSnipsJumpForwardTrigger=""
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips/"
 
@@ -86,8 +89,8 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#deoplete_onmni_patterns = get(g:, 'deoplete#force_omni_input_patterns', {})
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-let g:deoplete#sources = {}
-let g:deoplete#sources._=['omni', 'buffer', 'member', 'tag', 'ultisnips', 'file']
+"let g:deoplete#sources = {}
+"let g:deoplete#sources._=['omni', 'buffer', 'member', 'tag', 'ultisnips', 'file']
 
 " Applications
 Plug 'jceb/vim-orgmode' " Org-mode support for vim, for journaling + notes
