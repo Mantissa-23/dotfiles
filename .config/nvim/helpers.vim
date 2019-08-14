@@ -103,3 +103,24 @@ endfunction
 " !function ToggleSpelling()
 "     if &spelllang ==# 'en_us'
 " endfunction
+
+" Returns project absolute root if the current file is within rootdir and rootglobs can be
+" found within that rootdir
+function! IsProject(rootdir, rootglobs)
+  let abspath = expand('%:p')
+  let projroot = []
+  call substitute(abspath, '^\/.*\/' . a:rootdir, '\=add(projroot, submatch(0))', '')
+  if len(projroot) > 0
+    let globhits = 0
+    for g in a:rootglobs
+      if len(globpath(projroot[0], g)) > 0
+        let globhits += 1
+      endif
+    endfor
+    if globhits == len(a:rootglobs)
+      return projroot[0]
+    endif
+    return 0
+  endif
+  return 0
+endfunction

@@ -119,5 +119,11 @@ Plug 'metakirby5/codi.vim'
 
 call plug#end()
 
+" Source all helper functions
 source ~/.config/nvim/helpers.vim
+" Source core, which contains actual configuration
 source ~/.config/nvim/core.vim
+" Source all project.vim files
+for f in split(glob('~/.config/nvim/projects/*.vim'), '\n')
+    exe 'source' f
+endfor

@@ -176,6 +176,7 @@ nmap <leader>fb :Buffers<CR>
 " -----------------------------------
 nmap <leader>fei :vsp ~/.config/nvim/init.vim<CR>
 nmap <leader>fec :vsp ~/.config/nvim/core.vim<CR>
+nmap <leader>fep :vsp ~/.config/nvim/projects/<CR>
 nmap <leader>feh :vsp ~/.config/nvim/helpers.vim<CR>
 nmap <leader>fer :so $MYVIMRC<CR>
 " g         - Git/VCS
