@@ -29,11 +29,12 @@ My own personal neovim configuration.
 
 Indented lists indicate that a particular program's configuration depends on these packages being installed.
 - `i3`
-  - `bumblebee-status`
-  - `light`
-  - `pactl`
+  - `bumblebee-status`: Required for statusline
+  - `light`: Required for backlight changer
+  - `pactl`: Required for volume changer
+  - `xbindkeys xsel xdotool`: Required for disable middle mouse paste globally
 - `neovim` (with all optional dependencies such as python and ruby)
-  - `cmake`
+  - `cmake`: Required to build ag
 - `zsh`
   - `oh-my-zsh`
   - `zsh-autosuggestions`
