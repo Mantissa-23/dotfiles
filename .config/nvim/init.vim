@@ -95,7 +95,7 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " Applications
 Plug 'jceb/vim-orgmode' " Org-mode support for vim, for journaling + notes
 Plug 'vimwiki/vimwiki' " Personal knowledge base and organizer
-let g:vimwiki_list = [{'path': '~/Docs/wiki/', 'auto_export': 1, 'auto_toc': 1, 'template_path': '~/Docs/wiki/templates/', 'template_default': 'default', 'template_ext': '.html'}]
+let g:vimwiki_list = [{'path': '~/Docs/wiki/', 'auto_export': 0, 'auto_toc': 1, 'template_path': '~/Docs/wiki/templates/', 'template_default': 'default', 'template_ext': '.html'}]
 let g:vimwiki_folding='expr'
 
 " C# Development

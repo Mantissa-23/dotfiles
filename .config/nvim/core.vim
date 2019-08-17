@@ -75,17 +75,23 @@ endif
 
 " Make tab and window navigation more sensible
 " Functionality usually covered by vim-tmux-navigator
-" Map only if using oni, which doesn't require vim-tmux-navigator
-if exists("g:gui_oni")
+" Map only if using GUI
+if exists("g:gui")
     nnoremap <C-h> <C-w>h
     nnoremap <C-j> <C-w>j
     nnoremap <C-k> <C-w>k
     nnoremap <C-l> <C-w>l
 endif
 
+" Shift windows around with C-S-...
+nnoremap <M-h> <C-w>H
+nnoremap <M-j> <C-w>J
+nnoremap <M-k> <C-w>K
+nnoremap <M-l> <C-w>L
+
 " Use alt + directions to move left and right
-nnoremap <M-h> :tabp<CR>
-nnoremap <M-l> :tabn<CR>
+"nnoremap <M-h> :tabp<CR>
+"nnoremap <M-l> :tabn<CR>
 
 " Scroll through visible lines as opposed to numbered lines; but only in
 " markdown.
@@ -163,6 +169,10 @@ vmap <leader>c gc
 " -----------------------------------
 nmap <leader>Cnm :Neomake!<CR>
 " e         - Errors/Linting/Language Diagnostics
+nmap <leader>en :ALENextWrap<CR>
+nmap <leader>ep :ALEPreviousWrap
+nmap <leader>egg :ALEFirst<CR>
+nmap <leader>eG :ALELast<CR>
 " -----------------------------------
 " f         - Files
 " -----------------------------------
