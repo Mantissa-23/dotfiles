@@ -11,6 +11,7 @@
 #exec_always --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
 exec --no-startup-id feh --bg-fill "$HOME/Pictures/Free Ray.png"
 exec --no-startup-id xinput --set-prop 'SynPS/2 Synaptics TouchPad' "libinput Natural Scrolling Enabled" 1
+exec --no-startup-id xbindkeys
 
 set $mod Mod4
 
