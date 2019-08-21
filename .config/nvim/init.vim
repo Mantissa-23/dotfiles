@@ -88,7 +88,7 @@ endif
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#deoplete_onmni_patterns = get(g:, 'deoplete#force_omni_input_patterns', {})
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 "let g:deoplete#sources = {}
 "let g:deoplete#sources._=['omni', 'buffer', 'member', 'tag', 'ultisnips', 'file']
 

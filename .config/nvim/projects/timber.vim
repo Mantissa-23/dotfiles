@@ -2,9 +2,12 @@
 function! s:body()
   let projroot = IsProject('timber', ['.git'])
   if type(projroot) == v:t_string
-    let opts = '-std=c++11 -Wall -I ' . projroot . '/godot/ -I ' . projroot . '/godot/platform/x11/ -I ' . projroot . '/godot-dualgen/lib/armadillo/include/'
+    let includes = ['', '/godot/', '/godot/platform/x11/', '/godot-dualgen/lib/armadillo/include/', '/godot-dualgen/lib/libfive/libfive/include/', '/godot-dualgen/lib/eigen/']
+    let opts = '-std=c++11 -Wall' . join(includes, ' -I ' . projroot)
     let b:ale_cpp_clang_options = opts
     let b:ale_cpp_gcc_options = opts
+    let b:ale_fixers = ['gcc']
+    let b:ale_linters = ['gcc']
     setlocal noexpandtab tabstop=2 shiftwidth=2 autoindent
   endif
 endfunction
