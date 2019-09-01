@@ -106,6 +106,7 @@ vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 
 " ALL HAIL OUR GLORIOUS ETERNAL LEADER, THE SPACEBAR, PRAISE BE TO HIM
 let mapleader=" "
+let maplocalleader=","
 
 " Prefix Glossary
 " a         - Applications
@@ -176,12 +177,15 @@ nmap <leader>eG :ALELast<CR>
 " -----------------------------------
 " f         - Files
 " -----------------------------------
-nmap <leader>ft :NERDTreeToggle<CR>
+"nmap <leader>ft :NERDTreeToggle<CR>
 nmap <leader>fnb :Bookmark 
 nmap <leader>fr :History<CR>
 nmap <leader>ff :Files<CR>
 nmap <leader>fgf :GFiles<CR>
 nmap <leader>fb :Buffers<CR>
+nmap <leader>frg :Rg
+nmap <leader>ft :Tags
+nmap <leader>fT :tag<CR>
 " fe        - Edit configuration
 " -----------------------------------
 nmap <leader>fei :vsp ~/.config/nvim/init.vim<CR>
@@ -215,13 +219,6 @@ nmap <leader>ss :call Swoop()<CR>
 vmap <leader>ss :call SwoopSelection()<CR>
 nmap <leader>sS :call SwoopMulti()<CR>
 vmap <leader>sS :call SwoopMultiSelection()<CR>
-" sa        - ag
-" -----------------------------------
-" sg        - grep
-" -----------------------------------
-" sk        - ack
-" -----------------------------------
-" st        - pt
 " -----------------------------------
 " sw        - web
 " -----------------------------------

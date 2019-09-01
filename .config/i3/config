@@ -10,8 +10,11 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 #exec_always --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
 exec --no-startup-id feh --bg-fill "$HOME/Pictures/Free Ray.png"
+# ANNIHILATE middle-click-to-paste
 exec --no-startup-id xinput --set-prop 'SynPS/2 Synaptics TouchPad' "libinput Natural Scrolling Enabled" 1
 exec --no-startup-id xbindkeys
+# Enable bluetooth manager
+exec --no-startup-id blueman-applet
 
 set $mod Mod4
 
@@ -28,7 +31,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+#exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
@@ -185,6 +188,22 @@ bindsym XF86MonBrightnessUp     exec light -k -A 10
 bindsym XF86KbdBrightnessUp     exec light -k -A 10
 bindsym XF86MonBrightnessDown   exec light -k -U 10
 bindsym XF86KbdBrightnessDown   exec light -k -U 10
+
+# System controls
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+p mode "$mode_system"
 
 # ----- #
 # THEME #

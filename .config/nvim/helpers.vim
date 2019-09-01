@@ -36,7 +36,7 @@ function! JNewEntry()
     let bufnum = bufwinnr(expand(filename))
 
     if bufnum == -1
-      execute ":vsp" filename
+      execute ":tab edit" filename
     else
       execute bufnum . "wincmd w"
     endif

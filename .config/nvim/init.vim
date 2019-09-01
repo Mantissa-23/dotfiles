@@ -22,12 +22,25 @@ Plug 'sunaku/vim-shortcut' " Shows all available shortcuts when you've entered a
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' } " Fuzzy finder
 Plug 'junegunn/fzf.vim' " And its vim bindings
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+" Look up identifier under cursor with :tag
+Plug 'zackhsi/fzf-tags'
+
 
 " Functionality
 Plug 'tpope/vim-sensible' " Sensible defaults
-Plug 'scrooloose/nerdtree' " File browser
+" Plug 'scrooloose/nerdtree' " File browser
 Plug 'majutsushi/tagbar' " Tag browser
+let g:tagbar_type_markdown = {
+    \ 'ctagstype' : 'markdown',
+    \ 'kinds' : [
+        \ 'h:Heading_L1',
+        \ 'i:Heading_L2',
+        \ 'k:Heading_L3'
+    \ ]
+\ }
+
 Plug 'sheerun/vim-polyglot' " Language package package
+let g:polyglot_disabled = ['latex']
 "Plug 'Shougo/denite.nvim' " General completion framework similar to Helm
 
 if !exists("g:gui_oni") " Probably won't be using tmux in Oni
@@ -61,6 +74,7 @@ Plug 'airblade/vim-gitgutter' " Shows git diff in the left gutter.
 Plug 'tpope/vim-commentary' " Comment and uncomment stuff. gc to use.
 Plug 'easymotion/vim-easymotion' " Target specific locations when performing motions instead of repeating over and over
 Plug 'nathanaelkane/vim-indent-guides' " Highlight separate indentation levels
+let g:indent_guides_enable_on_vim_startup = 1
 Plug 'haya14busa/incsearch.vim' " Incremental search
 Plug 'haya14busa/incsearch-easymotion.vim' " Compatibility with easymotion
 Plug 'osyo-manga/vim-over' " Regex replacement preview
@@ -78,19 +92,31 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips/"
 
 " Deoplete completion plugin
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#deoplete_onmni_patterns = get(g:, 'deoplete#force_omni_input_patterns', {})
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" if has('nvim')
+"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" else
+"   Plug 'Shougo/deoplete.nvim'
+"   Plug 'roxma/nvim-yarp'
+"   Plug 'roxma/vim-hug-neovim-rpc'
+" endif
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_smart_case = 1
+" let g:deoplete#deoplete_onmni_patterns = get(g:, 'deoplete#force_omni_input_patterns', {})
+" inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 "let g:deoplete#sources = {}
 "let g:deoplete#sources._=['omni', 'buffer', 'member', 'tag', 'ultisnips', 'file']
+
+" YCM Completion Plugin
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py
+  endif
+endfunction
+Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
 
 " Applications
 Plug 'jceb/vim-orgmode' " Org-mode support for vim, for journaling + notes
@@ -112,13 +138,24 @@ let g:vimwiki_folding='expr'
 " Python and Jupyter
 
 "Plug 'broesler/jupyter-vim'
+"Plug 'szymonmaszke/vimpyter'
 
 " GDScript Development
 
 Plug 'calviken/vim-gdscript3'
 " REPL MAGIC
 
+" Interactive scratchpad-style REPL support for various languages
 Plug 'metakirby5/codi.vim'
+
+" LaTeX Writing
+Plug 'lervag/vimtex'
+" Setup vimtex for use with YCM
+if !exists('g:ycm_semantic_triggers')
+  let g:ycm_semantic_triggers = {}
+endif
+au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
+let g:vimtex_view_method = 'zathura'
 
 call plug#end()
 
