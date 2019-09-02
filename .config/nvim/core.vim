@@ -174,6 +174,7 @@ nmap <leader>en :ALENextWrap<CR>
 nmap <leader>ep :ALEPreviousWrap
 nmap <leader>egg :ALEFirst<CR>
 nmap <leader>eG :ALELast<CR>
+nmap <leader>ed :ALEDetail<CR>
 " -----------------------------------
 " f         - Files
 " -----------------------------------
@@ -183,7 +184,7 @@ nmap <leader>fr :History<CR>
 nmap <leader>ff :Files<CR>
 nmap <leader>fgf :GFiles<CR>
 nmap <leader>fb :Buffers<CR>
-nmap <leader>frg :Rg
+nmap <leader>frg :Rg 
 nmap <leader>ft :Tags
 nmap <leader>fT :tag<CR>
 " fe        - Edit configuration
@@ -208,6 +209,7 @@ nmap <leader>h<leader> :helpgrep
 nmap <leader>ise :UltiSnipsEdit<CR>
 "nmap <leader>isl call UltiSnips#ListSnippets()<CR>
 nmap <leader>it :pu=strftime('%c')<CR>
+imap <c-p><c-p> <plug>(fzf-complete-path)
 " j         - Jump; File navigation
 " -----------------------------------
 nmap <leader>jt :TagbarToggle<CR>

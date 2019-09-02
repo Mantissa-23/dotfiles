@@ -84,8 +84,7 @@ Plug 'SirVer/ultisnips' " Snippet engine
 Plug 'honza/vim-snippets' " And accompanying snippets
 "let g:UltiSnipsExpandTrigger = "<C-CR>"
 "let g:UltiSnipsListSnippets = "<C-u>"
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger=""
+let g:UltiSnipsExpandTrigger="<C-s>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
@@ -117,6 +116,11 @@ function! BuildYCM(info)
   endif
 endfunction
 Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
+let g:ycm_global_ycm_extra_conf = '$HOME/.config/nvim/ycm.py'
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_enable_diagnostic_highlighting = 0
+let g:ycm_echo_current_diagnostic = 0
 
 " Applications
 Plug 'jceb/vim-orgmode' " Org-mode support for vim, for journaling + notes
