@@ -184,10 +184,10 @@ bindsym $mod+r mode "resize"
 bindsym Print exec gnome-screenshot -i
 
 # Backlight controls
-bindsym XF86MonBrightnessUp     exec light -k -A 10
-bindsym XF86KbdBrightnessUp     exec light -k -A 10
-bindsym XF86MonBrightnessDown   exec light -k -U 10
-bindsym XF86KbdBrightnessDown   exec light -k -U 10
+bindsym XF86MonBrightnessUp     exec light -A 10
+bindsym XF86KbdBrightnessUp     exec light -A 10
+bindsym XF86MonBrightnessDown   exec light -U 10
+bindsym XF86KbdBrightnessDown   exec light -U 10
 
 # System controls
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -229,7 +229,7 @@ set $darkgray #1d2021
 # Bar stylin
 bar {
     position top
-    status_command bumblebee-status -m load memory disk:home spacer hostname bluetooth brightness pasink battery time -t gruvbox-powerline-light
+    status_command bumblebee-status -m load memory disk:home spacer hostname bluetooth brightness pasink battery datetime -t gruvbox-powerline-light
     # prime-select redshift vpn weather
     colors {
       background $darkgray
