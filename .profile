@@ -65,3 +65,5 @@ export PATH=$COCOS_X_ROOT:$PATH
 # Add environment variable COCOS_TEMPLATES_ROOT for cocos2d-x
 export COCOS_TEMPLATES_ROOT="~/.bin/cocos2d/cocos2d-x-3.17.2/templates"
 export PATH=$COCOS_TEMPLATES_ROOT:$PATH
+
+export PATH=~/Zotero/styles:$PATH

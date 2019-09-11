@@ -73,6 +73,7 @@ Plug 'terryma/vim-multiple-cursors' " Adds sublime-like multicursor. Use ctrl+n 
 Plug 'airblade/vim-gitgutter' " Shows git diff in the left gutter. 
 Plug 'tpope/vim-commentary' " Comment and uncomment stuff. gc to use.
 Plug 'easymotion/vim-easymotion' " Target specific locations when performing motions instead of repeating over and over
+Plug 'tpope/vim-repeat' " use . with several plugin commands
 Plug 'nathanaelkane/vim-indent-guides' " Highlight separate indentation levels
 let g:indent_guides_enable_on_vim_startup = 1
 Plug 'haya14busa/incsearch.vim' " Incremental search

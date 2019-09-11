@@ -31,6 +31,9 @@ set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab autoindent
 " Orgmode tabs
 autocmd Filetype org setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab autoindent
 autocmd BufEnter,BufNew *.gd setlocal noexpandtab tabstop=4 shiftwidth=4 autoindent
+"
+" LaTeX tabs
+autocmd Filetype tex setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
 
 " Enable line number display, always
 set number
@@ -63,6 +66,8 @@ imap <expr> <CR> EnterEnter()
 set ignorecase
 set smartcase
 
+" Turn on spelling for md, wiki and org files
+autocmd BufRead,BufNewFile *.md,*.wiki,*.org setlocal spell
 "                           General Keymappings
 " ----------------------------------------------------------------------------
 
