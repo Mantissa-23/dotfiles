@@ -27,7 +27,7 @@ endfunction
 
 function! JFilename()
     let journaldir = '~/Docs/Org/Journal/'
-    let name = strftime('%Y%m%d.org')
+    let name = strftime('%Y%m%d.md')
     return journaldir . name
 endfunction
 
@@ -43,10 +43,10 @@ function! JNewEntry()
     
     " If new file unopened in buffer, add date header
     if empty(glob(filename))
-        execute "normal! A* " . strftime('%A, %m/%d/%y')
+        execute "normal! A# " . strftime('%A, %m/%d/%y')
     endif
 
-    execute "normal! Go** " . strftime('%H:%M ')
+    execute "normal! Go\<esc>o## " . strftime('%H:%M ')
 endfunction
 
 function! JViewEntry()

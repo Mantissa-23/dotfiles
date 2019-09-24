@@ -42,6 +42,8 @@ let g:tagbar_type_markdown = {
 Plug 'sheerun/vim-polyglot' " Language package package
 let g:polyglot_disabled = ['latex']
 "Plug 'Shougo/denite.nvim' " General completion framework similar to Helm
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 
 if !exists("g:gui_oni") " Probably won't be using tmux in Oni
     Plug 'christoomey/vim-tmux-navigator' " Seamless navigation for tmux
@@ -126,7 +128,7 @@ let g:ycm_echo_current_diagnostic = 0
 " Applications
 Plug 'jceb/vim-orgmode' " Org-mode support for vim, for journaling + notes
 Plug 'vimwiki/vimwiki' " Personal knowledge base and organizer
-let g:vimwiki_list = [{'path': '~/Docs/wiki/', 'auto_export': 0, 'auto_toc': 1, 'template_path': '~/Docs/wiki/templates/', 'template_default': 'default', 'template_ext': '.html'}]
+let g:vimwiki_list = [{'path': '~/Docs/wiki/', 'auto_export': 0, 'auto_toc': 1, 'template_path': '~/Docs/wiki/templates/', 'template_default': 'default', 'template_ext': '.html', 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_folding='expr'
 
 " C# Development
