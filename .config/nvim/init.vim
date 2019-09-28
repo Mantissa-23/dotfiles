@@ -130,6 +130,7 @@ Plug 'jceb/vim-orgmode' " Org-mode support for vim, for journaling + notes
 Plug 'vimwiki/vimwiki' " Personal knowledge base and organizer
 let g:vimwiki_list = [{'path': '~/Docs/wiki/', 'auto_export': 0, 'auto_toc': 1, 'template_path': '~/Docs/wiki/templates/', 'template_default': 'default', 'template_ext': '.html', 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_folding='expr'
+let g:vimwiki_global_ext = 0
 
 " C# Development
 "Plug 'OmniSharp/omnisharp-vim'

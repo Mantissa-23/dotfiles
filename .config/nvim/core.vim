@@ -106,6 +106,10 @@ autocmd FileType markdown   nnoremap k gk
 " Add // in visual mode to search for highlighted text
 vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 
+" Non-leader Keymappings
+" ----------------------------------------------------------------------------
+
+nmap <C-;> :execute "normal! [sz=<CR>"
 " Leader Keymappings
 " ----------------------------------------------------------------------------
 
