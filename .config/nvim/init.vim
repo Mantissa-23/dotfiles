@@ -44,6 +44,9 @@ let g:polyglot_disabled = ['latex']
 "Plug 'Shougo/denite.nvim' " General completion framework similar to Helm
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-pandoc-after'
+Plug 'dhruvasagar/vim-table-mode'
+let g:pandoc#after#modules#enabled = ["tablemode"]
 
 if !exists("g:gui_oni") " Probably won't be using tmux in Oni
     Plug 'christoomey/vim-tmux-navigator' " Seamless navigation for tmux

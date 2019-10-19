@@ -100,8 +100,8 @@ nnoremap <M-l> <C-w>L
 
 " Scroll through visible lines as opposed to numbered lines; but only in
 " markdown.
-autocmd FileType markdown   nnoremap j gj
-autocmd FileType markdown   nnoremap k gk
+" autocmd FileType markdown   nnoremap j gj
+" autocmd FileType markdown   nnoremap k gk
 
 " Add // in visual mode to search for highlighted text
 vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
@@ -109,7 +109,7 @@ vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 " Non-leader Keymappings
 " ----------------------------------------------------------------------------
 
-nmap <C-;> :execute "normal! [sz=<CR>"
+nmap <C-;> :execute "normal! [s<CR>"
 " Leader Keymappings
 " ----------------------------------------------------------------------------
 
@@ -145,7 +145,7 @@ let maplocalleader=","
 " a         - Applications
 " -----------------------------------
 nmap <leader>ajj :call JNewEntry()<CR>
-nmap <leader>avj :call JViewEntry()<CR>
+"nmap <leader>avj :call JViewEntry()<CR>
 
 nmap <leader>att :terminal<CR>
 nmap <leader>atv :vsp<CR>:terminal<CR>
@@ -155,11 +155,12 @@ nmap <leader>aww <Plug>VimwikiIndex
 nmap <leader>awt <Plug>VimwikiTabIndex
 nmap <leader>aws <Plug>VimwikiUISelect
 nmap <leader>awc :VimwikiTOC<CR>
-nmap <leader>adi <Plug>VimwikiDiaryIndex
-nmap <leader>add <Plug>VimwikiMakeDiaryNote
-nmap <leader>adt <Plug>VimwikiTabMakeDiaryNote
-nmap <leader>ady <Plug>VimwikiMakeYesterdayDiaryNote
-nmap <leader>adm <Plug>VimwikiMakeTomorrowDiaryNote
+nmap <leader>aji <Plug>VimwikiDiaryIndex
+"nmap <leader>ajj <Plug>VimwikiMakeDiaryNote
+nmap <leader>ajj :call JNewEntry()<CR>
+nmap <leader>ajt <Plug>VimwikiTabMakeDiaryNote
+nmap <leader>ajy <Plug>VimwikiMakeYesterdayDiaryNote
+nmap <leader>ajm <Plug>VimwikiMakeTomorrowDiaryNote
 
 nmap <leader>ar :Codi!!<CR>
 " as        - Shells/Terminals
@@ -263,7 +264,7 @@ if exists("shortcuts")
   Shortcut fallback to shortcut menu on partial entry
         \ noremap <silent> <Leader> :Shortcuts<Return>
 
-  Shortcut! <leader>ajj    new journal entry
+  "Shortcut! <leader>ajj    new journal entry
   Shortcut! <leader>avj    open current journal entry
   Shortcut! <leader>att    open terminal in current window
   Shortcut! <leader>atv    open terminal in vsplit

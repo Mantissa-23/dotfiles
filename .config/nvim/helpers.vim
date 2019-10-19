@@ -32,17 +32,10 @@ function! JFilename()
 endfunction
 
 function! JNewEntry()
-    let filename = JFilename()
-    let bufnum = bufwinnr(expand(filename))
-
-    if bufnum == -1
-      execute ":tab edit" filename
-    else
-      execute bufnum . "wincmd w"
-    endif
+    execute "VimwikiMakeDiaryNote"
     
     " If new file unopened in buffer, add date header
-    if empty(glob(filename))
+    if empty(glob("%"))
         execute "normal! A# " . strftime('%A, %m/%d/%y')
     endif
 

@@ -67,3 +67,5 @@ export COCOS_TEMPLATES_ROOT="~/.bin/cocos2d/cocos2d-x-3.17.2/templates"
 export PATH=$COCOS_TEMPLATES_ROOT:$PATH
 
 export PATH=~/Zotero/styles:$PATH
+
+export PATH=~/.build/pizza/src:$PATH
