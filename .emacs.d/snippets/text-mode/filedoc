@@ -1,6 +1,0 @@
-#name : UVA Name/Email/Date/Filename header for plaintext files
-# --
-Dylan Culfogienis
-dtc9bb
-`(format-time-string "%Y-%m-%d")`
-`(file-name-nondirectory(buffer-file-name))`
