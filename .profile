@@ -68,4 +68,8 @@ export PATH=$COCOS_TEMPLATES_ROOT:$PATH
 
 export PATH=~/Zotero/styles:$PATH
 
+# pizza.py for lammps
 export PATH=~/.build/pizza/src:$PATH
+
+# doom emacs executable
+export PATH=~/.emacs.d/bin/doom:$PATH
