@@ -11,7 +11,9 @@ endif
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' } " Fuzzy finder
 Plug 'junegunn/fzf.vim' " And its vim bindings
 let g:fzf_history_dir = '~/.local/share/fzf-history'
-Plug 'zackhsi/fzf-tags' " Look up identifier under cursor with :tag
+" Plug 'zackhsi/fzf-tags' " Look up identifier under cursor with :tag
+
+" IDE - TAGS "
 
 Plug 'majutsushi/tagbar' " Tag browser
 let g:tagbar_type_markdown = {
@@ -22,6 +24,17 @@ let g:tagbar_type_markdown = {
         \ 'k:Heading_L3'
     \ ]
 \ }
+
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
+
+
+let g:gutentags_modules = ['ctags', 'gtags_cscope'] " enable gtags module
+" let g:gutentags_project_root = ['.root'] " config project root markers.
+let g:gutentags_cache_dir = expand('~/.cache/tags') " generate datebases in my cache directory, prevent gtags files polluting my project
+let g:gutentags_plus_switch = 1 " change focus to quickfix window after search (optional).
+let g:gutentags_plus_nomap = 1 " Do not use default gutentag bindings
+
 " IDE - SNIPPETS "
 
 Plug 'SirVer/ultisnips' " Snippet engine

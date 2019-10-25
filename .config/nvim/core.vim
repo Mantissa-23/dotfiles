@@ -222,7 +222,16 @@ nmap <leader>it :pu=strftime('%c')<CR>
 imap <c-p><c-p> <plug>(fzf-complete-path)
 " j         - Jump; File navigation
 " -----------------------------------
-nmap <leader>jt :TagbarToggle<CR>
+nmap <leader>jj :TagbarToggle<CR>
+nmap <leader>js :GscopeFind s <C-R><C-W><cr>
+nmap <leader>jg :GscopeFind g <C-R><C-W><cr>
+nmap <leader>jc :GscopeFind c <C-R><C-W><cr>
+nmap <leader>jt :GscopeFind t <C-R><C-W><cr>
+nmap <leader>je :GscopeFind e <C-R><C-W><cr>
+nmap <leader>jf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+nmap <leader>ji :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+nmap <leader>jd :GscopeFind d <C-R><C-W><cr>
+nmap <leader>ja :GscopeFind a <C-R><C-W><cr>
 " p         - Project
 " -----------------------------------
 " s         - Search
@@ -286,7 +295,6 @@ if exists("shortcuts")
   Shortcut! <leader>gl     git log
   Shortcut! <leader>gp     git push
   Shortcut! <leader>gd     git diff
-  Shortcut! <leader>jt     tagbar toggle
   Shortcut! <leader>ss     swoop
   Shortcut! <leader>ss     swoop selection
   Shortcut! <leader>sS     swoop all open buffers
@@ -304,4 +312,15 @@ if exists("shortcuts")
   Shortcut! <leader>wtc    close current tab
   Shortcut! <leader>wtt    go to next tab
   Shortcut! <leader>wtT    go to previous tab
+  Shortcut! <leader>jj     tagbar toggle
+  Shortcut! <leader>js     find symbol references under cursor
+  Shortcut! <leader>jg     find symbol definition under cursor
+  Shortcut! <leader>jc     functions called by this function
+  Shortcut! <leader>jt     functions calling this function
+  Shortcut! <leader>je     find string under cursor
+  Shortcut! <leader>jf     find egrep pattern under cursor
+  Shortcut! <leader>ji     find filename under cursor
+  Shortcut! <leader>jd     find files #including file name under cursor
+  Shortcut! <leader>ja     find places where current symbol is assigned
+
 endif
