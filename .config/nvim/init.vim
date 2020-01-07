@@ -11,6 +11,7 @@ endif
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' } " Fuzzy finder
 Plug 'junegunn/fzf.vim' " And its vim bindings
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 " Plug 'zackhsi/fzf-tags' " Look up identifier under cursor with :tag
 
 " IDE - TAGS "
@@ -135,6 +136,7 @@ Plug 'calviken/vim-gdscript3' " Somewhat hacky syntax highlighting for GDScript
 
 "Plug 'broesler/jupyter-vim' " Jupyter plugins
 "Plug 'szymonmaszke/vimpyter'
+" Plug 'beeender/Comrade'
 
 " CONFIGURATION "
 

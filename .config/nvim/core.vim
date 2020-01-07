@@ -43,6 +43,13 @@ set title
 " Do not wrap lines in the middle of words
 set linebreak
 
+" Do not wrap at all by default.
+set nowrap
+set sidescroll=1
+
+" But wrap for non-code file types
+au Filetype markdown,tex setlocal wrap
+
 " Split right and below, instead of left and above. Left and above is for
 " aliens.
 set splitright splitbelow
