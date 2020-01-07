@@ -73,3 +73,12 @@ export PATH=~/.build/pizza/src:$PATH
 
 # doom emacs executable
 export PATH=~/.emacs.d/bin/doom:$PATH
+
+# Flutter exec
+export PATH=~/.build/flutter/bin:$PATH
+
+# Android SDK
+export ANDROID_HOME=~/.build/Android/Sdk
+
+# Ruby executables
+export PATH=~/.gem/ruby/2.6.0/bin:$PATH
