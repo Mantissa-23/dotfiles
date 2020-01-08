@@ -29,9 +29,12 @@ font-2 = siji:pixelsize=10;3
 
 separator = |
 
-modules-left = bspwm
-modules-center = xwindow
+modules-left = memory filesystem network
+modules-center = bspwm
 modules-right = date battery volume mpd backlight powermenu
+
+tray-position = left
+tray-maxsize = 16
 
 wm-restack = bspwm
 
@@ -188,6 +191,35 @@ menu-1-0-padding = 1
 menu-2-0 = power off?
 menu-2-0-exec = sudo poweroff
 menu-2-0-padding = 1
+
+[module/network]
+type = internal/network
+interface = wlp4s0
+
+label-connected = %essid%
+format-connected =  <label-connected>
+
+; Seconds to sleep between updates
+interval = 3.0
+
+[module/memory]
+type = internal/memory
+interval = 3
+
+format =  <label>
+;label = %gb_used% of %gb_total%
+
+[module/filesystem]
+type = internal/fs
+
+mount-0 = /
+interval = 10
+
+format-mounted =  <label-mounted>
+
+label-mounted = %used% of %total%
+
+fixed-values = true
 
 [module/mpd]
 type = internal/mpd
