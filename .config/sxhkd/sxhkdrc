@@ -24,10 +24,10 @@ super + shift + r
 
 # system controls
 super + p ; {p,e,l,r}
-	{shutdown -p now, bspc quit, i3lock, reboot}
+	{shutdown -p now, bspc quit, i3lock-custom, reboot}
 
 # close and kill
-super + {_,shift + }q
+super + {_,alt + }q
 	bspc node -{c,k}
 
 # alternate between the tiled and monocle layout
