@@ -3,7 +3,7 @@ Description=Restart redshift on resume
 After=suspend.target
 
 [Service]
-ExecStart=/usr/bin/systemctl --user restart redshift.service
+ExecStart=/usr/bin/systemctl --user restart redshift-gtk.service
 
 [Install]
 WantedBy=suspend.target
