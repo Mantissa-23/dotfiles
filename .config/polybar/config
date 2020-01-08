@@ -106,12 +106,12 @@ adapter = AC0
 
 poll-interval = 5
 
-format-charging = <animation-charging> <label-charging>
-format-discharging = <ramp-capacity> <label-discharging>
-format-full = <ramp-capacity> <label-full>
-label-charging = %percentage%
-label-discharging = %percentage%
-label-full = %percentage%
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+label-charging = %percentage%%
+label-discharging = %percentage%%
+label-full = %percentage%%
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -133,7 +133,7 @@ card = intel_backlight
 enable-scroll = true
 
 format = <ramp><label>
-label = %percentage%
+label = %percentage%%
 
 ramp-0 = 🌕
 ramp-1 = 🌔
@@ -146,7 +146,7 @@ type = internal/volume
 
 format-volume = <ramp-volume> <label-volume>
 format-muted = <label-muted>
-label-volume = %percentage%
+label-volume = %percentage%%
 label-muted =  muted
 label-muted-foreground = #aaa
 

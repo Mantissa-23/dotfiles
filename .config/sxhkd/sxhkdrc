@@ -23,8 +23,8 @@ super + shift + r
 	bspc wm -r
 
 # system controls
-super + p ; {p,e,l,r}
-	{shutdown -p now, bspc quit, i3lock-custom, reboot}
+super + p ; {p,r,h,s,e,l}
+	{bspwmexit shutdown, bspwmexit reboot, bspwmexit hibernate, bspwmexit suspend, bspwmexit logout, bspwmexit lock}
 
 # close and kill
 super + {_,alt + }q
