@@ -1,15 +1,32 @@
 #!/bin/sh
 
+## LAUNCHES
+
+# Keybinds
 sxhkd &
 
-feh --bg-fill "$HOME/Pictures/desktop/desktop.jpg"
+# Background
+feh --bg-fill "$HOME/Pictures/desktop/desktop.jpg" &
 
-$HOME/.config/polybar/launch.sh
+# Bar
+$HOME/.config/polybar/launch.sh &
 #polybar top &
+
+# Run bliuetooth manager
+blueman-applet &
+
+# Run xbindkeys
+xbindkeys &
+
+## FIXES
+
+# Reverse scroll direction
+xinput --set-prop 'SynPS/2 Synaptics TouchPad' "libinput Natural Scrolling Enabled" 1 &
 
 # Fix for X-shaped default cursor
 xsetroot -cursor_name left_ptr &
 
+## CONFIGURATION
 bspc monitor -d I II III IV V VI VII VIII IX X
 
 bspc config border_width         0
