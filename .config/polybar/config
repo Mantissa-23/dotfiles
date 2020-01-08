@@ -15,31 +15,28 @@ underline-size = 0
 underline-color = #1d2021
 
 border-bottom-size = 3
-border-color = #3c3836
+border-color = #32302f
 
 spacing = 1
 padding-left = 1
-padding-right = 1
-module-margin-left = 1
-module-margin-right = 1
+padding-right = 2
+module-margin-left = 2
+module-margin-right = 2
 
 font-0 = Monaco:pixelsize=10;2
 font-1 = FontAwesome:pixelsize=10;2
-font-2 = siji:pixelsize=10;0
+font-2 = siji:pixelsize=10;3
+
+separator = |
 
 modules-left = bspwm
 modules-center = xwindow
-modules-right = date battery volume mpd powermenu
-
-;tray-position = right
-;tray-padding = 2
-;tray-background = #66333333
+modules-right = date battery volume mpd backlight powermenu
 
 wm-restack = bspwm
 
 ;scroll-up = bspwm-desknext
 ;scroll-down = bspwm-deskprev
-
 ;psuedo-transparency = true
 
 ; MODULES
@@ -52,7 +49,6 @@ ws-icon-default = ○
 format = <label-state> <label-mode>
 
 label-focused = ●
-;label-focused-background = #88000000
 label-focused-padding = 1
 
 label-occupied = %icon%
@@ -90,10 +86,6 @@ time-alt = %H:%M:%S
 
 label = %date% %time%
 format =  <label>
-;format-background = #ddffffff
-;format-background = #88000000
-;format-foreground = #333
-format-padding = 1
 
 [module/padding]
 type = custom/text
@@ -117,9 +109,6 @@ format-full = <ramp-capacity> <label-full>
 label-charging = %percentage%
 label-discharging = %percentage%
 label-full = %percentage%
-format-charging-padding = 1
-format-discharging-padding = 1
-format-full-padding = 1
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -140,7 +129,7 @@ type = internal/backlight
 card = intel_backlight
 enable-scroll = true
 
-format = <ramp> <label>
+format = <ramp><label>
 label = %percentage%
 
 ramp-0 = 🌕
@@ -157,8 +146,6 @@ format-muted = <label-muted>
 label-volume = %percentage%
 label-muted =  muted
 label-muted-foreground = #aaa
-format-volume-padding = 1
-format-muted-padding = 1
 
 ramp-volume-0 = 
 ramp-volume-1 = 
@@ -171,39 +158,36 @@ type = custom/script
 exec = /home/gamehelp16/Documents/np
 interval = 1
 
-format = <label>   
-;format-background = #dd00c6e0
-;format-foreground = #fff
-;format-padding = 4
+format = <label>
 
 label = %output%
 
 [module/powermenu]
 type = custom/menu
 
-label-open =   
-;label-open-background = #dd0000
-;label-open-foreground = #fff
+label-open = 
 label-close = cancel
-;label-close-background = #dd0000
-;label-close-foreground = #fff
-label-open-padding = 1
-label-close-padding = 1
 
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-menu-0-0-padding = 3
-menu-0-1-padding = 3
+menu-0-0 = lock
+menu-0-0-exec = i3lock-custom
+menu-0-1 = logout
+menu-0-1-exec = bspc quit
+menu-0-2 = reboot
+menu-0-2-exec = menu-open-1
+menu-0-3 = shutdown
+menu-0-3-exec = menu-open-2
+menu-0-0-padding = 1
+menu-0-1-padding = 1
+menu-0-2-padding = 1
+menu-0-3-padding = 1
 
-menu-1-0 = reboot?  
+menu-1-0 = reboot?
 menu-1-0-exec = sudo reboot
-menu-1-0-padding = 3
+menu-1-0-padding = 1
 
-menu-2-0 = power off?  
+menu-2-0 = power off?
 menu-2-0-exec = sudo poweroff
-menu-2-0-padding = 3
+menu-2-0-padding = 1
 
 [module/mpd]
 type = internal/mpd
@@ -241,4 +225,4 @@ format-online =    <label-song>
 ;   %title%
 ; Default: %artist% - %title%
 label-song = %title%
-format-online-padding = 3
+;format-online-padding = 3

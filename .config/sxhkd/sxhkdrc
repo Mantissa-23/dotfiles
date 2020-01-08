@@ -20,7 +20,7 @@ super + esc
 
 # Reload WM
 super + shift + r
-  bspc wm -r
+	bspc wm -r
 
 # system controls
 super + p ; {p,e,l,r}
@@ -126,16 +126,16 @@ super + {Left,Down,Up,Right}
 
 # volume and brightness
 XF86AudioRaiseVolume
-  pactl set-sink-volume @DEFAULT_SINK@ +10%
+	pactl set-sink-volume @DEFAULT_SINK@ +10%
 
 XF86AudioLowerVolume
-  pactl set-sink-volume @DEFAULT_SINK@ -10%
+	pactl set-sink-volume @DEFAULT_SINK@ -10%
 
 XF86AudioMute
-  pactl set-sink-mute @DEFAULT_SINK@ toggle
+	pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 XF86MonBrightnessDown
- light -U 5 
+	light -U 10
 
 XF86MonBrightnessUp
- light -A 5
+	light -A 10
