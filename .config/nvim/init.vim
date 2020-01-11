@@ -6,42 +6,38 @@ endif
 
 " IDE - PROJECT MANAGEMENT "
 
-" Plug 'scrooloose/nerdtree' " File browser
-" Plug 'kien/ctrlp.vim' " Fuzzy finder. ctrl+p to use.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' } " Fuzzy finder
 Plug 'junegunn/fzf.vim' " And its vim bindings
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
-" Plug 'zackhsi/fzf-tags' " Look up identifier under cursor with :tag
+
+Plug 'Lokaltog/neoranger'
+let g:neoranger_viewmode='miller'
 
 " IDE - TAGS "
 
-Plug 'majutsushi/tagbar' " Tag browser
-let g:tagbar_type_markdown = {
-    \ 'ctagstype' : 'markdown',
-    \ 'kinds' : [
-        \ 'h:Heading_L1',
-        \ 'i:Heading_L2',
-        \ 'k:Heading_L3'
-    \ ]
-\ }
+" Plug 'majutsushi/tagbar' " Tag browser
+" let g:tagbar_type_markdown = {
+"     \ 'ctagstype' : 'markdown',
+"     \ 'kinds' : [
+"         \ 'h:Heading_L1',
+"         \ 'i:Heading_L2',
+"         \ 'k:Heading_L3'
+"     \ ]
+" \ }
 
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'skywind3000/gutentags_plus'
+" Plug 'ludovicchabant/vim-gutentags'
+" Plug 'skywind3000/gutentags_plus'
 
 
-let g:gutentags_modules = ['ctags', 'gtags_cscope'] " enable gtags module
-" let g:gutentags_project_root = ['.root'] " config project root markers.
-let g:gutentags_cache_dir = expand('~/.cache/tags') " generate datebases in my cache directory, prevent gtags files polluting my project
-let g:gutentags_plus_switch = 1 " change focus to quickfix window after search (optional).
-let g:gutentags_plus_nomap = 1 " Do not use default gutentag bindings
+" let g:gutentags_modules = ['ctags', 'gtags_cscope'] " enable gtags module
+" let g:gutentags_cache_dir = expand('~/.cache/tags') " generate datebases in my cache directory, prevent gtags files polluting my project
+" let g:gutentags_plus_switch = 1 " change focus to quickfix window after search (optional).
+" let g:gutentags_plus_nomap = 1 " Do not use default gutentag bindings
 
 " IDE - SNIPPETS "
 
 Plug 'SirVer/ultisnips' " Snippet engine
-"Plug 'honza/vim-snippets' " And accompanying snippets
-"let g:UltiSnipsExpandTrigger = "<C-CR>"
-"let g:UltiSnipsListSnippets = "<C-u>"
 let g:UltiSnipsExpandTrigger="<C-s>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
@@ -64,17 +60,18 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} " Async completion framework wit
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 Plug 'neoclide/coc-sources' " coc common sources
 Plug 'neoclide/coc-neco' " viml completion
 Plug 'neoclide/coc-vimtex' " coc vimtex compatibility
 
+" Navigation and Editing
 
 Plug 'easymotion/vim-easymotion' " Target specific locations when performing motions instead of repeating over and over
 Plug 'tpope/vim-repeat' " use . with several plugin commands
 Plug 'nathanaelkane/vim-indent-guides' " Highlight separate indentation levels
 let g:indent_guides_enable_on_vim_startup = 1
-Plug 'haya14busa/incsearch.vim' " Incremental search
-Plug 'haya14busa/incsearch-easymotion.vim' " Compatibility with easymotion
 Plug 'osyo-manga/vim-over' " Regex replacement preview
 
 " IDE - EDITOR FEATURES "

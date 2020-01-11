@@ -73,6 +73,12 @@ imap <expr> <CR> EnterEnter()
 set ignorecase
 set smartcase
 
+" Enable incremental search
+set incsearch
+
+" Reduce update time to 300 from 4000 for diagnostics
+set updatetime=300
+
 " Turn on spelling for md, wiki and org files
 autocmd BufRead,BufNewFile *.md,*.wiki,*.org setlocal spell
 "                           General Keymappings
@@ -140,6 +146,7 @@ let maplocalleader=","
 " p         - Project
 " s         - Search
 " sa        - ag
+" j         - jump-to (IDE style)
 " sg        - grep
 " sk        - ack
 " st        - pt
@@ -195,15 +202,16 @@ nmap <leader>ed :ALEDetail<CR>
 " -----------------------------------
 " f         - Files
 " -----------------------------------
-"nmap <leader>ft :NERDTreeToggle<CR>
-nmap <leader>fnb :Bookmark 
+
 nmap <leader>fr :History<CR>
+nmap <leader>fF :RangerCurrentFile<CR>
 nmap <leader>ff :Files<CR>
+nmap <leader>fd :call fzf#run(fzf#wrap({'source': 'fasd -d -R', 'sink': { line -> execute('cd '.split(line)[-1]) }}))<CR>
 nmap <leader>fgf :GFiles<CR>
 nmap <leader>fb :Buffers<CR>
-nmap <leader>frg :Rg 
-nmap <leader>ft :Tags
-nmap <leader>fT :tag<CR>
+" nmap <leader>frg :Rg 
+" nmap <leader>ft :Tags
+" nmap <leader>fT :tag<CR>
 " fe        - Edit configuration
 " -----------------------------------
 nmap <leader>fei :vsp ~/.config/nvim/init.vim<CR>
@@ -211,6 +219,7 @@ nmap <leader>fec :vsp ~/.config/nvim/core.vim<CR>
 nmap <leader>fep :vsp ~/.config/nvim/projects/<CR>
 nmap <leader>feh :vsp ~/.config/nvim/helpers.vim<CR>
 nmap <leader>fer :so $MYVIMRC<CR>
+nmap <leader>fes :UltiSnipsEdit<CR>
 " g         - Git/VCS
 " -----------------------------------
 nmap <leader>gs :Gstatus<CR>
@@ -223,24 +232,46 @@ nmap <leader>gd :Gdiff<CR>
 nmap <leader>h<leader> :helpgrep 
 " i         - Insertion/Snippets
 " -----------------------------------
-nmap <leader>ise :UltiSnipsEdit<CR>
 "nmap <leader>isl call UltiSnips#ListSnippets()<CR>
 nmap <leader>it :pu=strftime('%c')<CR>
 imap <c-p><c-p> <plug>(fzf-complete-path)
 " j         - Jump; File navigation
 " -----------------------------------
-nmap <leader>jj :TagbarToggle<CR>
-nmap <leader>js :GscopeFind s <C-R><C-W><cr>
-nmap <leader>jg :GscopeFind g <C-R><C-W><cr>
-nmap <leader>jc :GscopeFind c <C-R><C-W><cr>
-nmap <leader>jt :GscopeFind t <C-R><C-W><cr>
-nmap <leader>je :GscopeFind e <C-R><C-W><cr>
-nmap <leader>jf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
-nmap <leader>ji :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
-nmap <leader>jd :GscopeFind d <C-R><C-W><cr>
-nmap <leader>ja :GscopeFind a <C-R><C-W><cr>
+" nmap <leader>jj :TagbarToggle<CR>
+nmap <leader>jd <Plug>(coc-definition)
+nmap <leader>jy <Plug>(coc-type-definition)
+nmap <leader>ji <Plug>(coc-implementation)
+nmap <leader>jr <Plug>(coc-references)
+" nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
+" nnoremap <silent> <leader>je  :<C-u>CocList extensions<cr>
+nnoremap <silent> <leader>jc  :<C-u>CocList commands<cr>
+nnoremap <silent> <leader>jo  :<C-u>CocList outline<cr>
+nnoremap <silent> <leader>js  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+" nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+" nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+" nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
+" nmap <leader>js :GscopeFind s <C-R><C-W><cr>
+" nmap <leader>jg :GscopeFind g <C-R><C-W><cr>
+" nmap <leader>jc :GscopeFind c <C-R><C-W><cr>
+" nmap <leader>jt :GscopeFind t <C-R><C-W><cr>
+" nmap <leader>je :GscopeFind e <C-R><C-W><cr>
+" nmap <leader>jf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+" nmap <leader>ji :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+" nmap <leader>jd :GscopeFind d <C-R><C-W><cr>
+" nmap <leader>ja :GscopeFind a <C-R><C-W><cr>
 " p         - Project
 " -----------------------------------
+
+" r         - Refactor
+" -----------------------------------
+
+nmap <leader>rn <Plug>(coc-rename)
+xmap <leader>rf  <Plug>(coc-format-selected)
+nmap <leader>rf  <Plug>(coc-format-selected)
+
 " s         - Search
 " -----------------------------------
 nmap <leader>ss :call Swoop()<CR>

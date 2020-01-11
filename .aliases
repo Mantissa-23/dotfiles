@@ -6,3 +6,7 @@ if [ -x "$(command -v nvim)" ]; then
 fi
 
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+if [ -x "$(command -v fasd)" ]; then
+  eval "$(fasd --init auto)"
+fi
