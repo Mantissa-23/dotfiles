@@ -209,7 +209,7 @@ nmap <leader>ff :Files<CR>
 nmap <leader>fd :call fzf#run(fzf#wrap({'source': 'fasd -d -R', 'sink': { line -> execute('cd '.split(line)[-1]) }}))<CR>
 nmap <leader>fgf :GFiles<CR>
 nmap <leader>fb :Buffers<CR>
-" nmap <leader>frg :Rg 
+nmap <leader>frg :Rg 
 " nmap <leader>ft :Tags
 " nmap <leader>fT :tag<CR>
 " fe        - Edit configuration
