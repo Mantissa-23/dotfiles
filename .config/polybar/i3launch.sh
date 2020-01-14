@@ -6,4 +6,4 @@ killall -q polybar
 # Wait until proceses have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-polybar bspwmtop &
+polybar i3top &

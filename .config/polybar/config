@@ -1,7 +1,7 @@
 ;Based on gamehelp16's config
 ;https://www.reddit.com/r/unixporn/comments/5tffxu/bspwm_polybar_trying_to_get_a_modern_look/
 
-[bar/top]
+[bar/common]
 width = 100%
 height = 35 
 offset-x = 0
@@ -11,7 +11,7 @@ offset-y = 0
 background = #282828
 foreground = #95bb2a
 
-underline-size = 0
+underline-size = 2
 underline-color = #1d2021
 
 border-bottom-size = 3
@@ -30,17 +30,27 @@ font-2 = siji:pixelsize=10;3
 separator = |
 
 modules-left = memory filesystem network
-modules-center = bspwm
 modules-right = date battery volume mpd backlight powermenu
 
 tray-position = left
 tray-maxsize = 16
 
-wm-restack = bspwm
 
 ;scroll-up = bspwm-desknext
 ;scroll-down = bspwm-deskprev
 ;psuedo-transparency = true
+
+line-size = 2
+
+[bar/i3top]
+inherit = bar/common
+modules-center = i3
+wm-restack = i3
+
+[bar/bspwmtop]
+inherit = bar/common
+modules-center = bspwm
+wm-restack = bspwm
 
 ; MODULES
 
@@ -63,6 +73,30 @@ label-urgent-padding = 1
 label-empty = %icon%
 label-empty-foreground = #44ffffff
 label-empty-padding = 1
+
+[module/i3]
+
+;strip-wsnumbers = true
+
+type = internal/i3
+
+format = <label-state> <label-mode>
+
+label-mode = %mode%
+label-mode-padding = 1
+
+label-focused = %index%
+label-focused-padding = 1
+label-focused-underline = #95bb2a
+
+label-visible = %index%
+label-visible-padding = 1
+
+label-unfocused = %index%
+label-unfocused-padding = 1
+
+label-urgent = %index%
+label-urgent-padding = 1
 
 [module/xwindow]
 type = internal/xwindow
