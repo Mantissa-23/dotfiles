@@ -7,6 +7,7 @@ fi
 
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
+# Check and see if fasd is available before init
 if [ -x "$(command -v fasd)" ]; then
   eval "$(fasd --init auto)"
 fi
@@ -14,4 +15,4 @@ fi
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-
+alias rifle=rifle -f=f
