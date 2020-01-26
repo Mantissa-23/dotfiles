@@ -32,6 +32,8 @@ export DISPLAY=":0"
 
 export EDITOR="/usr/bin/nvim"
 
+export FILEMANAGER="/usr/bin/ranger"
+
 export AUTHOR="Dylan Culfogienis <dylanculfogienis@gmail.com>"
 
 export JOURNAL="~/Docs/Writing/Journal"
