@@ -18,6 +18,9 @@ blueman-applet &
 # Run xbindkeys
 xbindkeys &
 
+# Clipboard manager
+parcellite &
+
 # Lock on screen sleep
 xss-lock --transfer-sleep-lock -- i3lock-custom --nofork &
 
