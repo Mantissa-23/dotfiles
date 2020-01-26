@@ -144,6 +144,7 @@ let maplocalleader=","
 " h         - Help
 " i         - Insertion/Snippets
 " p         - Project
+" r         - Refactor
 " s         - Search
 " sa        - ag
 " j         - jump-to (IDE style)
@@ -269,8 +270,10 @@ nnoremap <silent> <leader>js  :<C-u>CocList -I symbols<cr>
 " -----------------------------------
 
 nmap <leader>rn <Plug>(coc-rename)
-xmap <leader>rf  <Plug>(coc-format-selected)
-nmap <leader>rf  <Plug>(coc-format-selected)
+xmap <leader>rf <Plug>(coc-format-selected)
+nmap <leader>rf <Plug>(coc-format-selected)
+nmap <leader>rs :%s/\s\+$//e<cr>
+vmap <leader>rs :s/\s\+$//e<cr>
 
 " s         - Search
 " -----------------------------------

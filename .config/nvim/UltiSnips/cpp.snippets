@@ -1,0 +1,91 @@
+snippet incc
+#include <${1:iostream}>
+endsnippet
+
+snippet inch
+#include "${1:header}.h"
+endsnippet
+
+snippet gdcl
+/* `!p snip.rv = fn` */
+
+#ifndef ${2:`!v substitute(vim_snippets#Filename('$1_H','ClassName'),'.*','\U&\E','')`}
+#define $2
+
+class ${1:`!v substitute(substitute(vim_snippets#Filename('$1','ClassName'),'^.','\u&',''), '_\(\w\)', '\u\1', 'g')`} : public ${3:Resource} {
+	GDCLASS($1, $3);
+
+public:
+
+protected:
+	static void _bind_methods();
+
+private:
+
+public:
+
+	$1();
+	~$1();
+};
+
+#endif /* $2 */
+endsnippet
+
+snippet fn
+/* `!p snip.rv = fn` */
+endsnippet
+
+snippet gdfun
+${4:void} ${3:`!v substitute(substitute(vim_snippets#Filename('$1','ClassName'),'^.','\u&',''), '_\(\w\)', '\u\1', 'g')`}::${1:memberFunction}(${2}) {
+	${0}
+}
+endsnippet
+
+# Todo: Automatically pull out parameter names
+snippet gdmeth
+ClassDB::bind_method(D_METHOD("${1:function}"${2}), &${3:`!v substitute(substitute(vim_snippets#Filename('$1','ClassName'),'^.','\u&',''), '_\(\w\)', '\u\1', 'g')`}::$1);
+endsnippet
+
+snippet con
+${1:`!v substitute(substitute(vim_snippets#Filename('$1','ClassName'),'^.','\u&',''), '_\(\w\)', '\u\1', 'g')`}::$1(${2}) {
+	${3}
+}
+endsnippet
+
+snippet des
+${1:`!v substitute(substitute(vim_snippets#Filename('$1','ClassName'),'^.','\u&',''), '_\(\w\)', '\u\1', 'g')`}::~$1() {
+	${2}
+}
+endsnippet
+
+snippet incg
+#ifndef ${2:`!v substitute(vim_snippets#Filename('$1_H','ClassName'),'.*','\U&\E','')`}
+#define $2
+endsnippet
+
+snippet endg
+#endif /* ${2:`!v substitute(vim_snippets#Filename('$1_H','ClassName'),'.*','\U&\E','')`} */
+endsnippet
+
+snippet gdprop
+ADD_PROPERTY(PropertyInfo(Variant::${1:BOOL}, "${2:property}", PROPERTY_HINT_${3:NONE}), "set_${4:$2}", "get_${5:$2}");
+endsnippet
+
+snippet setgeth
+void set_${1:property}(${2:bool} ${3:$1});
+$2 get_$1();
+endsnippet
+
+snippet setgeti
+void ${4:`!v substitute(substitute(vim_snippets#Filename('$1','ClassName'),'^.','\u&',''), '_\(\w\)', '\u\1', 'g')`}::set_${1:property}(${2:bool} ${3:$1}) {
+	this->$1 = $1;
+}
+$2 $4::get_$1() {
+	return $1;
+}
+endsnippet
+
+snippet gdsetget
+ClassDB::bind_method(D_METHOD("set_${1:property}", "$1"), &${3:`!v substitute(substitute(vim_snippets#Filename('$1','ClassName'),'^.','\u&',''), '_\(\w\)', '\u\1', 'g')`}::set_$1);
+ClassDB::bind_method(D_METHOD("get_$1"${2}), &$3::get_$1);
+endsnippet
