@@ -12,6 +12,12 @@
       "args": ["start"],
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
+    },
+    "gdscript": {
+      "host": "localhost",
+      "port": 6008,
+      "filetypes": ["gd"],
+      "rootPatterns": ["project.godot"]
     }
   }
 }
