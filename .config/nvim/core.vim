@@ -238,7 +238,7 @@ nmap <leader>it :pu=strftime('%c')<CR>
 imap <c-p><c-p> <plug>(fzf-complete-path)
 " j         - Jump; File navigation
 " -----------------------------------
-" nmap <leader>jj :TagbarToggle<CR>
+nmap <leader>jj :TagbarToggle<CR>
 nmap <leader>jd <Plug>(coc-definition)
 nmap <leader>jy <Plug>(coc-type-definition)
 nmap <leader>ji <Plug>(coc-implementation)

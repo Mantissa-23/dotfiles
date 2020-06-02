@@ -16,7 +16,7 @@ let g:neoranger_viewmode='miller'
 
 " IDE - TAGS "
 
-" Plug 'majutsushi/tagbar' " Tag browser
+Plug 'majutsushi/tagbar' " Tag browser
 " let g:tagbar_type_markdown = {
 "     \ 'ctagstype' : 'markdown',
 "     \ 'kinds' : [
