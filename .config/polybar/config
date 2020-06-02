@@ -30,7 +30,7 @@ font-2 = siji:pixelsize=11;3
 separator = |
 
 modules-left = memory filesystem network
-modules-right = date battery volume mpd backlight powermenu
+modules-right = date battery volume backlight powermenu
 
 tray-position = left
 tray-maxsize = 16
