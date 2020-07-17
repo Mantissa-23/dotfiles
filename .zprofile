@@ -1,4 +1,4 @@
 #!/bin/zsh
 
-test -f ~/.profile && source ~/.profile
-test -f ~/.zshrc && source ~/.zshrc
+[[ -f ~/.profile ]] && source ~/.profile
+[[ -f ~/.zshrc ]] && source ~/.zshrc
