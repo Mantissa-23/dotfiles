@@ -6,30 +6,30 @@
 # fi
 
 export ANTIGEN_LOG=~/.log/antigen.log
+#export ANTIGEN_CACHE=false
 
-if [[ $(uname -s) == Darwin ]]
-then
-  source $(brew --prefix)/share/antigen/antigen.zsh
-else
-  source ~/.config/zsh/antigen.zsh
+source "${HOME}/.zgen/zgen.zsh"
+
+if ! zgen saved; then
+  zgen oh-my-zsh
+  zgen oh-my-zsh plugins/git
+  zgen load zsh-users/zsh-autosuggestions
+  zgen load zsh-users/zsh-history-substring-search
+  zgen load zsh-users/zsh-syntax-highlighting
+
+  zgen load romkatv/powerlevel10k powerlevel10k
+  zgen save
 fi
 
-antigen use oh-my-zsh
-antigen bundle git
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-history-substring-search
-antigen bundle zsh-users/zsh-syntax-highlighting
-
-antigen theme romkatv/powerlevel10k
-
-antigen apply
+#ZSH_THEME=
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
 
 [[ -f ~/.aliases ]] && source ~/.aliases
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+# [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+source ~/.p10k.zsh
 
 # source /usr/share/fzf/key-bindings.zsh
 # source /usr/share/fzf/completion.zsh
