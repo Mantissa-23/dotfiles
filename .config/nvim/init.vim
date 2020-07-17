@@ -77,6 +77,7 @@ Plug 'pelodelfuego/vim-swoop' " Adds helm-swoop-like functionality
 let g:swoopUseDefaultKeyMap = 0
 let g:swoopPatternSpaceInsertsWildcard = 0
 let g:swoopAutoInsertMode = 0
+Plug 'DanilaMihailov/beacon.nvim'
 
 Plug 'tpope/vim-speeddating' " Increment and decrement dates with <C-a> and <C-x>
 
