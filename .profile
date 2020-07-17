@@ -8,31 +8,13 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 export DISPLAY=":0"
 
-export EDITOR="/usr/bin/nvim"
+export EDITOR=nvim
 
-export FILEMANAGER="/usr/bin/ranger"
+export FILEMANAGER=ranger
 
 export AUTHOR="Dylan Culfogienis <dylanculfogienis@gmail.com>"
 
@@ -84,3 +66,12 @@ export ANDROID_HOME=~/.build/Android/Sdk
 
 # Ruby executables
 export PATH=~/.gem/ruby/2.6.0/bin:$PATH
+
+# Mac NVM setup
+
+if [[ $(uname -s) == Darwin ]]
+then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
+    [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && . "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+fi
