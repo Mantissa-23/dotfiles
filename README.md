@@ -23,37 +23,34 @@ I've tried Emacs, VSCode, a handful of IDEs and Vim. I pretty consistently only 
 
 My own personal neovim configuration.
 
-### Dependencies
+## Dependencies
 
 Indented lists indicate that a particular program's configuration depends on these packages being installed.
 - `i3`
   - `bumblebee-status`: Required for statusline
   - `light`: Required for backlight changer
   - `pactl`: Required for volume changer
-- `neovim` (with all optional dependencies such as python and ruby)
-  - `cmake`: Required to build ag
+- `bspwm`
+  - `polybar`
+  - `skhd`
+  - `rofi`
+  - `gnome-terminal`
+  - `light`
+  - `pactl`
+  - `gnome-screenshot`
+- `neovim`
+  - `python` and `ruby`, both the actual packages and their compatibility modules
+  - `ripgrep`
+  - `fzf` (possibly)
+  - Universal Ctags
+  - LSPs for Coc.nvim
 - `zsh`
-  - `oh-my-zsh`
-  - `zsh-autosuggestions`
-  - `zsh-history-substring-search`
-  - `zsh-syntax-highlighting`
+  - `zgen`
 
 ## .bashrc and .zshrc
 
-Small shell customizations for UNIX. Reliant on zgen.
+Small shell customizations for UNIX.
 
 ## .vimrc
 
 Just redirects sources `~/.config/nvim/init.vim`. This init file is designed to intelligently choose not to load certain plugins or will ignore certain features if they aren't compatible with vanilla vim. I mainly use neovim though, so some stuff has probably slipped through the cracks.
-
-## .tmux.conf
-
-An absolutely terrible tmux configuration file. Please do not use this.
-
-## .emacs.d
-
-Don't use my Emacs config.
-
-## AppData/Romaing/Code/{User,Oni}
-
-Personal configuration for VSCode and Oni, respectively. Both of these configs are fairly immature and terrible, the former because I just don't like VSCode that much (even though its completion and documentation-on-hover is fantastic) and the latter because Oni itself is immature.
