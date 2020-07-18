@@ -17,9 +17,7 @@ Please ensure all dependencies are installed before using a particular dotfile.
 
 ## Text Editors
 
-I use both Emacs and NeoVim depending on what I'm up to. Vim is generally for short edits, configuration, or if I must work remotely over an SSH (I haven't learned to use Emacs's Tramp-Mode yet). I also use Vim when I need to work with pipes (via moreutil's vipe) or if I'm going to get things faster with a BASH terminal than with an IDE. Emacs I generally use for my personal machine and development. I occasionally switch between which one is my favorite; as a result, one configuration may be more mature than the other at any given time (as of writing, Emacs is more mature).
-
-Both are vim-editing-style-biased; the Emacs configuration is evil-mode-centric. Both rely heavily on a rigorous and aggressive abuse of `SPC` as `<leader>`, just as with Spacemacs. Both are intended to be as lean as possible and do only what I need them to do, minimizing bloat otherwise.
+I've tried Emacs, VSCode, a handful of IDEs and Vim. I pretty consistently only use Vim nowadays, just because it's been the most flexible, configurable, intuitive, and most importantly fun out of all of them.
 
 ## nvim
 
@@ -32,7 +30,6 @@ Indented lists indicate that a particular program's configuration depends on the
   - `bumblebee-status`: Required for statusline
   - `light`: Required for backlight changer
   - `pactl`: Required for volume changer
-  - `xbindkeys xsel xdotool`: Required for disable middle mouse paste globally
 - `neovim` (with all optional dependencies such as python and ruby)
   - `cmake`: Required to build ag
 - `zsh`
@@ -41,31 +38,21 @@ Indented lists indicate that a particular program's configuration depends on the
   - `zsh-history-substring-search`
   - `zsh-syntax-highlighting`
 
-## .emacs.d
-
-My own personal Emacs configuration. Emacs and nvim configurations are designed to be fairly similar in terms of what keybindings do what, however do to intrinsic differences in the editors there will be feature differences between the two, and due to my laziness and also flip-flopping between which one is my favorite editor, there will be differences in the keybindings.
-
-### Dependencies
-- ripgrep
-- npm: javascript-typescript-langserver
-- lean
-
-### Dependencies
-
-- hunspell or similar
-- ripgrep
-
 ## .bashrc and .zshrc
 
-Small shell customizations for UNIX
+Small shell customizations for UNIX. Reliant on zgen.
 
 ## .vimrc
 
-Just redirects vim initialization to `~/.config/nvim/init.vim`. This init file is designed to intelligently choose not to load certain plugins or will ignore certain features if they aren't compatible with vanilla vim.
+Just redirects sources `~/.config/nvim/init.vim`. This init file is designed to intelligently choose not to load certain plugins or will ignore certain features if they aren't compatible with vanilla vim. I mainly use neovim though, so some stuff has probably slipped through the cracks.
 
 ## .tmux.conf
 
 An absolutely terrible tmux configuration file. Please do not use this.
+
+## .emacs.d
+
+Don't use my Emacs config.
 
 ## AppData/Romaing/Code/{User,Oni}
 
