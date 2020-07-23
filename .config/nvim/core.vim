@@ -192,6 +192,9 @@ nmap <leader>bp :bp<CR>
 nmap <leader>cc gcc
 vmap <leader>c gc
 " C         - Compile
+xmap <leader>Cc <Plug>SlimeRegionSend
+nmap <leader>Cc <Plug>SlimeParagraphSend
+
 " -----------------------------------
 nmap <leader>Cnm :Neomake!<CR>
 " e         - Errors/Linting/Language Diagnostics
