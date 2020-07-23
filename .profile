@@ -1,5 +1,5 @@
-# ~/.profile: executed by the command interpreter for login shells.
-# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
+# $HOME/.profile: executed by the command interpreter for login shells.
+# This file is not read by bash(1), if $HOME/.bash_profile or $HOME/.bash_login
 # exists.
 # see /usr/share/doc/bash/examples/startup-files for examples.
 # the files are located in the bash-doc package.
@@ -18,7 +18,7 @@ export FILEMANAGER=ranger
 
 export AUTHOR="Dylan Culfogienis <dylanculfogienis@gmail.com>"
 
-export JOURNAL="~/Docs/Writing/Journal"
+export JOURNAL="$HOME/Docs/Writing/Journal"
 
 machine="$(uname -s)"
 
@@ -32,34 +32,20 @@ esac
 
 export MACHINE
 
-export PATH=$PATH:~/.bin
-export PATH=$PATH:~/.build/lammps/build
+export PATH=$PATH:$HOME/.bin
 
 # Cocos2d paths
 
-export PATH=$PATH:~/.bin/cocos2d/cocos2d-x-3.17.2/tools/cocos2d-console/bin/
-# Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
-export COCOS_CONSOLE_ROOT="~/.bin/cocos2d/cocos2d-x-3.17.2/tools/cocos2d-console/bin"
-export PATH=$COCOS_CONSOLE_ROOT:$PATH
-
-# Add environment variable COCOS_X_ROOT for cocos2d-x
-export COCOS_X_ROOT="~/.bin/cocos2d"
-export PATH=$COCOS_X_ROOT:$PATH
-
-# Add environment variable COCOS_TEMPLATES_ROOT for cocos2d-x
-export COCOS_TEMPLATES_ROOT="~/.bin/cocos2d/cocos2d-x-3.17.2/templates"
-export PATH=$COCOS_TEMPLATES_ROOT:$PATH
-
-export PATH=~/Zotero/styles:$PATH
+export PATH=$HOME/Zotero/styles:$PATH
 
 # Flutter exec
-export PATH=~/.build/flutter/bin:$PATH
+export PATH=$HOME/.build/flutter/bin:$PATH
 
 # Android SDK
-export ANDROID_HOME=~/.build/Android/Sdk
+export ANDROID_HOME=$HOME/.build/Android/Sdk
 
 # Ruby executables
-export PATH=~/.gem/ruby/2.6.0/bin:$PATH
+export PATH=$HOME/.gem/ruby/2.6.0/bin:$PATH
 
 # Mac NVM setup
 
