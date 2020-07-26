@@ -89,7 +89,9 @@ let g:AutoPairsFlyMode = 0
 " IDE - MISC & UTILITY "
 
 " Plug 'metakirby5/codi.vim' " Interactive scratchpad-style REPL support for various languages
-Plug 'sillybun/vim-repl'
+" Plug 'sillybun/vim-repl' " Janky REPL plugin
+" Plug 'jpalardy/vim-slime' " Janky REPL plugin
+Plug 'kassio/neoterm'
 Plug 'sunaku/vim-shortcut' " Shows all available shortcuts when you've entered an incomplete binding. Depends on fzf.
 
 " APPEARANCE "
