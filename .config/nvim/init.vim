@@ -88,14 +88,14 @@ let g:AutoPairsFlyMode = 0
 
 " IDE - MISC & UTILITY "
 
-Plug 'jpalardy/vim-slime'
-let g:slime_target = "neovim"
-let g:slime_no_mappings = 1
-let g:slime_python_ipython = 1
+" Plug 'jpalardy/vim-slime'
+" let g:slime_target = "neovim"
+" let g:slime_no_mappings = 1
+" let g:slime_python_ipython = 1
 " Plug 'metakirby5/codi.vim' " Interactive scratchpad-style REPL support for various languages
 " Plug 'sillybun/vim-repl' " Janky REPL plugin
-" Plug 'jpalardy/vim-slime' " Janky REPL plugin
-Plug 'kassio/neoterm'
+" Plug 'kassio/neoterm'
+Plug 'rhysd/reply.vim'
 Plug 'sunaku/vim-shortcut' " Shows all available shortcuts when you've entered an incomplete binding. Depends on fzf.
 
 " APPEARANCE "
