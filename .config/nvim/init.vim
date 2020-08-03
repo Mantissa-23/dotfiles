@@ -85,6 +85,9 @@ Plug 'tpope/vim-surround' " Adds bindings for changing surrounds
 Plug 'amcsi/auto-pairs' " Automatically makes surrounds
 let g:AutoPairsFlyMode = 0
 "let g:AutoPairs = {'`': '`//s', '"': '"//s', '{': '}//s', '''': '''//s', '(': ')//s', '[': ']//s'} " Disable multiline autpairing
+Plug 'frazrepo/vim-rainbow'
+au FileType lisp,cl call rainbow#load()
+" let g:rainbow_active = 1
 
 " IDE - MISC & UTILITY "
 
@@ -104,6 +107,9 @@ Plug 'vim-airline/vim-airline' " Useful bottom info bar
 Plug 'vim-airline/vim-airline-themes'
 "let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensiosn#fugitiveline#enabled = 1
+let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#ale#enabled = 1
+
 
 " Plug 'drewtempelmeyer/palenight.vim'
 " Plug 'altercation/vim-colors-solarized'
@@ -137,6 +143,9 @@ Plug 'calviken/vim-gdscript3' " Somewhat hacky syntax highlighting for GDScript
 "Plug 'broesler/jupyter-vim' " Jupyter plugins
 "Plug 'szymonmaszke/vimpyter'
 " Plug 'beeender/Comrade'
+
+" LISP
+Plug 'vlime/vlime', {'rtp': 'vim/'}
 
 " CONFIGURATION "
 
