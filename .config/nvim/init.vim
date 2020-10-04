@@ -32,12 +32,14 @@ let g:pandoc#filetypes#pandoc_markdown = 0
 
 " IDE - SNIPPETS "
 
-Plug 'SirVer/ultisnips' " Snippet engine
-let g:UltiSnipsExpandTrigger="<C-s>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips/"
+if has("python3")
+  "Plug 'SirVer/ultisnips' " Snippet engine
+  let g:UltiSnipsExpandTrigger="<C-s>"
+  let g:UltiSnipsJumpForwardTrigger="<tab>"
+  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+  let g:UltiSnipsEditSplit="vertical"
+  let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips/"
+endif
 
 " IDE - VERSION CONTROL "
 
@@ -50,16 +52,18 @@ Plug 'w0rp/ale' " Lint and complete via external tools - async
 
 " IDE - COMPLETION "
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " Async completion framework with first-party support for LSP. VSCode-like.
-" use tab and S-tab instead of C-n C-p to navigate completion list
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-autocmd CursorHold * silent call CocActionAsync('highlight')
+if has("node")
+  Plug 'neoclide/coc.nvim', {'branch': 'release'} " Async completion framework with first-party support for LSP. VSCode-like.
+  " use tab and S-tab instead of C-n C-p to navigate completion list
+  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  autocmd CursorHold * silent call CocActionAsync('highlight')
 
-Plug 'neoclide/coc-sources' " coc common sources
-Plug 'neoclide/coc-neco' " viml completion
-Plug 'neoclide/coc-vimtex' " coc vimtex compatibility
+  Plug 'neoclide/coc-sources' " coc common sources
+  Plug 'neoclide/coc-neco' " viml completion
+  Plug 'neoclide/coc-vimtex' " coc vimtex compatibility
+endif
 
 " Navigation and Editing
 
@@ -85,6 +89,9 @@ Plug 'tpope/vim-surround' " Adds bindings for changing surrounds
 Plug 'amcsi/auto-pairs' " Automatically makes surrounds
 let g:AutoPairsFlyMode = 0
 "let g:AutoPairs = {'`': '`//s', '"': '"//s', '{': '}//s', '''': '''//s', '(': ')//s', '[': ']//s'} " Disable multiline autpairing
+Plug 'frazrepo/vim-rainbow'
+au FileType lisp,cl call rainbow#load()
+" let g:rainbow_active = 1
 
 " IDE - MISC & UTILITY "
 
@@ -104,6 +111,9 @@ Plug 'vim-airline/vim-airline' " Useful bottom info bar
 Plug 'vim-airline/vim-airline-themes'
 "let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensiosn#fugitiveline#enabled = 1
+let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#ale#enabled = 1
+
 
 " Plug 'drewtempelmeyer/palenight.vim'
 " Plug 'altercation/vim-colors-solarized'
@@ -131,12 +141,16 @@ let g:pandoc#after#modules#enabled = ["tablemode"]
 
 Plug 'lervag/vimtex' " LaTeX sucks. Luckily markdown is great.
 let g:vimtex_view_method = 'zathura'
+let g:tex_flavor = 'latex'
 
 Plug 'calviken/vim-gdscript3' " Somewhat hacky syntax highlighting for GDScript
 
 "Plug 'broesler/jupyter-vim' " Jupyter plugins
 "Plug 'szymonmaszke/vimpyter'
 " Plug 'beeender/Comrade'
+
+" LISP
+Plug 'vlime/vlime', {'rtp': 'vim/'}
 
 " CONFIGURATION "
 

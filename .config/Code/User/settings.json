@@ -1,0 +1,5 @@
+{
+    "editor.scrollBeyondLastLine": false,
+    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+    "vscode-neovim.neovimInitVimPaths.linux": "/home/dylan/.config/nvim/init.vim"
+}
