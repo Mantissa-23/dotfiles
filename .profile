@@ -55,3 +55,9 @@ then
     [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
     [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && . "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 fi
+
+# Work Config
+
+# Tokens
+
+export NPM_TOKEN=7003252149a15be2de6b86d310d3999f6828d06d
