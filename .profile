@@ -58,6 +58,4 @@ fi
 
 # Work Config
 
-# Tokens
-
-export NPM_TOKEN=7003252149a15be2de6b86d310d3999f6828d06d
+test -f ~/.localprofile && source ~/.localprofile

@@ -1,5 +1,7 @@
 {
     "editor.scrollBeyondLastLine": false,
     "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-    "vscode-neovim.neovimInitVimPaths.linux": "/home/dylan/.config/nvim/init.vim"
+    "vscode-neovim.neovimInitVimPaths.linux": "/home/dylan/.config/nvim/init.vim",
+    "vscode-neovim.neovimInitVimPaths.darwin": "/Users/dylan/.config/nvim/init.vim",
+    "vscode-neovim.neovimExecutablePaths.darwin": "/Users/dylan/.bin/nvim-osx64/bin/nvim"
 }

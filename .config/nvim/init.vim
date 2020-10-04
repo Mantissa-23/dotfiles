@@ -4,26 +4,116 @@ else
     call plug#begin('~/.vim/plugged')
 endif
 
+if !exists('g:vscode')
 " IDE - PROJECT MANAGEMENT "
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' } " Fuzzy finder
-Plug 'junegunn/fzf.vim' " And its vim bindings
-let g:fzf_history_dir = '~/.local/share/fzf-history'
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' } " Fuzzy finder
+  Plug 'junegunn/fzf.vim' " And its vim bindings
+  let g:fzf_history_dir = '~/.local/share/fzf-history'
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 
-Plug 'Lokaltog/neoranger'
-let g:neoranger_viewmode='miller'
+  Plug 'Lokaltog/neoranger'
+  let g:neoranger_viewmode='miller'
 
-" IDE - TAGS "
+  " IDE - VERSION CONTROL "
 
-Plug 'majutsushi/tagbar' " Tag browser
-" For tagbar compatibility
-let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
-let g:pandoc#filetypes#pandoc_markdown = 0
+  Plug 'tpope/vim-fugitive' " Git wrapper
+  Plug 'airblade/vim-gitgutter' " Shows git diff in the left gutter. 
+
+  " IDE - LINTING "
+
+  Plug 'w0rp/ale' " Lint and complete via external tools - async
+  
+  " IDE - COMPLETION "
+
+  if has("node")
+    Plug 'neoclide/coc.nvim', {'branch': 'release'} " Async completion framework with first-party support for LSP. VSCode-like.
+    " use tab and S-tab instead of C-n C-p to navigate completion list
+    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+
+    Plug 'neoclide/coc-sources' " coc common sources
+    Plug 'neoclide/coc-neco' " viml completion
+    Plug 'neoclide/coc-vimtex' " coc vimtex compatibility
+  endif
+
+  " IDE - Surrounds "
+  Plug 'tpope/vim-surround' " Adds bindings for changing surrounds
+  Plug 'amcsi/auto-pairs' " Automatically makes surrounds
+  let g:AutoPairsFlyMode = 0
+  "let g:AutoPairs = {'`': '`//s', '"': '"//s', '{': '}//s', '''': '''//s', '(': ')//s', '[': ']//s'} " Disable multiline autpairing
+  Plug 'frazrepo/vim-rainbow'
+  au FileType lisp,cl call rainbow#load()
+
+  " IDE - TAGS "
+
+  Plug 'majutsushi/tagbar' " Tag browser
+  " For tagbar compatibility
+  let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
+  let g:pandoc#filetypes#pandoc_markdown = 0
+  
+  " IDE - EDITOR FEATURES "
+
+  Plug 'terryma/vim-multiple-cursors' " Adds sublime-like multicursor. Use ctrl+n and alt+n.
+  Plug 'pelodelfuego/vim-swoop' " Adds helm-swoop-like functionality
+  let g:swoopUseDefaultKeyMap = 0
+  let g:swoopPatternSpaceInsertsWildcard = 0
+  let g:swoopAutoInsertMode = 0
+
+  " APPEARANCE "
+
+  Plug 'vim-airline/vim-airline' " Useful bottom info bar
+  Plug 'vim-airline/vim-airline-themes'
+  "let g:airline#extensions#syntastic#enabled = 1
+  let g:airline#extensiosn#fugitiveline#enabled = 1
+  let g:airline#extensions#coc#enabled = 1
+  let g:airline#extensions#ale#enabled = 1
+
+  " Plug 'drewtempelmeyer/palenight.vim'
+  " Plug 'altercation/vim-colors-solarized'
+  Plug 'morhetz/gruvbox'
+  let g:gruvbox_italic=1
+
+  " ORGANIZATION/JOURNALING "
+
+  Plug 'vimwiki/vimwiki' " Personal knowledge base and organizer
+  let g:vimwiki_list = [{'path': '~/Docs/wiki/', 'auto_export': 0, 'auto_toc': 1, 'template_path': '~/Docs/wiki/templates/', 'template_default': 'default', 'template_ext': '.html', 'syntax': 'markdown', 'ext': '.md'}]
+  let g:vimwiki_folding='expr'
+  let g:vimwiki_global_ext = 0
+  "Plug 'jceb/vim-orgmode' " Org-mode support for vim, for journaling + notes
+
+  " LANGUAGES "
+
+  Plug 'sheerun/vim-polyglot' " Language package package
+  let g:polyglot_disabled = ['latex']
+
+  Plug 'vim-pandoc/vim-pandoc' "vim-pandoc, for markdown->all
+  Plug 'vim-pandoc/vim-pandoc-syntax'
+  Plug 'vim-pandoc/vim-pandoc-after'
+  Plug 'dhruvasagar/vim-table-mode'
+  let g:pandoc#after#modules#enabled = ["tablemode"]
+
+  Plug 'lervag/vimtex' " LaTeX sucks. Luckily markdown is great.
+  let g:vimtex_view_method = 'zathura'
+  let g:tex_flavor = 'latex'
+
+  Plug 'calviken/vim-gdscript3' " Somewhat hacky syntax highlighting for GDScript
+
+  "Plug 'broesler/jupyter-vim' " Jupyter plugins
+  "Plug 'szymonmaszke/vimpyter'
+  " Plug 'beeender/Comrade'
+
+  " LISP
+  Plug 'vlime/vlime', {'rtp': 'vim/'}
+endif
+
+Plug 'tpope/vim-commentary' " Comment and uncomment stuff. gc to use.
+Plug 'DanilaMihailov/beacon.nvim'
 
 " Plug 'ludovicchabant/vim-gutentags'
 " Plug 'skywind3000/gutentags_plus'
-
 
 " let g:gutentags_modules = ['ctags', 'gtags_cscope'] " enable gtags module
 " let g:gutentags_cache_dir = expand('~/.cache/tags') " generate datebases in my cache directory, prevent gtags files polluting my project
@@ -34,35 +124,11 @@ let g:pandoc#filetypes#pandoc_markdown = 0
 
 if has("python3")
   "Plug 'SirVer/ultisnips' " Snippet engine
-  let g:UltiSnipsExpandTrigger="<C-s>"
-  let g:UltiSnipsJumpForwardTrigger="<tab>"
-  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-  let g:UltiSnipsEditSplit="vertical"
-  let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips/"
-endif
-
-" IDE - VERSION CONTROL "
-
-Plug 'tpope/vim-fugitive' " Git wrapper
-Plug 'airblade/vim-gitgutter' " Shows git diff in the left gutter. 
-
-" IDE - LINTING "
-
-Plug 'w0rp/ale' " Lint and complete via external tools - async
-
-" IDE - COMPLETION "
-
-if has("node")
-  Plug 'neoclide/coc.nvim', {'branch': 'release'} " Async completion framework with first-party support for LSP. VSCode-like.
-  " use tab and S-tab instead of C-n C-p to navigate completion list
-  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-
-  Plug 'neoclide/coc-sources' " coc common sources
-  Plug 'neoclide/coc-neco' " viml completion
-  Plug 'neoclide/coc-vimtex' " coc vimtex compatibility
+  " let g:UltiSnipsExpandTrigger="<C-s>"
+  " let g:UltiSnipsJumpForwardTrigger="<tab>"
+  " let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+  " let g:UltiSnipsEditSplit="vertical"
+  " let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips/"
 endif
 
 " Navigation and Editing
@@ -73,24 +139,8 @@ Plug 'nathanaelkane/vim-indent-guides' " Highlight separate indentation levels
 let g:indent_guides_enable_on_vim_startup = 1
 Plug 'osyo-manga/vim-over' " Regex replacement preview
 
-" IDE - EDITOR FEATURES "
-
-Plug 'tpope/vim-commentary' " Comment and uncomment stuff. gc to use.
-Plug 'terryma/vim-multiple-cursors' " Adds sublime-like multicursor. Use ctrl+n and alt+n.
-Plug 'pelodelfuego/vim-swoop' " Adds helm-swoop-like functionality
-let g:swoopUseDefaultKeyMap = 0
-let g:swoopPatternSpaceInsertsWildcard = 0
-let g:swoopAutoInsertMode = 0
-Plug 'DanilaMihailov/beacon.nvim'
-
 Plug 'tpope/vim-speeddating' " Increment and decrement dates with <C-a> and <C-x>
 
-Plug 'tpope/vim-surround' " Adds bindings for changing surrounds
-Plug 'amcsi/auto-pairs' " Automatically makes surrounds
-let g:AutoPairsFlyMode = 0
-"let g:AutoPairs = {'`': '`//s', '"': '"//s', '{': '}//s', '''': '''//s', '(': ')//s', '[': ']//s'} " Disable multiline autpairing
-Plug 'frazrepo/vim-rainbow'
-au FileType lisp,cl call rainbow#load()
 " let g:rainbow_active = 1
 
 " IDE - MISC & UTILITY "
@@ -104,53 +154,6 @@ au FileType lisp,cl call rainbow#load()
 " Plug 'kassio/neoterm'
 Plug 'rhysd/reply.vim'
 Plug 'sunaku/vim-shortcut' " Shows all available shortcuts when you've entered an incomplete binding. Depends on fzf.
-
-" APPEARANCE "
-
-Plug 'vim-airline/vim-airline' " Useful bottom info bar
-Plug 'vim-airline/vim-airline-themes'
-"let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensiosn#fugitiveline#enabled = 1
-let g:airline#extensions#coc#enabled = 1
-let g:airline#extensions#ale#enabled = 1
-
-
-" Plug 'drewtempelmeyer/palenight.vim'
-" Plug 'altercation/vim-colors-solarized'
-Plug 'morhetz/gruvbox'
-let g:gruvbox_italic=1
-
-" ORGANIZATION/JOURNALING "
-
-Plug 'vimwiki/vimwiki' " Personal knowledge base and organizer
-let g:vimwiki_list = [{'path': '~/Docs/wiki/', 'auto_export': 0, 'auto_toc': 1, 'template_path': '~/Docs/wiki/templates/', 'template_default': 'default', 'template_ext': '.html', 'syntax': 'markdown', 'ext': '.md'}]
-let g:vimwiki_folding='expr'
-let g:vimwiki_global_ext = 0
-"Plug 'jceb/vim-orgmode' " Org-mode support for vim, for journaling + notes
-
-" LANGUAGES "
-
-Plug 'sheerun/vim-polyglot' " Language package package
-let g:polyglot_disabled = ['latex']
-
-Plug 'vim-pandoc/vim-pandoc' "vim-pandoc, for markdown->all
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'vim-pandoc/vim-pandoc-after'
-Plug 'dhruvasagar/vim-table-mode'
-let g:pandoc#after#modules#enabled = ["tablemode"]
-
-Plug 'lervag/vimtex' " LaTeX sucks. Luckily markdown is great.
-let g:vimtex_view_method = 'zathura'
-let g:tex_flavor = 'latex'
-
-Plug 'calviken/vim-gdscript3' " Somewhat hacky syntax highlighting for GDScript
-
-"Plug 'broesler/jupyter-vim' " Jupyter plugins
-"Plug 'szymonmaszke/vimpyter'
-" Plug 'beeender/Comrade'
-
-" LISP
-Plug 'vlime/vlime', {'rtp': 'vim/'}
 
 " CONFIGURATION "
 
