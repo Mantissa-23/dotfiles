@@ -200,13 +200,17 @@ xmap <leader>Cc <Plug>SlimeRegionSend
 nmap <leader>Cc <Plug>SlimeParagraphSend
 
 " d         - Diagnostics
-nmap <leader>dc 
+nnoremap <silent> <leader>dcl  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <leader>dce  :<C-u>CocList extensions<cr>
 
 " -----------------------------------
 nmap <leader>Cnm :Neomake!<CR>
+
 " e         - Errors/Linting/Language Diagnostics
-nmap <leader>en :ALENextWrap<CR>
-nmap <leader>ep :ALEPreviousWrap
+nnoremap <silent> <leader>en  :<C-u>CocNext<CR>
+nnoremap <silent> <leader>ep  :<C-u>CocPrev<CR>
+nmap <leader>eN :ALENextWrap<CR>
+nmap <leader>eP :ALEPreviousWrap
 nmap <leader>egg :ALEFirst<CR>
 nmap <leader>eG :ALELast<CR>
 nmap <leader>ed :ALEDetail<CR>
@@ -253,15 +257,11 @@ nmap <leader>jd <Plug>(coc-definition)
 nmap <leader>jy <Plug>(coc-type-definition)
 nmap <leader>ji <Plug>(coc-implementation)
 nmap <leader>jr <Plug>(coc-references)
-" nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
-" nnoremap <silent> <leader>je  :<C-u>CocList extensions<cr>
 nnoremap <silent> <leader>jc  :<C-u>CocList commands<cr>
 nnoremap <silent> <leader>jo  :<C-u>CocList outline<cr>
 nnoremap <silent> <leader>js  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-" nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-" nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 " nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
 " nmap <leader>js :GscopeFind s <C-R><C-W><cr>

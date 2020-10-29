@@ -23,7 +23,20 @@ I've tried Emacs, VSCode, a handful of IDEs and Vim. I pretty consistently only 
 
 My own personal neovim configuration.
 
-## Dependencies
+I'm pretty proud of this at this point. Here's what we've got so far:
+- Intellisense via Coc.nvim for...
+  - webdev languages (JS, JSX, TS, TSX, HTML, JSON, XML, YAML, Svelte, GraphQL, Flutter, CSS, SASS, SCSS, SQL)
+  - Python 3
+  - clangd (C++, C)
+  - omnisharp (C#, visualbasic)
+  - godot (gdscript3)
+  - julia
+  - bash
+  - LaTeX
+- space-as-leader-focused setup. Access to personal journals, file finder, vim init scripts, fugitive, tags, file drawer, personal markdown wiki, compilation, diagnostics, errors, refactoring tools, reformatting, other IDE tools, etc. is all available through a series of spacebar-based bindings.
+- `fd` to escape insert mode
+
+# Dependencies
 
 Indented lists indicate that a particular program's configuration depends on these packages being installed.
 - `i3`
@@ -39,9 +52,9 @@ Indented lists indicate that a particular program's configuration depends on the
   - `pactl`
   - `gnome-screenshot`
 - `neovim`
-  - `python` and `ruby`, both the actual packages and their compatibility modules
+  - `python`, `node` and `ruby`, both the actual packages and their compatibility modules
+  - `yarn`
   - `ripgrep`
-  - `fzf` (possibly)
   - Universal Ctags
   - LSPs for Coc.nvim
 - `zsh`
