@@ -104,49 +104,14 @@ endif
 " IDE - COMPLETION "
 
 if has("node")
-  Plug 'neoclide/coc.nvim', {'branch': 'release'} " Async completion framework with first-party support for LSP. VSCode-like.
+  Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'cd ~/.config/coc/extensions && yarn'} " Async completion framework with first-party support for LSP. VSCode-like.
   " use tab and S-tab instead of C-n C-p to navigate completion list
   inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
   autocmd CursorHold * silent call CocActionAsync('highlight')
 
-  " Coc utilities
-  Plug 'neoclide/coc-sources' " coc common sources
-  Plug 'neoclide/coc-highlight'
 
-  " viml
-  Plug 'neoclide/coc-neco' " viml completion
-
-  " vimtex
-  Plug 'neoclide/coc-vimtex' " coc vimtex compatibility
-
-  " Coc plugins for JS/webdev
-  Plug 'neoclide/coc-html', { 'for': ['html', 'handlebars', 'razor'], 'do': 'yarn install --frozen-lockfile' }
-  Plug 'neoclide/coc-tsserver', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'typescriptcommon'], 'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-css', { 'for': ['css', 'scss', 'sass'], 'do': 'yarn install --frozen-lockfile' }
-  Plug 'felippepuhle/coc-graphql', { 'for': 'graphql', 'do': 'yarn install --frozen-lockfile' }
-  Plug 'neoclide/coc-json', { 'for': 'json', 'do': 'yarn install --frozen-lockfile' }
-  Plug 'fannheyward/coc-sql', { 'for': ['sql', 'sqloracle', 'mysql'] }
-  Plug 'coc-extensions/coc-svelte', { 'for': 'svelte' }
-  Plug 'fannheyward/coc-xml', { 'for': 'xml' }
-  Plug 'neoclide/coc-yaml', { 'for': 'yaml', 'do': 'yarn install --frozen-lockfile' }
-
-  " Coc plugins for Julia
-  Plug 'fannheyward/coc-julia', { 'for': 'julia' }
-
-  " Coc plugins for Python
-  Plug 'neoclide/coc-python', { 'for': 'python' }
-  Plug 'fannheyward/coc-pyright', { 'for': 'python' }
-
-  " Coc plugins for bash/sh
-  Plug 'josa42/coc-sh', { 'for': ['sh', 'zsh'] }
-
-  " Coc plugins for C-family
-  Plug 'clangd/coc-clangd', { 'for': ['c', 'cpp', 'objc', 'objcpp'] }
-
-  " Coc plugins for C#
-  Plug 'coc-extensions/coc-omnisharp', { 'for': ['cs', 'basic'] }
 endif
 
 " LANGUAGES "
