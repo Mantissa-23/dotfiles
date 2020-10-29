@@ -60,10 +60,70 @@ if has("node")
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
   autocmd CursorHold * silent call CocActionAsync('highlight')
 
-  Plug 'neoclide/coc-sources' " coc common sources
-  Plug 'neoclide/coc-neco' " viml completion
-  Plug 'neoclide/coc-vimtex' " coc vimtex compatibility
+  " Coc utilities
+  Plug 'neoclide/coc-sources', {'do': 'yarn install --frozen-lockfile'} " coc common sources
+  Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
+
+  " viml
+  Plug 'neoclide/coc-neco', {'do': 'yarn install --frozen-lockfile'} " viml completion
+
+  " vimtex
+  Plug 'neoclide/coc-vimtex', {'do': 'yarn install --frozen-lockfile'} " coc vimtex compatibility
+
+  " Coc plugins for JS/webdev
+  Plug 'neoclide/coc-html', { 'for': ['html', 'handlebars', 'razor'], 'do': 'yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-tsserver'
+  Plug 'neoclide/coc-css', { 'for': ['css', 'scss', 'sass'], 'do': 'yarn install --frozen-lockfile' }
+  Plug 'felippepuhle/coc-graphql', { 'for': 'graphql', 'do': 'yarn install --frozen-lockfile' }
+  Plug 'neoclide/coc-json', { 'for': 'json', 'do': 'yarn install --frozen-lockfile' }
+  Plug 'fannheyward/coc-sql', { 'for': ['sql', 'sqloracle', 'mysql'], 'do': 'yarn install --frozen-lockfile' }
+  Plug 'coc-extensions/coc-svelte', { 'for': 'svelte', 'do': 'yarn install --frozen-lockfile' }
+  Plug 'fannheyward/coc-xml', { 'for': 'xml', 'do': 'yarn install --frozen-lockfile' }
+  Plug 'neoclide/coc-yaml', { 'for': 'yaml', 'do': 'yarn install --frozen-lockfile' }
+
+  " Coc plugins for Julia
+  Plug 'fannheyward/coc-julia', { 'for': 'julia', 'do': 'yarn install --frozen-lockfile' }
+
+  " Coc plugins for Python
+  Plug 'neoclide/coc-python', { 'for': 'python', 'do': 'yarn install --frozen-lockfile' }
+  Plug 'fannheyward/coc-pyright', { 'for': 'python', 'do': 'yarn install --frozen-lockfile' }
+
+  " Coc plugins for bash/sh
+  Plug 'josa42/coc-sh', { 'for': ['sh', 'zsh'], 'do': 'yarn install --frozen-lockfile' }
+
+  " Coc plugins for C-family
+  Plug 'clangd/coc-clangd', { 'for': ['c', 'cpp', 'objc', 'objcpp'], 'do': 'yarn install --frozen-lockfile' }
+
+  " Coc plugins for C#
+  Plug 'coc-extensions/coc-omnisharp', { 'for': ['cs', 'basic'], 'do': 'yarn install --frozen-lockfile' }
 endif
+
+" LANGUAGES "
+
+" Webdev
+Plug 'mattn/emmet-vim'
+
+Plug 'sheerun/vim-polyglot' " Language package package
+let g:polyglot_disabled = ['latex']
+
+Plug 'vim-pandoc/vim-pandoc' "vim-pandoc, for markdown->all
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-pandoc-after'
+Plug 'dhruvasagar/vim-table-mode'
+let g:pandoc#after#modules#enabled = ["tablemode"]
+
+Plug 'lervag/vimtex', { 'for': 'latex' } " LaTeX sucks. Luckily markdown is great.
+let g:vimtex_view_method = 'zathura'
+let g:tex_flavor = 'latex'
+
+Plug 'calviken/vim-gdscript3', { 'for': 'gd' } " Somewhat hacky syntax highlighting for GDScript
+
+"Plug 'broesler/jupyter-vim' " Jupyter plugins
+"Plug 'szymonmaszke/vimpyter'
+" Plug 'beeender/Comrade'
+
+" LISP
+Plug 'vlime/vlime', {'rtp': 'vim/'}
 
 " Navigation and Editing
 
@@ -76,7 +136,7 @@ Plug 'osyo-manga/vim-over' " Regex replacement preview
 " IDE - EDITOR FEATURES "
 
 Plug 'tpope/vim-commentary' " Comment and uncomment stuff. gc to use.
-Plug 'terryma/vim-multiple-cursors' " Adds sublime-like multicursor. Use ctrl+n and alt+n.
+Plug 'mg979/vim-visual-multi' " Adds sublime-like multicursor. Use ctrl+n and alt+n.
 Plug 'pelodelfuego/vim-swoop' " Adds helm-swoop-like functionality
 let g:swoopUseDefaultKeyMap = 0
 let g:swoopPatternSpaceInsertsWildcard = 0
@@ -127,30 +187,6 @@ let g:vimwiki_list = [{'path': '~/Docs/wiki/', 'auto_export': 0, 'auto_toc': 1, 
 let g:vimwiki_folding='expr'
 let g:vimwiki_global_ext = 0
 "Plug 'jceb/vim-orgmode' " Org-mode support for vim, for journaling + notes
-
-" LANGUAGES "
-
-Plug 'sheerun/vim-polyglot' " Language package package
-let g:polyglot_disabled = ['latex']
-
-Plug 'vim-pandoc/vim-pandoc' "vim-pandoc, for markdown->all
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'vim-pandoc/vim-pandoc-after'
-Plug 'dhruvasagar/vim-table-mode'
-let g:pandoc#after#modules#enabled = ["tablemode"]
-
-Plug 'lervag/vimtex' " LaTeX sucks. Luckily markdown is great.
-let g:vimtex_view_method = 'zathura'
-let g:tex_flavor = 'latex'
-
-Plug 'calviken/vim-gdscript3' " Somewhat hacky syntax highlighting for GDScript
-
-"Plug 'broesler/jupyter-vim' " Jupyter plugins
-"Plug 'szymonmaszke/vimpyter'
-" Plug 'beeender/Comrade'
-
-" LISP
-Plug 'vlime/vlime', {'rtp': 'vim/'}
 
 " CONFIGURATION "
 

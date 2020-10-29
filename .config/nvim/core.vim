@@ -15,6 +15,9 @@ call DarkScheme()
 " Color column 80, for code formatting
 set colorcolumn=80
 
+" Disable messages for completion menu
+set shortmess+=c
+
 "                         General Editor Configuration
 " ----------------------------------------------------------------------------
 
@@ -192,8 +195,12 @@ nmap <leader>bp :bp<CR>
 nmap <leader>cc gcc
 vmap <leader>c gc
 " C         - Compile
+" -----------------------------------
 xmap <leader>Cc <Plug>SlimeRegionSend
 nmap <leader>Cc <Plug>SlimeParagraphSend
+
+" d         - Diagnostics
+nmap <leader>dc 
 
 " -----------------------------------
 nmap <leader>Cnm :Neomake!<CR>
