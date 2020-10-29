@@ -59,3 +59,8 @@ fi
 # Work Config
 
 test -f ~/.localprofile && source ~/.localprofile
+
+# Ruby stuff
+
+export PATH="~/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
