@@ -122,15 +122,15 @@ if has("node")
   Plug 'neoclide/coc-vimtex' " coc vimtex compatibility
 
   " Coc plugins for JS/webdev
-  Plug 'neoclide/coc-html', { 'for': ['html', 'handlebars', 'razor'] }
+  Plug 'neoclide/coc-html', { 'for': ['html', 'handlebars', 'razor'], 'do': 'yarn install --frozen-lockfile' }
   Plug 'neoclide/coc-tsserver', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'typescriptcommon'], 'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-css', { 'for': ['css', 'scss', 'sass'] }
-  Plug 'felippepuhle/coc-graphql', { 'for': 'graphql' }
-  Plug 'neoclide/coc-json', { 'for': 'json' }
+  Plug 'neoclide/coc-css', { 'for': ['css', 'scss', 'sass'], 'do': 'yarn install --frozen-lockfile' }
+  Plug 'felippepuhle/coc-graphql', { 'for': 'graphql', 'do': 'yarn install --frozen-lockfile' }
+  Plug 'neoclide/coc-json', { 'for': 'json', 'do': 'yarn install --frozen-lockfile' }
   Plug 'fannheyward/coc-sql', { 'for': ['sql', 'sqloracle', 'mysql'] }
   Plug 'coc-extensions/coc-svelte', { 'for': 'svelte' }
   Plug 'fannheyward/coc-xml', { 'for': 'xml' }
-  Plug 'neoclide/coc-yaml', { 'for': 'yaml' }
+  Plug 'neoclide/coc-yaml', { 'for': 'yaml', 'do': 'yarn install --frozen-lockfile' }
 
   " Coc plugins for Julia
   Plug 'fannheyward/coc-julia', { 'for': 'julia' }
