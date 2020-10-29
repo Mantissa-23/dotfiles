@@ -61,41 +61,41 @@ if has("node")
   autocmd CursorHold * silent call CocActionAsync('highlight')
 
   " Coc utilities
-  Plug 'neoclide/coc-sources', {'do': 'yarn install --frozen-lockfile'} " coc common sources
-  Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-sources' " coc common sources
+  Plug 'neoclide/coc-highlight'
 
   " viml
-  Plug 'neoclide/coc-neco', {'do': 'yarn install --frozen-lockfile'} " viml completion
+  Plug 'neoclide/coc-neco' " viml completion
 
   " vimtex
-  Plug 'neoclide/coc-vimtex', {'do': 'yarn install --frozen-lockfile'} " coc vimtex compatibility
+  Plug 'neoclide/coc-vimtex' " coc vimtex compatibility
 
   " Coc plugins for JS/webdev
-  Plug 'neoclide/coc-html', { 'for': ['html', 'handlebars', 'razor'], 'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-tsserver'
-  Plug 'neoclide/coc-css', { 'for': ['css', 'scss', 'sass'], 'do': 'yarn install --frozen-lockfile' }
-  Plug 'felippepuhle/coc-graphql', { 'for': 'graphql', 'do': 'yarn install --frozen-lockfile' }
-  Plug 'neoclide/coc-json', { 'for': 'json', 'do': 'yarn install --frozen-lockfile' }
-  Plug 'fannheyward/coc-sql', { 'for': ['sql', 'sqloracle', 'mysql'], 'do': 'yarn install --frozen-lockfile' }
-  Plug 'coc-extensions/coc-svelte', { 'for': 'svelte', 'do': 'yarn install --frozen-lockfile' }
-  Plug 'fannheyward/coc-xml', { 'for': 'xml', 'do': 'yarn install --frozen-lockfile' }
-  Plug 'neoclide/coc-yaml', { 'for': 'yaml', 'do': 'yarn install --frozen-lockfile' }
+  Plug 'neoclide/coc-html', { 'for': ['html', 'handlebars', 'razor'] }
+  Plug 'neoclide/coc-tsserver', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'typescriptcommon'] }
+  Plug 'neoclide/coc-css', { 'for': ['css', 'scss', 'sass'] }
+  Plug 'felippepuhle/coc-graphql', { 'for': 'graphql' }
+  Plug 'neoclide/coc-json', { 'for': 'json' }
+  Plug 'fannheyward/coc-sql', { 'for': ['sql', 'sqloracle', 'mysql'] }
+  Plug 'coc-extensions/coc-svelte', { 'for': 'svelte' }
+  Plug 'fannheyward/coc-xml', { 'for': 'xml' }
+  Plug 'neoclide/coc-yaml', { 'for': 'yaml' }
 
   " Coc plugins for Julia
-  Plug 'fannheyward/coc-julia', { 'for': 'julia', 'do': 'yarn install --frozen-lockfile' }
+  Plug 'fannheyward/coc-julia', { 'for': 'julia' }
 
   " Coc plugins for Python
-  Plug 'neoclide/coc-python', { 'for': 'python', 'do': 'yarn install --frozen-lockfile' }
-  Plug 'fannheyward/coc-pyright', { 'for': 'python', 'do': 'yarn install --frozen-lockfile' }
+  Plug 'neoclide/coc-python', { 'for': 'python' }
+  Plug 'fannheyward/coc-pyright', { 'for': 'python' }
 
   " Coc plugins for bash/sh
-  Plug 'josa42/coc-sh', { 'for': ['sh', 'zsh'], 'do': 'yarn install --frozen-lockfile' }
+  Plug 'josa42/coc-sh', { 'for': ['sh', 'zsh'] }
 
   " Coc plugins for C-family
-  Plug 'clangd/coc-clangd', { 'for': ['c', 'cpp', 'objc', 'objcpp'], 'do': 'yarn install --frozen-lockfile' }
+  Plug 'clangd/coc-clangd', { 'for': ['c', 'cpp', 'objc', 'objcpp'] }
 
   " Coc plugins for C#
-  Plug 'coc-extensions/coc-omnisharp', { 'for': ['cs', 'basic'], 'do': 'yarn install --frozen-lockfile' }
+  Plug 'coc-extensions/coc-omnisharp', { 'for': ['cs', 'basic'] }
 endif
 
 " LANGUAGES "
