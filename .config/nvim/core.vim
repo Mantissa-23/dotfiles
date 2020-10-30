@@ -219,8 +219,9 @@ nmap <leader>ed :ALEDetail<CR>
 " -----------------------------------
 
 nmap <leader>fr :History<CR>
-nmap <leader>fF :RangerCurrentFile<CR>
+" nmap <leader>fF :RangerCurrentFile<CR>
 nmap <leader>ff :Files<CR>
+nmap <leader>ft :NERDTreeToggle<CR>
 nmap <leader>fd :call fzf#run(fzf#wrap({'source': 'fasd -d -R', 'sink': { line -> execute('cd '.split(line)[-1]) }}))<CR>
 nmap <leader>fgf :GFiles<CR>
 nmap <leader>fb :Buffers<CR>
@@ -282,6 +283,7 @@ nnoremap <silent> <leader>js  :<C-u>CocList -I symbols<cr>
 nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>rf <Plug>(coc-format-selected)
 nmap <leader>rf <Plug>(coc-format-selected)
+nmap <leader>rF :call CocAction('format')<CR>
 nmap <leader>rs :%s/\s\+$//e<cr>
 vmap <leader>rs :s/\s\+$//e<cr>
 

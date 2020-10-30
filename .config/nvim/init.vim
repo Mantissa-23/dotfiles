@@ -12,8 +12,9 @@ if !exists('g:vscode')
   let g:fzf_history_dir = '~/.local/share/fzf-history'
   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 
-  Plug 'Lokaltog/neoranger'
-  let g:neoranger_viewmode='miller'
+  " Plug 'Lokaltog/neoranger'
+  " let g:neoranger_viewmode='miller'
+  Plug 'preservim/nerdtree'
 
   " IDE - VERSION CONTROL "
 
