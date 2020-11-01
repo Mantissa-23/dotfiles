@@ -29,8 +29,9 @@ if !exists('g:vscode')
   Plug 'tpope/vim-surround' " Adds bindings for changing surrounds
   Plug 'amcsi/auto-pairs' " Automatically makes surrounds
   let g:AutoPairsFlyMode = 0
+  au FileType lisp,clojure let b:autopairs_loaded=1
   Plug 'frazrepo/vim-rainbow'
-  au FileType lisp,cl call rainbow#load()
+  au FileType lisp,cl,clojure call rainbow#load()
 
   " IDE - TAGS "
 
@@ -86,6 +87,10 @@ if !exists('g:vscode')
 
   " LISP
   Plug 'vlime/vlime', {'rtp': 'vim/'}
+  Plug 'Olical/conjure', {'tag': 'v4.7.0'}
+  Plug 'guns/vim-sexp'
+  Plug 'tpope/vim-sexp-mappings-for-regular-people'
+
 endif " End VSCode-excluded plugins
 
 Plug 'tpope/vim-commentary' " Comment and uncomment stuff. gc to use.

@@ -40,7 +40,7 @@ autocmd Filetype tex setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab sma
 
 " Enable line number display, always
 set number
-set relativenumber
+" set relativenumber
 set title
 
 " Do not wrap lines in the middle of words
