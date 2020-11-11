@@ -235,7 +235,6 @@ nmap <leader>fec :vsp ~/.config/nvim/core.vim<CR>
 nmap <leader>fep :vsp ~/.config/nvim/projects/<CR>
 nmap <leader>feh :vsp ~/.config/nvim/helpers.vim<CR>
 nmap <leader>fer :so $MYVIMRC<CR>
-nmap <leader>fes :UltiSnipsEdit<CR>
 " g         - Git/VCS
 " -----------------------------------
 nmap <leader>gs :Gstatus<CR>
@@ -246,9 +245,8 @@ nmap <leader>gd :Gdiff<CR>
 " h         - Help
 " -----------------------------------
 nmap <leader>h<leader> :helpgrep 
-" i         - Insertion/Snippets
+" i         - Insertion
 " -----------------------------------
-"nmap <leader>isl call UltiSnips#ListSnippets()<CR>
 nmap <leader>it :pu=strftime('%c')<CR>
 imap <c-p><c-p> <plug>(fzf-complete-path)
 " j         - Jump; File navigation
@@ -293,6 +291,12 @@ nmap <leader>ss :call Swoop()<CR>
 vmap <leader>ss :call SwoopSelection()<CR>
 nmap <leader>sS :call SwoopMulti()<CR>
 vmap <leader>sS :call SwoopMultiSelection()<CR>
+" S         - Snippet
+" -----------------------------------
+
+nmap <leader>Se :UltiSnipsEdit<CR>
+nmap <leader>Sl :call UltiSnips#ListSnippets()<CR>
+
 " -----------------------------------
 " sw        - web
 " -----------------------------------
