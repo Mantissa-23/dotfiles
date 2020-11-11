@@ -1,6 +1,13 @@
 # Turn .gitignore into a whitelist instead of a blacklist
 *
-!*/
+!**/
+/Downloads
+/Projects
+.*
+
+# Weird things that aren't ignored
+blog*
+Docs_temp*
 
 # Obviously we need to track the gitignore file
 !/.gitignore
@@ -24,12 +31,13 @@
 !/.p10k.zsh
 
 # Allow my custom scripts
-!/.bin/**
+!/.bin/*
 
 # Nvim
 !/.config/nvim/**
 !/.config/coc/extensions/package.json
 !/.local/share/nvim/site/autoload/plug.vim
+/.local/share/nvim/plugged
 
 # Regular vim shim
 !/.vimrc
@@ -40,9 +48,11 @@
 
 # Ranger
 !/.config/ranger/**
+/.config/ranger/.mypy_cache/**
+/.config/ranger/plugins/**
 
 # Custom systemd tasks
-!/.config/systemd/user/**
+!/.config/systemd/user/*
 
 # Window Managers
 !/.config/i3/**
