@@ -33,6 +33,7 @@ esac
 export MACHINE
 
 export PATH=$PATH:$HOME/.bin
+export PATH=$PATH:$HOME/.opt
 
 # Cocos2d paths
 

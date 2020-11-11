@@ -1,13 +1,20 @@
 # Turn .gitignore into a whitelist instead of a blacklist
 *
-!**/
+!*/
 /Downloads
 /Projects
-.*
 
 # Weird things that aren't ignored
 blog*
 Docs_temp*
+/.cache
+/.gem
+/.emacs.d
+/.fzf
+/.oh-my-zsh
+/.zgen
+/.build
+/.pub-cache
 
 # Obviously we need to track the gitignore file
 !/.gitignore

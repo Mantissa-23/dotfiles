@@ -1,0 +1,6 @@
+[Unit]
+Description=Download and set desktop background to a random /r/earthporn image
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash $HOME/bin/epbg.sh
