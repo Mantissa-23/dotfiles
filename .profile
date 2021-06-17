@@ -8,7 +8,7 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+# export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 export DISPLAY=":0"
 
@@ -62,5 +62,7 @@ test -f ~/.localprofile && source ~/.localprofile
 
 # Ruby stuff
 
-export PATH="~/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
