@@ -1,4 +1,63 @@
-.cfg
+# Turn .gitignore into a whitelist instead of a blacklist
+*
+!*/
 
-__pycache__/
-.mypy_cache/
+# Obviously we need to track the gitignore file
+!/.gitignore
+
+# Relevant to this dotfiles repo
+!/.install.sh
+!/.install_windows.bat
+!/README.md
+
+# Generic shell profile and aliases
+!/.aliases
+!/.profile
+
+# Bash-specific stuff
+!/.bashrc
+!/.bash_profile
+
+# Zsh-specific stuff
+!/.zshrc
+!/.zprofile
+!/.p10k.zsh
+
+# Allow my custom scripts
+!/.bin/**
+
+# Nvim
+!/.config/nvim/**
+!/.config/coc/extensions/package.json
+!/.local/share/nvim/site/autoload/plug.vim
+
+# Regular vim shim
+!/.vimrc
+
+# VSCode
+!/.config/Code/User/keybindings.json
+!/.config/Code/User/settings.json
+
+# Ranger
+!/.config/ranger/**
+
+# Custom systemd tasks
+!/.config/systemd/user/**
+
+# Window Managers
+!/.config/i3/**
+!/.config/bspwm/**
+!/.config/sxhkd/**
+!/.config/rofi/**
+
+# Polybar
+!/.config/polybar/**
+
+# SSH
+!/.ssh/config
+
+# CTAGS
+!/.ctags
+
+# CSL
+!/.csl/**
