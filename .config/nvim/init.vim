@@ -19,7 +19,7 @@ if !exists('g:vscode')
   " IDE - VERSION CONTROL "
 
   Plug 'tpope/vim-fugitive' " Git wrapper
-  Plug 'airblade/vim-gitgutter' " Shows git diff in the left gutter. 
+  " Plug 'airblade/vim-gitgutter' " Shows git diff in the left gutter. 
 
   " IDE - LINTING "
 
@@ -73,6 +73,7 @@ if !exists('g:vscode')
   Plug 'sheerun/vim-polyglot' " Language package package
   let g:polyglot_disabled = ['latex']
 
+  Plug 'jxnblk/vim-mdx-js' " For mdx
   Plug 'vim-pandoc/vim-pandoc' "vim-pandoc, for markdown->all
   Plug 'vim-pandoc/vim-pandoc-syntax'
   Plug 'vim-pandoc/vim-pandoc-after'
