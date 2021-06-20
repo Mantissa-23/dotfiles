@@ -51,7 +51,7 @@ set nowrap
 set sidescroll=1
 
 " But wrap for non-code file types
-au Filetype markdown,tex setlocal wrap
+au Filetype markdown,tex,markdown.mdx setlocal wrap
 
 " Split right and below, instead of left and above. Left and above is for
 " aliens.
@@ -78,6 +78,8 @@ set smartcase
 
 " Enable incremental search
 set incsearch
+
+runtime macros/matchit.vim
 
 " Reduce update time to 300 from 4000 for diagnostics
 set updatetime=300

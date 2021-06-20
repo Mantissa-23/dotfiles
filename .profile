@@ -8,6 +8,8 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+[[ -f ~/.aliases ]] && source ~/.aliases
+
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 export DISPLAY=":0"
@@ -48,13 +50,17 @@ export ANDROID_HOME=$HOME/.build/Android/Sdk
 # Ruby executables
 export PATH=$HOME/.gem/ruby/2.6.0/bin:$PATH
 
-# Mac NVM setup
+# Mac/Arch NVM setup
 
 if [[ $(uname -s) == Darwin ]]
 then
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
-    [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && . "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
+  [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && . "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+else
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
 # Work Config
@@ -64,4 +70,4 @@ test -f ~/.localprofile && source ~/.localprofile
 # Ruby stuff
 
 export PATH="~/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+command -v rbenv && "$(rbenv init -)"

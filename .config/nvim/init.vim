@@ -86,8 +86,9 @@ if !exists('g:vscode')
   Plug 'calviken/vim-gdscript3' " Somewhat hacky syntax highlighting for GDScript
 
   " LISP
-  Plug 'vlime/vlime', {'rtp': 'vim/'}
-  Plug 'Olical/conjure', {'tag': 'v4.7.0'}
+  " Plug 'vlime/vlime', {'rtp': 'vim/'}
+  " Plug 'Olical/conjure', {'tag': 'v4.7.0'}
+  Plug 'kovisoft/slimv'
   Plug 'guns/vim-sexp'
   Plug 'tpope/vim-sexp-mappings-for-regular-people'
 

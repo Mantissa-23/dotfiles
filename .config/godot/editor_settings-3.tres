@@ -143,3 +143,4 @@ network/language_server/use_thread = true
 projects/::home::dylan::temp::test = "/home/dylan/temp/test"
 projects/::home::dylan::temp::godot_bug_report = "/home/dylan/temp/godot_bug_report"
 favorite_projects/::home::dylan::Projects::nightrun::nightrun = "/home/dylan/Projects/nightrun/nightrun"
+editors/3d/navigation/show_viewport_rotation_gizmo = true
