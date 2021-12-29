@@ -1,7 +1,0 @@
-{
-  "diagnostic.displayByAle": true,
-  "languageserver": {
-  },
-  "tsserver.log": "verbose",
-  "tsserver.trace.server": "verbose"
-}
