@@ -46,6 +46,9 @@ Docs_temp*
 !/.local/share/nvim/site/autoload/plug.vim
 /.local/share/nvim/plugged
 
+# Lvim
+!/.config/lvim/config.lua
+
 # Regular vim shim
 !/.vimrc
 
