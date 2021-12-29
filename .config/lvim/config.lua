@@ -2,7 +2,7 @@ lvim.plugins = {
   {
     'vimwiki/vimwiki',
     config = function()
-      vim.g.wiki_list = {
+      vim.g.vimwiki_list = {
         {
           path = '~/Docs/wiki',
           syntax = 'markdown',
@@ -12,10 +12,14 @@ lvim.plugins = {
     end
   },
   {
+    'dhruvasagar/vim-table-mode',
+  },
+  {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
   {'morhetz/gruvbox'},
+  {'tpope/vim-surround'},
 }
 
 -- general
@@ -28,7 +32,69 @@ lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.insert_mode["jj"] = false
 
--- TODO: User Config for predefined plugins
+-- Custom whichkey mappings
+local builtin_mappings = lvim.builtin.which_key.mappings
+
+lvim.builtin.which_key.mappings = {
+  L = builtin_mappings['L'],
+  l = builtin_mappings['l'],
+  b = builtin_mappings['b'],
+  p = builtin_mappings['p'],
+  g = builtin_mappings['g'],
+  q = { "<cmd>BufferClose!<CR>", "Close Buffer" },
+  f = {
+    name = "Find (Telescope)",
+    g = {
+      name = "Git",
+      c = { "<cmd>Telescope git_branches<cr>", "Branches (checkout)" },
+    },
+    p = { "<cmd>Telescope projects<cr>", "Projects" },
+    f = { "<cmd>Telescope find_files<cr>", "Find File" },
+    s = { "<cmd>Telescope live_grep<cr>", "Text Search (Grep)" },
+    S = { "<cmd>Telescope symbols<cr>", "Symbols" },
+    h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
+    M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+    r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+    R = { "<cmd>Telescope registers<cr>", "Registers" },
+    k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+    C = { "<cmd>Telescope commands<cr>", "Commands" },
+    b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+    c = {
+      "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
+      "Colorscheme with Preview",
+    },
+  },
+  w = {
+    name = "VimWiki",
+    ['<leader>'] = {
+      name = "Diary",
+      i = "Update Diary Index",
+      w = "Open Today's Diary File",
+      t = "Open Today's Diary File in New tab",
+    },
+    i = "Diary Index",
+    w = "Wiki Index",
+    t = "Wiki Index (new tab)",
+    s = "Wiki Index (select and open)",
+    d = "Delete this wiki file",
+    r = "Rename this file",
+  },
+  c = { "<CMD>lua require('Comment.api').toggle_current_linewise()<CR>", "Toggle Comment" },
+  t = {
+    name = "Table Mode",
+    m = "Toggle table mode",
+    t = "Tableize",
+  },
+}
+lvim.builtin.which_key.vmappings = {
+  c = { "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Toggle Comment" },
+  T = "Tableize Delimiter",
+  t = {
+    name = "Table Mode",
+    t = "Tableize"
+  },
+}
+
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
@@ -59,19 +125,19 @@ lvim.builtin.treesitter.highlight.enabled = true
 lvim.lsp.automatic_servers_installation = false
 
 -- Use prettier for JavaScript
-local formatters = require "lvim.lsp.null-ls.formatters"
-formatters.setup {
-  -- { exe = "black", filetypes = { "python" } },
-  -- { exe = "isort", filetypes = { "python" } },
-  {
-    exe = "prettier",
-    ---@usage arguments to pass to the formatter
-    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-    args = { "--print-with", "100" },
-    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-    filetypes = { "typescript", "typescriptreact" },
-  },
-}
+-- local formatters = require "lvim.lsp.null-ls.formatters"
+-- formatters.setup {
+--   -- { exe = "black", filetypes = { "python" } },
+--   -- { exe = "isort", filetypes = { "python" } },
+--   {
+--     exe = "prettier",
+--     ---@usage arguments to pass to the formatter
+--     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+--     args = { "--print-with", "100" },
+--     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+--     filetypes = { "typescript", "typescriptreact" },
+--   },
+-- }
 
 -- -- set additional linters
 -- local linters = require "lvim.lsp.null-ls.linters"
