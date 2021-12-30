@@ -20,6 +20,7 @@ lvim.plugins = {
   },
   {'morhetz/gruvbox'},
   {'tpope/vim-surround'},
+  {'tpope/vim-fugitive'},
 }
 
 -- general
@@ -31,6 +32,7 @@ lvim.colorscheme = "gruvbox"
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.insert_mode["jj"] = false
+lvim.keys.insert_mode["fd"] = "<ESC>"
 
 -- Custom whichkey mappings
 local builtin_mappings = lvim.builtin.which_key.mappings
@@ -41,7 +43,9 @@ lvim.builtin.which_key.mappings = {
   l = builtin_mappings['l'],
   b = builtin_mappings['b'],
   p = builtin_mappings['p'],
-  g = builtin_mappings['g'],
+  g = {
+    g = { "<cmd>Git<cr>", "Git Interface" },
+  },
   q = { "<cmd>BufferClose!<CR>", "Close Buffer" },
   f = {
     name = "Find (Telescope)",
@@ -100,6 +104,11 @@ lvim.builtin.which_key.vmappings = {
     name = "Table Mode",
     t = "Tableize"
   },
+}
+
+-- autocmds
+lvim.autocommands.custom_groups = {
+  { "BufWinEnter", "markdown,tex,markdown.mdx,vimwiki", "setlocal wrap"}
 }
 
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
