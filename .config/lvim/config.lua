@@ -1,3 +1,4 @@
+-- Additional Plugins
 lvim.plugins = {
   {
     'vimwiki/vimwiki',
@@ -23,12 +24,34 @@ lvim.plugins = {
   {'tpope/vim-fugitive'},
 }
 
--- general
+-- General
+
 lvim.log.level = "warn"
 -- lvim.format_on_save = true
 lvim.colorscheme = "gruvbox"
 
--- keymappings [view all the defaults by pressing <leader>Lk]
+-- Set ignorecase and smartcase so that all-lowercase searches are case-insensitive, but everything else is
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
+-- Set scrolloff so we can always see above and below the cursor by at last 10 lines
+vim.o.scrolloff = 10
+
+-- Set linebreak so that words don't get cut off in the middle
+vim.o.linebreak = true
+
+-- Turn off wrap by default and enable sidescroll
+vim.o.wrap = false
+vim.o.sidescroll = 1
+
+-- autocmds
+lvim.autocommands.custom_groups = {
+  -- BUT enable wrap for "plaintext" files
+  { "BufWinEnter", "markdown,tex,markdown.mdx,vimwiki", "setlocal wrap"}
+}
+
+-- Keymappings
+
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.insert_mode["jj"] = false
@@ -93,7 +116,8 @@ lvim.builtin.which_key.mappings = {
   },
   i = {
     name = "Insert",
-    t = { "<cmd>pu=strftime('%c')<cr>", "Insert Current Timestamp"}
+    t = { "<cmd>pu=strftime('%a %d %b %Y %Z')<cr>", "Insert Current Timestamp"},
+    d = { "<cmd>pu=strftime('%a %d %b %Y')<cr>", "Insert Current Day"},
   },
 }
 lvim.builtin.which_key.vmappings = {
@@ -106,10 +130,7 @@ lvim.builtin.which_key.vmappings = {
   },
 }
 
--- autocmds
-lvim.autocommands.custom_groups = {
-  { "BufWinEnter", "markdown,tex,markdown.mdx,vimwiki", "setlocal wrap"}
-}
+-- LunarVim builtin plugin settings
 
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
