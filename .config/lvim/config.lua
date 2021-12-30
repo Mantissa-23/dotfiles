@@ -4,7 +4,7 @@ lvim.plugins = {
     config = function()
       vim.g.vimwiki_list = {
         {
-          path = '~/Docs/wiki',
+          path = '$HOME/Wiki',
           syntax = 'markdown',
           ext = '.md',
         }
@@ -24,7 +24,7 @@ lvim.plugins = {
 
 -- general
 lvim.log.level = "warn"
-lvim.format_on_save = true
+-- lvim.format_on_save = true
 lvim.colorscheme = "gruvbox"
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
@@ -36,6 +36,7 @@ lvim.keys.insert_mode["jj"] = false
 local builtin_mappings = lvim.builtin.which_key.mappings
 
 lvim.builtin.which_key.mappings = {
+  e = builtin_mappings['e'],
   L = builtin_mappings['L'],
   l = builtin_mappings['l'],
   b = builtin_mappings['b'],
@@ -79,15 +80,21 @@ lvim.builtin.which_key.mappings = {
     d = "Delete this wiki file",
     r = "Rename this file",
   },
-  c = { "<CMD>lua require('Comment.api').toggle_current_linewise()<CR>", "Toggle Comment" },
+  -- Comment.api not working
+  -- c = { "<CMD>lua require('Comment.api').toggle_current_linewise()<CR>", "Toggle Comment" },
   t = {
     name = "Table Mode",
     m = "Toggle table mode",
     t = "Tableize",
   },
+  i = {
+    name = "Insert",
+    t = { "<cmd>pu=strftime('%c')<cr>", "Insert Current Timestamp"}
+  },
 }
 lvim.builtin.which_key.vmappings = {
-  c = { "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Toggle Comment" },
+  -- Commnt.api not working
+  -- c = { "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Toggle Comment" },
   T = "Tableize Delimiter",
   t = {
     name = "Table Mode",
