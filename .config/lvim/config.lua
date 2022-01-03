@@ -26,6 +26,9 @@ lvim.plugins = {
 
 -- General
 
+-- Timeoutlen to 100ms
+vim.o.timeoutlen = 200
+
 lvim.log.level = "warn"
 -- lvim.format_on_save = true
 lvim.colorscheme = "gruvbox"
@@ -133,6 +136,18 @@ lvim.builtin.which_key.vmappings = {
     t = "Tableize"
   },
 }
+-- Disable whichkey specifically for the semicolon key so we can still type in semicolons and use ;; to escape
+lvim.builtin.which_key.on_config_done = function(which_key)
+  which_key.register({
+    [';'] = 'which_key_ignore'
+  }, {
+    mode = 'i',
+    buffer = nil,
+    silent = true,
+    noremap = true,
+    nowait = true,
+  })
+end
 
 -- LunarVim builtin plugin settings
 
