@@ -55,7 +55,7 @@ lvim.autocommands.custom_groups = {
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.insert_mode["jj"] = false
-lvim.keys.insert_mode["fd"] = "<ESC>"
+lvim.keys.insert_mode[";;"] = "<ESC>"
 
 -- Custom whichkey mappings
 local builtin_mappings = lvim.builtin.which_key.mappings
@@ -94,18 +94,21 @@ lvim.builtin.which_key.mappings = {
   },
   w = {
     name = "VimWiki",
-    ['<leader>'] = {
-      name = "Diary",
-      i = "Update Diary Index",
-      w = "Open Today's Diary File",
-      t = "Open Today's Diary File in New tab",
-    },
     i = "Diary Index",
     w = "Wiki Index",
     t = "Wiki Index (new tab)",
-    s = "Wiki Index (select and open)",
     d = "Delete this wiki file",
     r = "Rename this file",
+    f = { "<cmd>lua require('telescope.builtin').find_files({ cwd = '$HOME/Wiki/'})<cr>", "Find file in wiki" },
+    s = { "<cmd>lua require('telescope.builtin').live_grep({ cwd = '$HOME/Wiki/'})<cr>", "Find file in wiki" },
+  },
+  j = {
+    name = "Journal",
+    j = { "<cmd>VimwikiMakeDiaryNote<cr>", "New entry (today)" },
+    g = { "<cmd>VimwikiDiaryGenerateLinks<cr>", "Regenerate Index" },
+    i = { "<cmd>VimwikiDiaryIndex<cr>", "Goto Index" },
+    f = { "<cmd>lua require('telescope.builtin').find_files({ cwd = '$HOME/Wiki/diary'})<cr>", "Find file in wiki" },
+    s = { "<cmd>lua require('telescope.builtin').live_grep({ cwd = '$HOME/Wiki/diary'})<cr>", "Find file in wiki" },
   },
   -- Comment.api not working
   -- c = { "<CMD>lua require('Comment.api').toggle_current_linewise()<CR>", "Toggle Comment" },
@@ -116,8 +119,9 @@ lvim.builtin.which_key.mappings = {
   },
   i = {
     name = "Insert",
-    t = { "<cmd>pu=strftime('%a %d %b %Y %Z')<cr>", "Insert Current Timestamp"},
+    t = { "<cmd>pu=strftime('%H:%M:%S %Z')<cr>", "Insert Current Timestamp"},
     d = { "<cmd>pu=strftime('%a %d %b %Y')<cr>", "Insert Current Day"},
+    s = { "<cmd>pu=strftime('%a %d %b %Y %H:%M:%S %Z')<cr>", "Insert Current Day" },
   },
 }
 lvim.builtin.which_key.vmappings = {
