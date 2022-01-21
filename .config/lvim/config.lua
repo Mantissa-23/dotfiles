@@ -22,6 +22,7 @@ lvim.plugins = {
   {'morhetz/gruvbox'},
   {'tpope/vim-surround'},
   {'tpope/vim-fugitive'},
+  {'lukas-reineke/indent-blankline.nvim'},
 }
 
 -- General
@@ -46,6 +47,9 @@ vim.o.linebreak = true
 -- Turn off wrap by default and enable sidescroll
 vim.o.wrap = false
 vim.o.sidescroll = 1
+
+-- Color column 80
+vim.o.colorcolumn = "80"
 
 -- autocmds
 lvim.autocommands.custom_groups = {
