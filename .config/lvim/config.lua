@@ -23,15 +23,31 @@ lvim.plugins = {
   {'tpope/vim-surround'},
   {'tpope/vim-fugitive'},
   {'lukas-reineke/indent-blankline.nvim'},
+  -- {'dccsillag/magma-nvim',
+  --   config = function()
+  --     vim.cmd('UpdateRemotePlugins')
+  --   end
+  -- }
 }
 
 -- General
+
+-- Tab settings
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.opt.smarttab = true
+vim.opt.autoindent = true
+
+-- Do not use the system clipboard by default - i prefer the + and * buffers
+vim.opt.clipboard = ""
 
 -- Timeoutlen to 100ms
 vim.o.timeoutlen = 200
 
 lvim.log.level = "warn"
--- lvim.format_on_save = true
+lvim.format_on_save = false
 lvim.colorscheme = "gruvbox"
 
 -- Set ignorecase and smartcase so that all-lowercase searches are case-insensitive, but everything else is
@@ -75,6 +91,17 @@ lvim.builtin.which_key.mappings = {
   p = builtin_mappings['p'],
   g = {
     g = { "<cmd>Git<cr>", "Git Interface" },
+  },
+  a = {
+    name = "Application-Specific",
+    m = {
+      name = "Magma (ipython)",
+      o = "<cmd>MagmaEvaluateOperator<cr>",
+      l = "<cmd>MagmaEvaluateLine<cr>",
+      r = "<cmd>MagmaEvaluateCell<cr>",
+      d = "<cmd>MagmaDelete<cr>",
+      s = "<cmd>MagmaShowOutput<cr>",
+    }
   },
   q = { "<cmd>BufferClose!<CR>", "Close Buffer" },
   f = {
@@ -139,6 +166,14 @@ lvim.builtin.which_key.vmappings = {
     name = "Table Mode",
     t = "Tableize"
   },
+  a = {
+    name = "Magma (ipython)",
+    r = "<cmd><C-u>MagmaEvaluateVisual<cr>",
+  },
+  l = {
+    name = "LSP",
+    f = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "Format (visual)" },
+  }
 }
 -- Disable whichkey specifically for the semicolon key so we can still type in semicolons and use ;; to escape
 lvim.builtin.which_key.on_config_done = function(which_key)
@@ -185,6 +220,10 @@ lvim.builtin.treesitter.highlight.enabled = true
 
 -- ---@usage disable automatic installation of servers
 lvim.lsp.automatic_servers_installation = false
+
+vim.list_extend(lvim.lsp.override, { "pylsp", "pyright" } )
+require("lvim.lsp.manager").setup("pylsp")
+require("lvim.lsp.manager").setup("pyright")
 
 -- Use prettier for JavaScript
 -- local formatters = require "lvim.lsp.null-ls.formatters"
