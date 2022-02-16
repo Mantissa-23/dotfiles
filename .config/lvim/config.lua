@@ -5,10 +5,15 @@ lvim.plugins = {
     config = function()
       vim.g.vimwiki_list = {
         {
-          path = '$HOME/Wiki',
+          path = '$HOME/wiki/Personal Wiki',
           syntax = 'markdown',
           ext = '.md',
-        }
+        },
+        {
+          path = '$HOME/wiki/Expression Wiki',
+          syntax = 'markdown',
+          ext = '.md',
+        },
       }
     end
   },
