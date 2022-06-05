@@ -1,5 +1,6 @@
 -- Additional Plugins
 lvim.plugins = {
+  -- My wiki!
   {
     'vimwiki/vimwiki',
     config = function()
@@ -17,16 +18,22 @@ lvim.plugins = {
       }
     end
   },
+  -- Used for editing plaintext tables
   {
     'dhruvasagar/vim-table-mode',
   },
+  -- Displays errors at the end of a line, vscode style
   {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
+  -- Sick retro theme
   {'morhetz/gruvbox'},
+  -- Used for editing and inserting surrounds, i.e. () [] {} `` ""
   {'tpope/vim-surround'},
+  -- Git wrapper
   {'tpope/vim-fugitive'},
+  -- Indents lines
   {'lukas-reineke/indent-blankline.nvim'},
   -- {'dccsillag/magma-nvim',
   --   config = function()
@@ -38,6 +45,7 @@ lvim.plugins = {
 -- General
 
 -- Tab settings
+-- Default to space tabs of width 2
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
@@ -48,12 +56,15 @@ vim.opt.autoindent = true
 -- Do not use the system clipboard by default - i prefer the + and * buffers
 vim.opt.clipboard = ""
 
--- Timeoutlen to 100ms
+-- Timeoutlen to 100ms - key combos have to be entered snappily but not inhumanly fast
 vim.o.timeoutlen = 200
 
 lvim.log.level = "warn"
 lvim.format_on_save = false
 lvim.colorscheme = "gruvbox"
+
+-- Color column 80
+vim.o.colorcolumn = "80"
 
 -- Set ignorecase and smartcase so that all-lowercase searches are case-insensitive, but everything else is
 vim.o.ignorecase = true
@@ -68,9 +79,6 @@ vim.o.linebreak = true
 -- Turn off wrap by default and enable sidescroll
 vim.o.wrap = false
 vim.o.sidescroll = 1
-
--- Color column 80
-vim.o.colorcolumn = "80"
 
 -- autocmds
 lvim.autocommands.custom_groups = {
@@ -196,13 +204,20 @@ end
 -- LunarVim builtin plugin settings
 
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
+
+-- This is deprecated and equivalent to lvim.builtin.apha.active for older versions of lvim
 --lvim.builtin.dashboard.active = true
-lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
-lvim.builtin.nvimtree.setup.update_cwd = false
-lvim.builtin.project.manual_mode = true
 lvim.builtin.alpha.active = false
+-- Use the builtin terminal plugin
+lvim.builtin.terminal.active = true
+-- File explorer on the left
+lvim.builtin.nvimtree.setup.view.side = "left"
+-- We want to use the tray for errors, not git diffs
+lvim.builtin.nvimtree.show_icons.git = 0
+-- Don't auto-change the current working directory. I am the captain, I choose this
+lvim.builtin.nvimtree.setup.update_cwd = false
+-- Do not automatically try and head to the top level project directory. I am the captain, I choose this
+lvim.builtin.project.manual_mode = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
