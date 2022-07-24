@@ -31,8 +31,3 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
 
 export PATH=$HOME/bin:$PATH
 export NODE_OPTIONS=--max_old_space_size=16384
-
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
