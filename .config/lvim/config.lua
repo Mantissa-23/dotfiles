@@ -81,10 +81,27 @@ vim.o.wrap = false
 vim.o.sidescroll = 1
 
 -- autocmds
-lvim.autocommands.custom_groups = {
-  -- BUT enable wrap for "plaintext" files
-  { "BufWinEnter", "markdown,tex,markdown.mdx,vimwiki", "setlocal wrap"}
+-- lvim.autocommands.custom_groups = {
+--   -- BUT enable wrap for "plaintext" files
+--   { "BufWinEnter", "markdown,tex,markdown.mdx,vimwiki", "setlocal wrap"}
+-- }
+
+local autocmd_dict = {
+  BufWinEnter = {
+    {
+      pattern = "markdown,tex,markdown.mdx,vimwiki",
+      callback = function()
+        vim.opt_local.wrap = true
+      end,
+    }
+  }
 }
+
+for event, opt_tbls in pairs(autocmd_dict) do
+    for _, opt_tbl in pairs(opt_tbls) do
+        vim.api.nvim_create_autocmd(event, opt_tbl)
+    end
+end
 
 -- Keymappings
 
@@ -213,7 +230,7 @@ lvim.builtin.terminal.active = true
 -- File explorer on the left
 lvim.builtin.nvimtree.setup.view.side = "left"
 -- We want to use the tray for errors, not git diffs
-lvim.builtin.nvimtree.show_icons.git = 0
+--lvim.builtin.nvimtree.show_icons.git = 0
 -- Don't auto-change the current working directory. I am the captain, I choose this
 lvim.builtin.nvimtree.setup.update_cwd = false
 -- Do not automatically try and head to the top level project directory. I am the captain, I choose this
